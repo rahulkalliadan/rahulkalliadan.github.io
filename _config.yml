@@ -1,52 +1,33 @@
 title: "Rahul Kalliadan"
-name: "Rahul Kalliadan"
-email: "your-email@example.com"   # update
-description: "Senior Mechanical Engineer (Robotics) — 7+ years building AMRs & commercial cleaning robots. Canada PR."
+description: "Senior Mechanical Engineer (Robotics) — AMRs, mechanisms, DFM/DFA, GD&T."
 url: "https://rahulkalliadan.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
 
-# Theme
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-
-# GitHub Pages–compatible plugins
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
 
-logo: "/assets/images/avatar.png"
-masthead_title: "Rahul Kalliadan"
-search: true
-breadcrumbs: true
-paginate: 5
-paginate_path: "/blog/page:num/"
-permalink: /:categories/:title/
-
 author:
   name: "Rahul Kalliadan"
   avatar: "/assets/images/avatar.png"
-  bio: "Mechanical Robotics Engineer. AMRs, mechanisms, DFM/DFA, GD&T. Prototype → Production."
-  location: "Canada / India"
+  bio: "Mechanical Robotics Engineer. Prototype → Production."
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:your-email@example.com"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/rahulkalliadan"   # update if needed
+      url: "https://www.linkedin.com/in/rahulkalliadan"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/rahulkalliadan"            # update if needed
+      url: "https://github.com/rahulkalliadan"
 
-# Collections
 collections:
   projects:
     output: true
     permalink: /projects/:path/
 
-# Defaults
 defaults:
   - scope:
       path: ""
@@ -54,27 +35,13 @@ defaults:
     values:
       layout: "single"
       author_profile: true
-      read_time: false
-      comments: false
-      share: true
   - scope:
       path: ""
       type: "projects"
     values:
       layout: "single"
       author_profile: true
-      classes: "wide"
 
-# SEO
-social:
-  name: "Rahul Kalliadan"
-  links:
-    - "https://www.linkedin.com/in/rahulkalliadan"
-    - "https://github.com/rahulkalliadan"
-jekyll_seo_tag:
-  type: "Person"
-  name: "Rahul Kalliadan"
-  same_as:
-    - "https://www.linkedin.com/in/rahulkalliadan"
-    - "https://github.com/rahulkalliadan"
-
+permalink: /:categories/:title/
+paginate: 5
+paginate_path: "/blog/page:num/"
