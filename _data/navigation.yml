@@ -1,1 +1,10 @@
+main:
+  - title: "Work"
+    url: /projects/
+  - title: "Blog"
+    url: /blog/
+  - title: "About"
+    url: /about/
+  - title: "Resume"
+    url: /assets/resume/Rahul_Kalliadan_Resume.pdf
 
