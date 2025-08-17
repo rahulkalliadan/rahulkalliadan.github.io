@@ -5,6 +5,7 @@ baseurl: ""
 timezone: "Asia/Kolkata"
 
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+minimal_mistakes_skin: "default"
 
 plugins:
   - jekyll-remote-theme
@@ -14,7 +15,6 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 
-# No projects collection anymore
 permalink: /:categories/:title/
 paginate: 7
 paginate_path: "/page:num/"
