@@ -4,24 +4,24 @@ url: "https://rahulkalliadan.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
 
-# Minimal Mistakes via remote theme
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 
-# IMPORTANT: GitHub Pages must load these plugins
 plugins:
   - jekyll-remote-theme
   - jekyll-include-cache
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
+  - jekyll-paginate
 
-# Collections
 collections:
+  pages:            # <-- this is the key bit
+    output: true
+    permalink: /:path/
   projects:
     output: true
     permalink: /projects/:path/
 
-# Defaults
 defaults:
   - scope:
       path: ""
@@ -36,7 +36,6 @@ defaults:
       layout: "single"
       author_profile: true
 
-# URLs
 permalink: /:categories/:title/
 paginate: 5
 paginate_path: "/blog/page:num/"
