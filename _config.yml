@@ -4,30 +4,24 @@ url: "https://rahulkalliadan.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
 
+# Minimal Mistakes via remote theme
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+# IMPORTANT: GitHub Pages must load these plugins
 plugins:
   - jekyll-remote-theme
+  - jekyll-include-cache
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
 
-author:
-  name: "Rahul Kalliadan"
-  avatar: "/assets/images/avatar.png"
-  bio: "Mechanical Robotics Engineer. Prototype → Production."
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/rahulkalliadan"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/rahulkalliadan"
-
+# Collections
 collections:
   projects:
     output: true
     permalink: /projects/:path/
 
+# Defaults
 defaults:
   - scope:
       path: ""
@@ -42,6 +36,7 @@ defaults:
       layout: "single"
       author_profile: true
 
+# URLs
 permalink: /:categories/:title/
 paginate: 5
 paginate_path: "/blog/page:num/"
