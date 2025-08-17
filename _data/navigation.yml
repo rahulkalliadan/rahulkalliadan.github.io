@@ -1,8 +1,7 @@
 main:
-  - title: "About"
-    url: /about/
-  - title: "Resume"
-    url: /assets/resume/Rahul_Kalliadan_Resume.pdf
+  - title: "Experience"
+    url: /experience/
   - title: "Blog"
     url: /
-
+  - title: "Resume"
+    url: /assets/resume/Rahul_Kalliadan_Resume.pdf
