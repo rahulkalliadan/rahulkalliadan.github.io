@@ -1,11 +1,12 @@
 title: "Rahul Kalliadan"
-description: "Senior Mechanical Engineer (Robotics) — AMRs, mechanisms, DFM/DFA, GD&T."
+description: "Engineer — Robotics hardware, mechanisms, DFM/DFA, GD&T. Prototype → Production."
 url: "https://rahulkalliadan.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
 
+# Theme + skin
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "default"
+minimal_mistakes_skin: "dark"   # stable base; we add neon accents via /assets/css/main.scss
 
 plugins:
   - jekyll-remote-theme
@@ -22,7 +23,7 @@ paginate_path: "/page:num/"
 author:
   name: "Rahul Kalliadan"
   avatar: "/assets/images/avatar.png"
-  bio: "Mechanical Robotics Engineer. Prototype → Production."
+  bio: "Mechanical Robotics Engineer — AMRs, mechanisms, reliability. Canada PR."
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
@@ -31,10 +32,15 @@ author:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/rahulkalliadan"
 
+# No projects collection
+# Pages (optional: only needed if you keep files under _pages/)
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
 defaults:
-  - scope:
-      path: ""
-      type: "posts"
+  - scope: { path: "", type: "posts" }
     values:
       layout: "single"
       author_profile: true
