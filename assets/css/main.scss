@@ -27,9 +27,9 @@
 
 /* ========= Full-bleed wrapper so content hugs the left edge ========= */
 .rk-full {
-  width: 100vw;                                 /* span full viewport width */
-  margin-left: calc(50% - 50vw);                /* escape centered container */
-  padding-inline: clamp(16px, 4vw, 48px);       /* nice side padding */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-inline: clamp(16px, 4vw, 48px);
 }
 
 /* ===== Landing layout (left profile, right about) ===== */
@@ -64,7 +64,8 @@
   pointer-events: none;
 }
 .rk-avatar {
-  width: 120px; height: 120px;
+  width: 120px; height: 120px; display: block;
+  position: relative; z-index: 1;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--rk-accent-soft);
@@ -115,3 +116,16 @@
 
 /* Section heading before blog feed */
 .rk-section-intro { margin: 18px 0 6px; border-left: 3px solid var(--rk-accent); padding-left: 10px; }
+
+/* Experience page timeline dots */
+.rk-exp__item {
+  position: relative; padding-left: 20px; margin: 0 0 18px;
+  border-left: 2px solid rgba(100,255,218,.2);
+}
+.rk-exp__item::before {
+  content: ""; position: absolute; left: -6px; top: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--rk-accent);
+  box-shadow: 0 0 12px var(--rk-accent-soft);
+}
+.rk-exp__meta { color: var(--rk-dim); margin-top: -6px; }
