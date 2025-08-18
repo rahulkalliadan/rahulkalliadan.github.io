@@ -8,7 +8,6 @@ author_profile: false
   <div class="rk-landing">
     <!-- LEFT: photo, name, role, socials -->
     <aside class="rk-profile">
-      <!-- Use your JPEG headshot -->
       <img class="rk-avatar" src="{{ '/assets/images/avatar.jpeg' | relative_url }}" alt="Rahul Kalliadan">
       <h2 class="rk-name">Rahul Kalliadan</h2>
       <p class="rk-role">Engineer — Mechanical Robotics</p>
