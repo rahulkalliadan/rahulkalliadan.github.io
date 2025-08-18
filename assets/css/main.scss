@@ -1,10 +1,11 @@
 ---
-# Jekyll compiles this SCSS to /assets/css/main.css
+# Compiles to /assets/css/main.css
 ---
 
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
+/* Theme vars */
 :root{
   --rk-accent:#64ffda;
   --rk-accent-soft:rgba(100,255,218,.22);
@@ -13,6 +14,7 @@
   --rk-header-h:64px;
 }
 
+/* Header */
 .site-header{
   backdrop-filter:saturate(1.2) blur(6px);
   background:linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.45)) !important;
@@ -20,41 +22,48 @@
 }
 .masthead__menu-item a:hover{ color:var(--rk-accent)!important; }
 
-/* Section scaffold */
-.rk-section{
-  scroll-margin-top: var(--rk-header-h);
-  padding: clamp(24px, 6vw, 64px) clamp(24px, 6vw, 80px);
+/* ======= 3/4 width container ======= */
+.rk-section{ scroll-margin-top:var(--rk-header-h); padding-block:clamp(24px,6vw,64px); }
+.rk-container{
+  width:min(75vw, 1200px);
+  margin-inline:auto;
+  padding-inline:clamp(16px,4vw,32px); /* responsive breathing room */
 }
+
+/* Headings & bullets */
 .rk-h2{ font-size:1.6rem; margin:0 0 .75rem; }
 .rk-h3{ font-size:1.1rem; margin:0 0 .5rem; color:#e6f1ff; }
 .rk-bullets{ margin:.25rem 0 0; padding-left:1.1rem; }
 .rk-bullets li{ margin:.35rem 0; color:var(--rk-dim); }
 
-/* HERO */
-.rk-hero{ padding-top: clamp(32px, 8vw, 96px); }
+/* ======= HERO: stacked center (photo → intro → socials) ======= */
+.rk-hero{ padding-top:clamp(32px,8vw,96px); }
 .rk-hero__inner{
-  display:grid; gap:22px;
-  grid-template-columns: 160px 1fr;
-  align-items:center;
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;
 }
-@media (max-width: 700px){ .rk-hero__inner{ grid-template-columns:1fr; } }
-
 .rk-avatar{
-  width:160px; height:160px; border-radius:50%; object-fit:cover; display:block;
+  width:180px; height:180px; border-radius:50%; object-fit:cover; display:block;
   border:2px solid var(--rk-accent);
-  box-shadow:0 0 0 3px rgba(100,255,218,.14), 0 0 32px 6px var(--rk-accent-soft);
+  box-shadow:0 0 0 3px rgba(100,255,218,.14), 0 0 36px 8px var(--rk-accent-soft);
 }
-.rk-title{ margin:0 0 .2rem; font-size:2rem; }
-.rk-tagline{ margin:0 0 .8rem; color:var(--rk-accent); }
-.rk-blurb{ color:#c9d6f0; max-width:65ch; }
-.rk-cta .btn{ margin-right:10px; margin-top:12px; }
+.rk-title{ margin:.4rem 0 .1rem; font-size:2.1rem; }
+.rk-tagline{ margin:0 0 .6rem; color:var(--rk-accent); }
+.rk-blurb{ color:#c9d6f0; max-width:70ch; }
+
+.rk-cta .btn{ margin:12px 6px 0 0; }
 .rk-btn--neon{ border:1px solid var(--rk-accent); color:var(--rk-accent)!important; box-shadow:0 0 0 0 var(--rk-accent-soft); }
 .rk-btn--neon:hover{ box-shadow:0 0 24px 2px var(--rk-accent-soft); transform:translateY(-1px); }
-.rk-socials a{ display:inline-flex; width:38px; height:38px; margin-right:8px; align-items:center; justify-content:center;
-  border-radius:10px; border:1px solid rgba(255,255,255,.15); color:#e6f1ff;}
-.rk-socials a:hover{ border-color:var(--rk-accent); color:var(--rk-accent); box-shadow:0 0 18px var(--rk-accent-soft); }
 
-/* Cards */
+.rk-socials{ margin-top:6px; }
+.rk-socials a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; margin:0 6px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.15); color:#e6f1ff;
+  transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
+}
+.rk-socials a:hover{ transform:translateY(-2px); border-color:var(--rk-accent); box-shadow:0 0 18px var(--rk-accent-soft); color:var(--rk-accent); }
+
+/* Cards (Experience) */
 .rk-card{
   border:1px solid rgba(255,255,255,.10);
   border-radius:18px;
@@ -70,7 +79,7 @@
 .rk-exp::before{ content:""; position:absolute; left:-12px; top:20px; bottom:20px; width:2px; background:rgba(100,255,218,.18); border-radius:2px; }
 .rk-exp::after{ content:""; position:absolute; left:-16px; top:22px; width:10px; height:10px; background:var(--rk-accent); border-radius:50%; box-shadow:0 0 12px var(--rk-accent-soft); }
 
-/* Toggle button */
+/* Toggle button (already wired by includes) */
 .rk-theme-btn{
   position:fixed; right:clamp(18px,2.5vw,28px); bottom:clamp(18px,2.5vw,28px);
   width:54px; height:54px; border-radius:50%;
@@ -82,5 +91,5 @@
 }
 .rk-theme-btn:hover{ border-color:var(--rk-accent); color:var(--rk-accent); transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.3), 0 0 28px var(--rk-accent-soft); }
 
-/* Hide left site title in header */
+/* Hide left brand */
 .site-title, .site-logo, .site-branding{ display:none !important; }
