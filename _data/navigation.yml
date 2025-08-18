@@ -1,7 +1,9 @@
 main:
   - title: "Home"
-    url: /
+    url: /#home
+  - title: "About"
+    url: /#about
   - title: "Experience"
-    url: /experience/
+    url: /#experience
   - title: "Blog"
     url: /blog/
