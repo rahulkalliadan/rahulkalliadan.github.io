@@ -164,3 +164,5 @@ html, body { width: 100%; overflow-x: hidden; }
 .rk-exp::before,
 .rk-exp::after { content: none !important; }
 
+.page, .initial-content, .page__inner-wrap { margin-left: 0 !important; margin-right: 0 !important; max-width: 100% !important; }
+
