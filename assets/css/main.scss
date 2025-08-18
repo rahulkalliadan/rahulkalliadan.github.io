@@ -1,101 +1,112 @@
 ---
-# Only the main Sass file needs front matter for Jekyll
+# Only the main Sass file needs front matter for Jekyll to compile SCSS
 ---
 
+/* Base theme (dark) */
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
-/* ===== Futuristic Engineer theme accents ===== */
+/* =========================================================
+   Rahul Kalliadan — Futuristic Engineer Theme Overrides
+   ========================================================= */
+
 :root {
-  --rk-accent: #64ffda;
-  --rk-accent-soft: rgba(100, 255, 218, 0.22);
-  --rk-grid: rgba(100, 255, 218, 0.10);
-  --rk-dim: #a8b2d1;
+  --rk-accent: #64ffda;                 /* neon teal */
+  --rk-accent-soft: rgba(100,255,218,.22);
+  --rk-grid: rgba(100,255,218,.10);
+  --rk-dim: #a8b2d1;                    /* soft text */
 }
 
-/* Header: subtle glass + accent underline */
+/* Header: subtle glass + accent */
 .site-header {
   backdrop-filter: saturate(1.2) blur(6px);
   background: linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.45)) !important;
-  border-bottom: 1px solid rgba(100, 255, 218, 0.12);
+  border-bottom: 1px solid rgba(100,255,218,.12);
 }
-
 .masthead__menu-item a:hover { color: var(--rk-accent) !important; }
 
-/* ===== Landing layout ===== */
-.rk-landing{
-  display:grid; gap:28px; margin:18px 0 10px;
+/* ===== Landing layout (left profile, right about) ===== */
+.rk-landing {
+  display: grid;
+  gap: 28px;
+  margin: 18px 0 10px;
   grid-template-columns: minmax(260px,320px) 1fr;
 }
-@media (max-width: 900px){ .rk-landing{ grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .rk-landing { grid-template-columns: 1fr; } }
 
-/* Left card */
-.rk-profile{
-  position:relative; padding:22px; border-radius:18px;
-  border:1px solid var(--rk-accent-soft);
+/* Left card (photo, name, role, socials) */
+.rk-profile {
+  position: relative;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid var(--rk-accent-soft);
   background:
     radial-gradient(900px 300px at 10% 0%, rgba(100,255,218,.05), transparent 60%),
     linear-gradient(180deg, rgba(11,15,23,.95), rgba(11,15,23,.65));
-  overflow:hidden;
+  overflow: hidden;
 }
-.rk-profile::before{
-  content:""; position:absolute; inset:0;
+.rk-profile::before {
+  content: "";
+  position: absolute; inset: 0;
   background-image:
     linear-gradient(var(--rk-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--rk-grid) 1px, transparent 1px);
-  background-size:22px 22px;
+  background-size: 22px 22px;
   mask-image: radial-gradient(80% 60% at 50% 20%, black, transparent 70%);
-  pointer-events:none;
+  pointer-events: none;
 }
-.rk-avatar{
-  width:120px; height:120px; border-radius:50%; object-fit:cover;
-  border:2px solid var(--rk-accent-soft); box-shadow:0 0 16px var(--rk-accent-soft);
+.rk-avatar {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--rk-accent-soft);
+  box-shadow: 0 0 16px var(--rk-accent-soft);
 }
-.rk-name{ margin:.8rem 0 .15rem; font-size:1.35rem; }
-.rk-role{ margin:0 0 .75rem; color:var(--rk-accent); }
+.rk-name { margin: .8rem 0 .15rem; font-size: 1.35rem; }
+.rk-role { margin: 0 0 .75rem; color: var(--rk-accent); }
 
-.rk-socials a{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:38px; height:38px; margin-right:8px;
-  border-radius:10px; border:1px solid rgba(255,255,255,.15);
-  color:#e6f1ff;
-  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+/* Social icons */
+.rk-socials a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; margin-right: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.15);
+  color: #e6f1ff;
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
 }
-.rk-socials a:hover{
+.rk-socials a:hover {
   transform: translateY(-2px);
   border-color: var(--rk-accent);
   box-shadow: 0 0 18px var(--rk-accent-soft);
   color: var(--rk-accent);
 }
 
-/* Right section */
-.rk-about{
-  padding:22px; border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
+/* Right card (about + resume + interests + education) */
+.rk-about {
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
   background: linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
 }
-.rk-two-col{
-  margin-top:12px; display:grid; gap:18px; grid-template-columns: 1fr 1fr;
+.rk-two-col {
+  margin-top: 12px;
+  display: grid; gap: 18px; grid-template-columns: 1fr 1fr;
 }
-@media (max-width: 700px){ .rk-two-col{ grid-template-columns: 1fr; } }
-.rk-bullets{ margin:0; padding-left:1.1rem; }
-.rk-bullets li{ margin:.3rem 0; color:var(--rk-dim); }
+@media (max-width: 700px) { .rk-two-col { grid-template-columns: 1fr; } }
+.rk-bullets { margin: 0; padding-left: 1.1rem; }
+.rk-bullets li { margin: .3rem 0; color: var(--rk-dim); }
 
 /* Buttons */
-.rk-btn--neon{
-  border:1px solid var(--rk-accent);
-  color:var(--rk-accent) !important;
-  box-shadow:0 0 0 0 var(--rk-accent-soft);
+.rk-btn--neon {
+  border: 1px solid var(--rk-accent);
+  color: var(--rk-accent) !important;
+  box-shadow: 0 0 0 0 var(--rk-accent-soft);
   transition: box-shadow .25s ease, transform .1s ease;
 }
-.rk-btn--neon:hover{ box-shadow:0 0 24px 2px var(--rk-accent-soft); transform: translateY(-1px); }
+.rk-btn--neon:hover { box-shadow: 0 0 24px 2px var(--rk-accent-soft); transform: translateY(-1px); }
 
+/* Section heading before blog feed */
+.rk-section-intro { margin: 18px 0 6px; border-left: 3px solid var(--rk-accent); padding-left: 10px; }
 
-
-/* Section heading before the feed */
-.rk-section-intro{
-  margin:18px 0 6px; border-left:3px solid var(--rk-accent); padding-left:10px;
-}
-
-
+/* Hide duplicate site title in masthead (we show name in left card) */
 .site-title { display: none !important; }
