@@ -1,4 +1,4 @@
-title: "Rahul Kalliadan"          # SEO only
+title: "Rahul Kalliadan"
 description: "Engineer — Robotics hardware, mechanisms, DFM/DFA, GD&T."
 url: "https://rahulkalliadan.github.io"
 baseurl: ""
@@ -6,7 +6,7 @@ timezone: "Asia/Kolkata"
 
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "dark"
-masthead_title: ""                 # hide left brand; we use right-side nav
+masthead_title: ""
 
 plugins:
   - jekyll-remote-theme
@@ -32,9 +32,3 @@ defaults:
     values:
       layout: "single"
       author_profile: true
-
-# Load our theme-switch scripts
-head_scripts:
-  - /assets/js/theme-init.js
-footer_scripts:
-  - /assets/js/theme-toggle.js
