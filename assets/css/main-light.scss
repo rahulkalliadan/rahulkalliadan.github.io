@@ -118,3 +118,49 @@ html, body { overflow-x: hidden; }
 .rk-theme-btn:hover{ border-color:var(--rk-accent); color:#065; transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.2), 0 0 24px var(--rk-accent-soft); }
 
 .site-title, .site-logo, .site-branding{ display:none !important; }
+
+/* === FINAL LAYOUT FIXES: centre page at 75% and remove sideways scroll === */
+
+/* 1) Never allow horizontal scroll from any pseudo/line effects */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { width: 100%; overflow-x: hidden; }
+
+/* 2) Exact 3/4 width centred container (with a sensible max) */
+:root {
+  --rk-page-max: 1200px;
+  --rk-page-width: 75vw; /* 3/4 of the viewport */
+}
+
+/* Sections have only vertical padding; the container handles width/centering */
+.rk-section { padding: clamp(24px, 6vw, 64px) 0; }
+
+.rk-container {
+  width: min(var(--rk-page-max), var(--rk-page-width));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(16px, 3vw, 32px);
+  padding-right: clamp(16px, 3vw, 32px);
+}
+
+/* Keep key blocks centred inside the container */
+.rk-hero__inner,
+.rk-two-col,
+.rk-card { margin-left: auto; margin-right: auto; }
+
+/* 3) Timeline: draw the line INSIDE the card so nothing bleeds left */
+.rk-exp {
+  position: relative;
+  padding-left: 16px;                /* space for line “inside” the card */
+  border-left: 2px solid rgba(100,255,218,.18); /* dark skin */
+}
+
+/* Light skin version will be overridden by its own color variable;
+   to be safe, re-declare a neutral line color if you want: */
+/* .rk-exp { border-left: 2px solid rgba(0,0,0,.12); } */
+
+/* Remove old pseudo-elements that could extend outside the container */
+.rk-exp::before,
+.rk-exp::after { content: none !important; }
+
