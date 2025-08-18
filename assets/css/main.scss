@@ -25,12 +25,20 @@
 }
 .masthead__menu-item a:hover { color: var(--rk-accent) !important; }
 
+/* ========= Full-bleed wrapper so content hugs the left edge ========= */
+.rk-full {
+  width: 100vw;                                 /* span full viewport width */
+  margin-left: calc(50% - 50vw);                /* escape centered container */
+  padding-inline: clamp(16px, 4vw, 48px);       /* nice side padding */
+}
+
 /* ===== Landing layout (left profile, right about) ===== */
 .rk-landing {
   display: grid;
   gap: 28px;
   margin: 18px 0 10px;
-  grid-template-columns: minmax(260px,320px) 1fr;
+  grid-template-columns: minmax(260px, 1fr) 3fr;  /* ≈25% : 75% */
+  align-items: start;
 }
 @media (max-width: 900px) { .rk-landing { grid-template-columns: 1fr; } }
 
@@ -107,6 +115,3 @@
 
 /* Section heading before blog feed */
 .rk-section-intro { margin: 18px 0 6px; border-left: 3px solid var(--rk-accent); padding-left: 10px; }
-
-/* Hide duplicate site title in masthead (we show name in left card) */
-.site-title { display: none !important; }
