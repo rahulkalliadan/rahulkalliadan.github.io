@@ -1,9 +1,11 @@
 ---
-# Compiles to /assets/css/main-light.css
+# Light theme CSS compiled by Jekyll (the dashes above/below are required)
 ---
 
 @import "minimal-mistakes/skins/default";
 @import "minimal-mistakes";
+
+/* ===== Rahul Kalliadan — LIGHT skin overrides ===== */
 
 :root{
   --rk-accent:#0fb;
@@ -66,4 +68,18 @@
 
 .rk-exp{ position:relative; }
 .rk-exp::before{ content:""; position:absolute; left:-12px; top:20px; bottom:20px; width:2px; background:rgba(0,0,0,.12); border-radius:2px; }
-.rk-exp::after{ content:""; position:absolute; left:-16px; top:22px; width:10px; height:10px; background:var(--rk-accent); border-radius:50%; box-shadow:0 0 10px var(--rk-accent-sof
+.rk-exp::after{ content:""; position:absolute; left:-16px; top:22px; width:10px; height:10px; background:var(--rk-accent); border-radius:50%; box-shadow:0 0 10px var(--rk-accent-soft); }
+
+/* Toggle button */
+.rk-theme-btn{
+  position:fixed; right:clamp(18px,2.5vw,28px); bottom:clamp(18px,2.5vw,28px);
+  width:54px; height:54px; border-radius:50%;
+  background:rgba(255,255,255,.85); color:#1b2430; cursor:pointer;
+  border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 8px 26px rgba(0,0,0,.15), 0 0 14px var(--rk-accent-soft);
+  backdrop-filter: blur(6px);
+  transition:all .2s ease; z-index:999;
+}
+.rk-theme-btn:hover{ border-color:var(--rk-accent); color:#065; transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.2), 0 0 24px var(--rk-accent-soft); }
+
+.site-title, .site-logo, .site-branding{ display:none !important; }
