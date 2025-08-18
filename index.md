@@ -1,3 +1,71 @@
+---
+layout: home
+title: ""
+author_profile: false
+---
+
+<!-- ======================= HERO ======================= -->
+<section id="home" class="rk-section rk-hero">
+  <div class="rk-container">
+    <div class="rk-hero__inner">
+      <img class="rk-avatar" src="{{ '/assets/images/avatar.jpeg' | relative_url }}" alt="Rahul Kalliadan">
+
+      <h1 class="rk-title">Rahul Kalliadan</h1>
+      <p class="rk-tagline">Engineer — Mechanical Robotics</p>
+
+      <p class="rk-blurb rk-narrow">
+        Hello, I’m Rahul — a Mechanical Robotics Engineer with 7+ years building reliable AMRs and commercial cleaning robots.
+        I work end-to-end: first-principles design, DFM/DFA, GD&amp;T/tolerance stacks, validation and scaling from prototype to production.
+      </p>
+
+      <div class="rk-socials">
+        <a href="https://www.linkedin.com/in/rahulkalliadan" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/rahulkalliadan" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="mailto:rahulkalliadan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+
+      <!-- Only the resume button here -->
+      <div class="rk-cta">
+        <a class="btn rk-btn--neon" href="{{ '/assets/resume/Rahul_Kalliadan_Resume.pdf' | relative_url }}" download>
+          <i class="fas fa-download"></i> Download Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ABOUT (centered) ======================= -->
+<section id="about" class="rk-section">
+  <div class="rk-container">
+    <h2 class="rk-h2 rk-center-text">About</h2>
+
+    <p class="rk-narrow">
+      I design, validate and ship robust robotics hardware: mechanisms, chassis, suspensions,
+      lifters/tugs, water/vacuum subsystems, and sensor layouts. I care about clean drawings,
+      stack-ups that pass, fixtures that speed assembly, and field reliability.
+    </p>
+
+    <!-- Interests (left) & Education (right) -->
+    <div class="rk-two-col rk-wide">
+      <div>
+        <h3 class="rk-h3">Interests</h3>
+        <ul class="rk-bullets">
+          <li>Robotics hardware systems &amp; mechanisms</li>
+          <li>DFM/DFA, GD&amp;T, reliability engineering</li>
+          <li>Field validation, IP sealing, lifecycle testing</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="rk-h3">Education</h3>
+        <ul class="rk-bullets">
+          <li>M.S. Robotics &amp; Automation</li>
+          <li>B.E. Mechanical Engineering</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= EXPERIENCE (timeline with circular logos) ======================= -->
 <section id="experience" class="rk-section">
   <div class="rk-container">
