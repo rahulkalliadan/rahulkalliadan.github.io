@@ -1,4 +1,4 @@
-title: "Rahul Kalliadan"          # for SEO
+title: "Rahul Kalliadan"          # SEO only (not shown on masthead)
 description: "Engineer — Robotics hardware, mechanisms, DFM/DFA, GD&T."
 url: "https://rahulkalliadan.github.io"
 baseurl: ""
@@ -7,8 +7,8 @@ timezone: "Asia/Kolkata"
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "dark"
 
-# Show 'Home' at top-left; it links to /
-masthead_title: "Home"
+# Keep the left masthead empty; nav will be on the right
+masthead_title: ""
 
 plugins:
   - jekyll-remote-theme
@@ -22,7 +22,7 @@ permalink: /:categories/:title/
 paginate: 7
 paginate_path: "/page:num/"
 
-# We keep _pages/experience.md
+# We keep _pages for Experience
 collections:
   pages:
     output: true
