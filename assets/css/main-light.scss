@@ -79,6 +79,41 @@
   box-shadow:0 8px 26px rgba(0,0,0,.15), 0 0 14px var(--rk-accent-soft);
   backdrop-filter: blur(6px);
   transition:all .2s ease; z-index:999;
+
+
+  /* === Centering & no-horizontal-scroll fixes === */
+html, body { overflow-x: hidden; }
+
+/* 3/4 width, centered */
+.rk-container {
+  max-width: 1200px;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ensure key blocks stay centred */
+.rk-hero__inner,
+.rk-two-col,
+.rk-card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Keep the experience timeline inside the container */
+.rk-exp {
+  position: relative;
+  padding-left: 18px;   /* room for the line & dot */
+  overflow: hidden;     /* prevent bleed outside container */
+}
+.rk-exp::before {       /* vertical line */
+  left: 0;              /* inside the card, no negative offset */
+}
+.rk-exp::after {        /* glowing dot */
+  left: 0;              /* align with the line */
+  transform: translateX(-50%); /* dot intersects the line nicely */
+}
+
 }
 .rk-theme-btn:hover{ border-color:var(--rk-accent); color:#065; transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.2), 0 0 24px var(--rk-accent-soft); }
 
