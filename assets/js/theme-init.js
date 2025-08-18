@@ -1,0 +1,15 @@
+(function () {
+  try {
+    var pref = localStorage.getItem('rk-theme') || 'dark';
+    var link = document.querySelector('link[rel="stylesheet"][href*="/assets/css/main"]');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    var target = (pref === 'light')
+      ? href.replace(/main(-light)?\.css/, 'main-light.css')
+      : href.replace(/main(-light)?\.css/, 'main.css');
+
+    if (href !== target) link.setAttribute('href', target);
+    document.documentElement.setAttribute('data-theme', pref);
+  } catch (e) {}
+})();
