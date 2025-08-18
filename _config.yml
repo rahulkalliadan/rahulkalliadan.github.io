@@ -38,7 +38,7 @@ defaults:
 
 author:
   name: "Rahul Kalliadan"
-  avatar: "/assets/images/Avatar.jpg"
+  avatar: "/assets/images/avatar.jpeg"
   bio: "Mechanical Robotics Engineer — prototype to production."
   links:
     - label: "LinkedIn"
