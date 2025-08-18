@@ -63,6 +63,8 @@
   mask-image: radial-gradient(80% 60% at 50% 20%, black, transparent 70%);
   pointer-events: none;
 }
+
+/* Avatar */
 .rk-avatar {
   width: 120px; height: 120px; display: block;
   position: relative; z-index: 1;
@@ -129,3 +131,6 @@
   box-shadow: 0 0 12px var(--rk-accent-soft);
 }
 .rk-exp__meta { color: var(--rk-dim); margin-top: -6px; }
+
+/* ===== Hide the left site title/logo block in the masthead ===== */
+.site-title, .site-logo, .site-branding { display: none !important; }
