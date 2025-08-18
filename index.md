@@ -1,6 +1,6 @@
 ---
 layout: home
-title: ""          # no banner title
+title: ""
 author_profile: false
 ---
 
@@ -8,7 +8,10 @@ author_profile: false
   <div class="rk-landing">
     <!-- LEFT: photo, name, role, socials -->
     <aside class="rk-profile">
-      <img class="rk-avatar" src="{{ '/assets/images/avatar.jpg' | relative_url }}" alt="Rahul Kalliadan">
+      <picture>
+        <source srcset="{{ '/assets/images/avatar.png' | relative_url }}" type="image/png">
+        <img class="rk-avatar" src="{{ '/assets/images/avatar.jpg' | relative_url }}" alt="Rahul Kalliadan">
+      </picture>
       <h2 class="rk-name">Rahul Kalliadan</h2>
       <p class="rk-role">Engineer — Mechanical Robotics</p>
 
@@ -63,4 +66,3 @@ author_profile: false
 <div class="rk-section-intro">
   <h2 class="rk-section-title">Recent Articles</h2>
 </div>
-<!-- The 'home' layout will list your blog feed below -->
