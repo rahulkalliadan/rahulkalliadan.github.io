@@ -161,3 +161,43 @@ html, body { width: 100%; overflow-x: hidden; }
 *::after { box-sizing: border-box; }
 html, body { width: 100%; overflow-x: hidden; }
 
+/* === Centering helpers for the new layout === */
+
+/* Center headings or any text block */
+.rk-center-text { text-align: center; }
+
+/* Centered narrow paragraph (About intro) */
+.rk-narrow {
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Wider container for the Interests/Education row, kept centered */
+.rk-wide {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Experience list container centered (slightly narrower for readability) */
+.rk-exp-list {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Make sure the two-col grid aligns nicely under About */
+.rk-two-col {
+  align-items: start;
+}
+
+/* Keep the timeline line inside the card and centered content overall */
+.rk-exp {
+  position: relative;
+  border-left: 2px solid rgba(100,255,218,.18); /* overridden in light file already */
+  padding-left: 16px;
+  overflow: hidden;
+}
+.rk-exp::before, .rk-exp::after { content: none !important; }
