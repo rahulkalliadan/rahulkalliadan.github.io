@@ -6,7 +6,7 @@ timezone: "Asia/Kolkata"
 
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "dark"
-masthead_title: ""
+masthead_title: ""    # keep left brand empty; use right-side nav
 
 plugins:
   - jekyll-remote-theme
