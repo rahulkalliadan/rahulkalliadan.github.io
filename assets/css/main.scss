@@ -5,27 +5,21 @@
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
-/* ========= Hard reset for layout ========= */
+/* ===== Reset to avoid sideways scroll ===== */
 *,
 *::before,
 *::after { box-sizing: border-box; }
+html, body { width: 100%; overflow-x: hidden; }
 
-html, body {
-  width: 100%;
-  overflow-x: hidden;  /* kill any horizontal scroll */
-}
-
-/* ========= Theme variables ========= */
+/* ===== Theme tokens ===== */
 :root{
   --rk-accent: #64ffda;
   --rk-accent-soft: rgba(100,255,218,.22);
   --rk-dim: #a8b2d1;
   --rk-header-h: 64px;
-  --rk-page-max: 1200px;
-  --rk-page-w: 75vw;   /* 3/4 width */
 }
 
-/* ========= Header ========= */
+/* ===== Header ===== */
 .site-header{
   backdrop-filter: saturate(1.2) blur(6px);
   background: linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.45)) !important;
@@ -33,47 +27,45 @@ html, body {
 }
 .masthead__menu-item a:hover{ color: var(--rk-accent) !important; }
 
-/* ========= Page sections / container ========= */
+/* ===== Sections + centered container (75% width) ===== */
 .rk-section{
   scroll-margin-top: var(--rk-header-h);
-  padding-block: clamp(24px, 6vw, 64px);
+  padding: 32px 0;
 }
+@media (min-width: 900px){ .rk-section{ padding: 56px 0; } }
+
 .rk-container{
-  width: min(var(--rk-page-max), var(--rk-page-w));
-  margin-inline: auto;                     /* center it */
-  padding-inline: clamp(16px, 3vw, 32px);  /* inner breathing room */
+  width: 75vw;           /* 3/4 screen */
+  max-width: 1200px;     /* cap */
+  margin: 0 auto;        /* center */
+  padding: 0 24px;       /* side breathing room */
 }
 
-/* ========= Typography helpers ========= */
+/* ===== Typography helpers ===== */
 .rk-h2{ font-size: 1.6rem; margin: 0 0 .75rem; }
 .rk-h3{ font-size: 1.1rem; margin: 0 0 .5rem; color: #e6f1ff; }
 .rk-bullets{ margin: .25rem 0 0; padding-left: 1.1rem; }
 .rk-bullets li{ margin: .35rem 0; color: var(--rk-dim); }
 
-/* ========= HERO: stacked center (photo → intro → socials) ========= */
-.rk-hero{ padding-top: clamp(32px, 8vw, 96px); }
+/* ===== HERO (stacked center: photo → intro → socials) ===== */
+.rk-hero{ padding-top: 64px; }
+@media (min-width: 900px){ .rk-hero{ padding-top: 96px; } }
+
 .rk-hero__inner{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center; gap: 16px;
 }
 
 .rk-avatar{
-  width: 180px; height: 180px;
-  border-radius: 50%; object-fit: cover; display: block;
+  width: 180px; height: 180px; border-radius: 50%; object-fit: cover; display: block;
   border: 2px solid var(--rk-accent);
   box-shadow: 0 0 0 3px rgba(100,255,218,.14), 0 0 36px 8px var(--rk-accent-soft);
 }
-
 .rk-title   { margin: .4rem 0 .1rem; font-size: 2.1rem; }
 .rk-tagline { margin: 0 0 .6rem; color: var(--rk-accent); }
 .rk-blurb   { color: #c9d6f0; max-width: 70ch; }
 
-.rk-cta .btn{
-  margin: 12px 6px 0 0;
-}
+.rk-cta .btn{ margin: 12px 6px 0 0; }
 .rk-btn--neon{
   border: 1px solid var(--rk-accent);
   color: var(--rk-accent) !important;
@@ -84,7 +76,7 @@ html, body {
   transform: translateY(-1px);
 }
 
-/* Social icons */
+/* Socials */
 .rk-socials{ margin-top: 6px; }
 .rk-socials a{
   display: inline-flex; align-items: center; justify-content: center;
@@ -99,16 +91,11 @@ html, body {
   color: var(--rk-accent);
 }
 
-/* ========= Two-column blocks (About) ========= */
-.rk-two-col{
-  display: grid; gap: 20px;
-  grid-template-columns: 1fr 1fr;
-}
-@media (max-width: 820px){
-  .rk-two-col{ grid-template-columns: 1fr; }
-}
+/* ===== Two columns (About) ===== */
+.rk-two-col{ display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 820px){ .rk-two-col{ grid-template-columns: 1fr 1fr; } }
 
-/* ========= Cards (Experience items) ========= */
+/* ===== Cards (Experience items) ===== */
 .rk-card{
   border: 1px solid rgba(255,255,255,.10);
   border-radius: 18px;
@@ -116,26 +103,24 @@ html, body {
   background: linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
   margin: 12px 0;
 }
-
 .rk-exp__head{
   display: flex; gap: 12px; flex-wrap: wrap;
   align-items: baseline; justify-content: space-between;
 }
 .rk-exp__meta{ color: var(--rk-dim); }
 
-/* Timeline line INSIDE the card — no negative offsets, no overflow */
+/* Timeline line INSIDE the card (no negative offsets) */
 .rk-exp{
   position: relative;
   border-left: 2px solid rgba(100,255,218,.18);
   padding-left: 16px;
-  overflow: hidden; /* safety */
+  overflow: hidden;
 }
-/* remove any old pseudo timeline decorations */
 .rk-exp::before, .rk-exp::after{ content: none !important; }
 
-/* ========= Theme toggle button ========= */
+/* ===== Theme toggle button ===== */
 .rk-theme-btn{
-  position: fixed; right: clamp(18px,2.5vw,28px); bottom: clamp(18px,2.5vw,28px);
+  position: fixed; right: 24px; bottom: 24px;
   width: 54px; height: 54px; border-radius: 50%;
   background: rgba(20,24,32,.75); color: #e6f1ff; cursor: pointer;
   border: 1px solid rgba(255,255,255,.16);
@@ -150,5 +135,5 @@ html, body {
 }
 @media print{ .rk-theme-btn{ display:none } }
 
-/* ========= Hide left brand text block (we use right nav only) ========= */
+/* Hide the left brand block */
 .site-title, .site-logo, .site-branding{ display: none !important; }
