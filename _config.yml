@@ -1,12 +1,14 @@
-title: "Rahul Kalliadan"
-description: "Engineer — Robotics hardware, mechanisms, DFM/DFA, GD&T. Prototype → Production."
+title: "Rahul Kalliadan"          # keep for SEO
+description: "Engineer — Robotics hardware, mechanisms, DFM/DFA, GD&T."
 url: "https://rahulkalliadan.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
 
-# Theme + skin
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
-minimal_mistakes_skin: "dark"   # stable base; we add neon accents via /assets/css/main.scss
+minimal_mistakes_skin: "dark"
+
+# Hide the masthead title on the left so only (Experience, Blog) show on the right
+masthead_title: ""
 
 plugins:
   - jekyll-remote-theme
@@ -20,10 +22,24 @@ permalink: /:categories/:title/
 paginate: 7
 paginate_path: "/page:num/"
 
+# Keep pages as a collection since we use _pages/experience.md
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "single"
+      author_profile: true
+
 author:
   name: "Rahul Kalliadan"
-  avatar: "/assets/images/avatar.png"
-  bio: "Mechanical Robotics Engineer — AMRs, mechanisms, reliability. Canada PR."
+  avatar: "/assets/images/avatar.jpg"
+  bio: "Mechanical Robotics Engineer — prototype to production."
   links:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
@@ -31,16 +47,3 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/rahulkalliadan"
-
-# No projects collection
-# Pages (optional: only needed if you keep files under _pages/)
-collections:
-  pages:
-    output: true
-    permalink: /:path/
-
-defaults:
-  - scope: { path: "", type: "posts" }
-    values:
-      layout: "single"
-      author_profile: true
