@@ -90,10 +90,12 @@
 }
 .rk-btn--neon:hover{ box-shadow:0 0 24px 2px var(--rk-accent-soft); transform: translateY(-1px); }
 
-.site-title { display: none !important; }
 
 
 /* Section heading before the feed */
 .rk-section-intro{
   margin:18px 0 6px; border-left:3px solid var(--rk-accent); padding-left:10px;
 }
+
+
+.site-title { display: none !important; }
