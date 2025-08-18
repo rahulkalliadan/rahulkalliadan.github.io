@@ -33,9 +33,4 @@ author_profile: false
       <li>Designed conveyors; commissioned unit at HUL site with stable 3-week run during handover.</li>
     </ul>
   </div>
-
-  <div class="rk-exp__item">
-    <h3>Education</h3>
-    <p class="rk-exp__meta">B.E. Mechanical · M.S. Robotics & Automation</p>
-  </div>
 </section>
