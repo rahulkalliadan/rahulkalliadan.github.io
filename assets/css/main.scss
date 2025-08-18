@@ -137,3 +137,34 @@ html, body { width: 100%; overflow-x: hidden; }
 
 /* Hide the left brand block */
 .site-title, .site-logo, .site-branding{ display: none !important; }
+
+/* === Hard override: make theme wrappers full-width and centered on the home page === */
+.layout--home .initial-content,
+.layout--home #main,
+.layout--home .page,
+.layout--home .page__inner-wrap,
+.layout--home .archive {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Keep our content column strictly centered at 75% width */
+.rk-section { padding: 32px 0; }              /* vertical spacing only */
+.rk-container {
+  width: 75vw;                                 /* 3/4 of the viewport */
+  max-width: 1200px;
+  margin-left: auto;                            /* center */
+  margin-right: auto;                           /* center */
+  padding-left: 24px;                           /* gentle inner padding */
+  padding-right: 24px;
+}
+
+/* Safety: absolutely no sideways scroll from anything */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { width: 100%; overflow-x: hidden; }
