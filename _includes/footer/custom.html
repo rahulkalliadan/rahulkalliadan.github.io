@@ -1,39 +1,49 @@
 <script>
 (function () {
-  function currentTheme() {
-    return document.documentElement.getAttribute('data-theme') || 'dark';
-  }
-  function updateIcon(theme) {
-    var btn = document.getElementById('rk-theme-btn');
-    if (!btn) return;
-    btn.textContent = (theme === 'light') ? '🌙' : '☀️';
-    btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
-    btn.title = btn.getAttribute('aria-label');
-  }
-  function swapTheme(theme) {
+  function cur() { return document.documentElement.getAttribute('data-theme') || 'dark'; }
+  function setTheme(theme){
     var link = document.querySelector('link[rel="stylesheet"][href*="/assets/css/main"]');
-    if (!link) return;
-    var href = link.getAttribute('href');
-    var target = (theme === 'light')
-      ? href.replace(/main(-light)?\.css/, 'main-light.css')
-      : href.replace(/main(-light)?\.css/, 'main.css');
-    if (href !== target) link.setAttribute('href', target);
+    if (link){
+      var href = link.getAttribute('href');
+      var target = (theme === 'light')
+        ? href.replace(/main(-light)?\.css/, 'main-light.css')
+        : href.replace(/main(-light)?\.css/, 'main.css');
+      if (href !== target) link.setAttribute('href', target);
+    }
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('rk-theme', theme);
-    updateIcon(theme);
+    updIcon(theme);
+  }
+  function updIcon(theme){
+    var b = document.getElementById('rk-theme-btn');
+    if (!b) return;
+    b.textContent = (theme === 'light') ? '🌙' : '☀️';
+    b.title = (theme === 'light') ? 'Switch to dark mode' : 'Switch to light mode';
+    b.setAttribute('aria-label', b.title);
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    // create button
+  document.addEventListener('DOMContentLoaded', function(){
+    // Floating toggle
     var btn = document.createElement('button');
     btn.id = 'rk-theme-btn';
     btn.className = 'rk-theme-btn';
     btn.type = 'button';
     document.body.appendChild(btn);
+    updIcon(cur());
+    btn.addEventListener('click', function(){ setTheme(cur()==='light'?'dark':'light'); });
 
-    updateIcon(currentTheme());
-    btn.addEventListener('click', function () {
-      swapTheme(currentTheme() === 'light' ? 'dark' : 'light');
+    // Anchor links in masthead -> smooth scroll + close mobile menu if open
+    document.querySelectorAll('.masthead a[href^="/#"], .masthead a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(ev){
+        var id = a.getAttribute('href').replace('/','');
+        var el = document.querySelector(id);
+        if (el){
+          ev.preventDefault();
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+          // update hash without jump
+          history.replaceState(null, '', id);
+        }
+      });
     });
   });
 })();
