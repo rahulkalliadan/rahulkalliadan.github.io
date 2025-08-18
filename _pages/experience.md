@@ -10,9 +10,9 @@ author_profile: false
     <h3>Lionsbot — Senior Mechanical Engineer</h3>
     <p class="rk-exp__meta">Commercial cleaning robots · 2022 — 2024</p>
     <ul>
-      <li>Owned mechanical design for key subsystems (handlebar, cleaning mech, vacuum chamber, safety bumper, water-line, sensor layout).</li>
-      <li>Shipped <strong>1,800+ robots</strong> in service; achieved <strong>IPX3</strong> ingress compliance.</li>
-      <li><strong>25% cost down</strong> and <strong>33% faster assembly</strong> via DFM/DFA and supplier fixture redesign.</li>
+      <li>Owned mechanical design for handlebar, cleaning mechanism, vacuum chamber, safety bumper, water-line, sensor layout.</li>
+      <li>Shipped <strong>1,800+ robots</strong>; achieved <strong>IPX3</strong> ingress compliance.</li>
+      <li><strong>25% cost down</strong> & <strong>33% faster assembly</strong> via DFM/DFA and fixture redesign.</li>
     </ul>
   </div>
 
@@ -39,4 +39,3 @@ author_profile: false
     <p class="rk-exp__meta">B.E. Mechanical · M.S. Robotics & Automation</p>
   </div>
 </section>
-
