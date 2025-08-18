@@ -7,7 +7,7 @@
 @import "minimal-mistakes";
 
 /* =========================================================
-   Rahul Kalliadan — Futuristic Engineer Theme Overrides
+   Rahul Kalliadan — Futuristic Engineer Theme (DARK)
    ========================================================= */
 
 :root {
@@ -17,7 +17,7 @@
   --rk-dim: #a8b2d1;                    /* soft text */
 }
 
-/* Header: subtle glass + accent */
+/* Header */
 .site-header {
   backdrop-filter: saturate(1.2) blur(6px);
   background: linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.45)) !important;
@@ -25,124 +25,100 @@
 }
 .masthead__menu-item a:hover { color: var(--rk-accent) !important; }
 
-/* ========= Full-bleed wrapper so content hugs the left edge ========= */
-/* Increased side gap on both extremes */
+/* Full-bleed wrapper with wide side gaps */
 .rk-full {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding-inline: clamp(24px, 6vw, 80px);   /* was 16/4vw/48 — now wider */
+  padding-inline: clamp(24px, 6vw, 80px);
 }
 
-/* ===== Landing layout (left profile, right about) ===== */
+/* Landing grid */
 .rk-landing {
-  display: grid;
-  gap: 28px;
-  margin: 18px 0 10px;
+  display: grid; gap: 28px; margin: 18px 0 10px;
   grid-template-columns: minmax(260px, 1fr) 3fr;  /* ≈25% : 75% */
   align-items: start;
 }
-@media (max-width: 900px) { .rk-landing { grid-template-columns: 1fr; } }
+@media (max-width: 900px){ .rk-landing { grid-template-columns: 1fr; } }
 
-/* Left card (photo, name, role, socials) */
-.rk-profile {
-  position: relative;
-  padding: 22px;
-  border-radius: 18px;
-  border: 1px solid var(--rk-accent-soft);
+/* Left card */
+.rk-profile{
+  position:relative; padding:22px; border-radius:18px;
+  border:1px solid var(--rk-accent-soft);
   background:
     radial-gradient(900px 300px at 10% 0%, rgba(100,255,218,.05), transparent 60%),
     linear-gradient(180deg, rgba(11,15,23,.95), rgba(11,15,23,.65));
-  overflow: hidden;
+  overflow:hidden;
 }
-.rk-profile::before {
-  content: "";
-  position: absolute; inset: 0;
+.rk-profile::before{
+  content:""; position:absolute; inset:0;
   background-image:
     linear-gradient(var(--rk-grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--rk-grid) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-size:22px 22px;
   mask-image: radial-gradient(80% 60% at 50% 20%, black, transparent 70%);
-  pointer-events: none;
+  pointer-events:none;
 }
 
-/* ===== Avatar (larger + glow) ===== */
-.rk-avatar {
-  width: 160px;             /* increased from 120px */
-  height: 160px;
-  display: block;
-  position: relative;
-  z-index: 1;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--rk-accent);
-  box-shadow:
-    0 0 0 3px rgba(100,255,218,.14),
-    0 0 32px 6px var(--rk-accent-soft);   /* neon glow */
-  transition: transform .12s ease, box-shadow .3s ease;
-  filter: saturate(1.05) contrast(1.02);
+/* Avatar (bigger + glow) */
+.rk-avatar{
+  width:160px; height:160px; display:block; border-radius:50%; object-fit:cover;
+  border:2px solid var(--rk-accent);
+  box-shadow:0 0 0 3px rgba(100,255,218,.14), 0 0 32px 6px var(--rk-accent-soft);
+  filter:saturate(1.05) contrast(1.02);
+  transition:transform .12s ease, box-shadow .3s ease;
 }
-.rk-avatar:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 0 0 3px rgba(100,255,218,.18),
-    0 0 44px 10px var(--rk-accent-soft);
-}
+.rk-avatar:hover{ transform:translateY(-1px); box-shadow:0 0 0 3px rgba(100,255,218,.18), 0 0 44px 10px var(--rk-accent-soft); }
 
-.rk-name { margin: .9rem 0 .2rem; font-size: 1.45rem; }
-.rk-role { margin: 0 0 .9rem; color: var(--rk-accent); }
+.rk-name{ margin:.9rem 0 .2rem; font-size:1.45rem; }
+.rk-role{ margin:0 0 .9rem; color:var(--rk-accent); }
 
-/* Social icons */
-.rk-socials a {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; margin-right: 8px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.15);
-  color: #e6f1ff;
-  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
+/* Socials */
+.rk-socials a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:38px; height:38px; margin-right:8px; border-radius:10px;
+  border:1px solid rgba(255,255,255,.15); color:#e6f1ff;
+  transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
 }
-.rk-socials a:hover {
-  transform: translateY(-2px);
-  border-color: var(--rk-accent);
-  box-shadow: 0 0 18px var(--rk-accent-soft);
-  color: var(--rk-accent);
-}
+.rk-socials a:hover{ transform:translateY(-2px); border-color:var(--rk-accent); box-shadow:0 0 18px var(--rk-accent-soft); color:var(--rk-accent); }
 
-/* Right card (about + resume + interests + education) */
-.rk-about {
-  padding: 22px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.10);
+/* Right card */
+.rk-about{
+  padding:22px; border-radius:18px;
+  border:1px solid rgba(255,255,255,.10);
   background: linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
 }
-.rk-two-col {
-  margin-top: 12px;
-  display: grid; gap: 18px; grid-template-columns: 1fr 1fr;
-}
-@media (max-width: 700px) { .rk-two-col { grid-template-columns: 1fr; } }
-.rk-bullets { margin: 0; padding-left: 1.1rem; }
-.rk-bullets li { margin: .3rem 0; color: var(--rk-dim); }
+.rk-two-col{ margin-top:12px; display:grid; gap:18px; grid-template-columns:1fr 1fr; }
+@media (max-width:700px){ .rk-two-col{ grid-template-columns:1fr; } }
+.rk-bullets{ margin:0; padding-left:1.1rem; }
+.rk-bullets li{ margin:.3rem 0; color:var(--rk-dim); }
 
 /* Buttons */
-.rk-btn--neon {
-  border: 1px solid var(--rk-accent);
-  color: var(--rk-accent) !important;
-  box-shadow: 0 0 0 0 var(--rk-accent-soft);
-  transition: box-shadow .25s ease, transform .1s ease;
+.rk-btn--neon{
+  border:1px solid var(--rk-accent); color:var(--rk-accent) !important;
+  box-shadow:0 0 0 0 var(--rk-accent-soft); transition:box-shadow .25s ease, transform .1s ease;
 }
-.rk-btn--neon:hover { box-shadow: 0 0 24px 2px var(--rk-accent-soft); transform: translateY(-1px); }
+.rk-btn--neon:hover{ box-shadow:0 0 24px 2px var(--rk-accent-soft); transform:translateY(-1px); }
 
-/* Section heading before blog feed */
-.rk-section-intro { margin: 18px 0 6px; border-left: 3px solid var(--rk-accent); padding-left: 10px; }
+/* Section title before feed */
+.rk-section-intro{ margin:18px 0 6px; border-left:3px solid var(--rk-accent); padding-left:10px; }
 
-/* Experience page timeline dots */
-.rk-exp__item {
-  position: relative; padding-left: 20px; margin: 0 0 18px;
-  border-left: 2px solid rgba(100,255,218,.2);
+/* Experience page timeline */
+.rk-exp__item{ position:relative; padding-left:20px; margin:0 0 18px; border-left:2px solid rgba(100,255,218,.2); }
+.rk-exp__item::before{ content:""; position:absolute; left:-6px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--rk-accent); box-shadow:0 0 12px var(--rk-accent-soft); }
+.rk-exp__meta{ color:var(--rk-dim); margin-top:-6px; }
+
+/* Hide masthead text block on the left */
+.site-title, .site-logo, .site-branding{ display:none !important; }
+
+/* ===== Bottom-right theme toggle button ===== */
+.rk-theme-btn{
+  position:fixed; right:clamp(18px,2.5vw,28px); bottom:clamp(18px,2.5vw,28px);
+  width:54px; height:54px; border-radius:50%;
+  background:rgba(20,24,32,.75); color:#e6f1ff; cursor:pointer;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 8px 26px rgba(0,0,0,.25), 0 0 18px var(--rk-accent-soft);
+  backdrop-filter: blur(6px);
+  transition:all .2s ease;
+  z-index: 999;
 }
-.rk-exp__item::before {
-  content: ""; position: absolute; left: -6px; top: 6px;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--rk-accent);
-  box-shadow: 0 0 12px var(--rk-accent-soft);
-}
-.rk-exp__meta { color: var(--rk-dim); margin-top: -6px; }
+.rk-theme-btn:hover{ border-color:var(--rk-accent); color:var(--rk-accent); transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.3), 0 0 28px var(--rk-accent-soft); }
