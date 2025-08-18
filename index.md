@@ -1,6 +1,6 @@
 ---
 layout: home
-title: ""          # no big banner title
+title: ""          # no banner title
 author_profile: false
 ---
 
@@ -8,7 +8,7 @@ author_profile: false
   <div class="rk-landing">
     <!-- LEFT: photo, name, role, socials -->
     <aside class="rk-profile">
-      <img class="rk-avatar" src="/assets/images/avatar.jpg" alt="Rahul Kalliadan">
+      <img class="rk-avatar" src="{{ '/assets/images/avatar.jpg' | relative_url }}" alt="Rahul Kalliadan">
       <h2 class="rk-name">Rahul Kalliadan</h2>
       <p class="rk-role">Engineer — Mechanical Robotics</p>
 
@@ -34,7 +34,7 @@ author_profile: false
       </p>
 
       <p>
-        <a class="btn rk-btn--neon" href="/assets/resume/Rahul_Kalliadan_Resume.pdf" download>
+        <a class="btn rk-btn--neon" href="{{ '/assets/resume/Rahul_Kalliadan_Resume.pdf' | relative_url }}" download>
           <i class="fas fa-download"></i> Download Resume
         </a>
       </p>
