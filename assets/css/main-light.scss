@@ -1,5 +1,5 @@
 ---
-# Light theme CSS compiled by Jekyll
+# Compiles to /assets/css/main-light.css
 ---
 
 @import "minimal-mistakes/skins/default";
@@ -13,6 +13,7 @@
   --rk-header-h:64px;
 }
 
+/* Header */
 .site-header{
   backdrop-filter:saturate(1.1) blur(6px);
   background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.72)) !important;
@@ -20,48 +21,49 @@
 }
 .masthead__menu-item a:hover{ color:var(--rk-accent)!important; }
 
-.rk-section{ scroll-margin-top:var(--rk-header-h); padding:clamp(24px,6vw,64px) clamp(24px,6vw,80px); }
+/* 3/4 width container */
+.rk-section{ scroll-margin-top:var(--rk-header-h); padding-block:clamp(24px,6vw,64px); }
+.rk-container{
+  width:min(75vw, 1200px);
+  margin-inline:auto;
+  padding-inline:clamp(16px,4vw,32px);
+}
+
+/* Headings & bullets */
 .rk-h2{ font-size:1.6rem; margin:0 0 .75rem; }
 .rk-h3{ font-size:1.1rem; margin:0 0 .5rem; color:#1b2430; }
 .rk-bullets{ margin:.25rem 0 0; padding-left:1.1rem; }
 .rk-bullets li{ margin:.35rem 0; color:var(--rk-dim); }
 
+/* HERO: stacked center */
 .rk-hero{ padding-top:clamp(32px,8vw,96px); }
-.rk-hero__inner{ display:grid; gap:22px; grid-template-columns:160px 1fr; align-items:center; }
-@media (max-width:700px){ .rk-hero__inner{ grid-template-columns:1fr; } }
-
+.rk-hero__inner{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; }
 .rk-avatar{
-  width:160px; height:160px; border-radius:50%; object-fit:cover; display:block;
+  width:180px; height:180px; border-radius:50%; object-fit:cover; display:block;
   border:2px solid var(--rk-accent);
-  box-shadow:0 0 0 3px rgba(0,255,187,.15), 0 0 26px 4px var(--rk-accent-soft);
+  box-shadow:0 0 0 3px rgba(0,255,187,.15), 0 0 30px 6px var(--rk-accent-soft);
 }
+.rk-title{ margin:.4rem 0 .1rem; font-size:2.1rem; }
+.rk-tagline{ margin:0 0 .6rem; color:#0a6; }
+.rk-blurb{ color:#334155; max-width:70ch; }
 
-.rk-title{ margin:0 0 .2rem; font-size:2rem; }
-.rk-tagline{ margin:0 0 .8rem; color:#0a6; }
-.rk-blurb{ color:#334155; max-width:65ch; }
-.rk-cta .btn{ margin-right:10px; margin-top:12px; }
+.rk-cta .btn{ margin:12px 6px 0 0; }
+.rk-btn--neon{ border:1px solid var(--rk-accent); color:#065 !important; }
+.rk-btn--neon:hover{ box-shadow:0 0 20px 2px var(--rk-accent-soft); }
 
-.rk-socials a{ display:inline-flex; width:38px; height:38px; margin-right:8px; align-items:center; justify-content:center;
-  border-radius:10px; border:1px solid rgba(0,0,0,.12); color:#1b2430; }
+.rk-socials{ margin-top:6px; }
+.rk-socials a{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; margin:0 6px; border-radius:12px;
+  border:1px solid rgba(0,0,0,.12); color:#1b2430;
+}
 .rk-socials a:hover{ border-color:var(--rk-accent); color:#065; box-shadow:0 0 18px var(--rk-accent-soft); }
 
+/* Cards (Experience) */
 .rk-card{ border:1px solid rgba(0,0,0,.08); border-radius:18px; padding:18px; background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.9)); margin:12px 0; }
 .rk-exp__head{ display:flex; gap:12px; flex-wrap:wrap; align-items:baseline; justify-content:space-between; }
 .rk-exp__meta{ color:var(--rk-dim); }
 
 .rk-exp{ position:relative; }
 .rk-exp::before{ content:""; position:absolute; left:-12px; top:20px; bottom:20px; width:2px; background:rgba(0,0,0,.12); border-radius:2px; }
-.rk-exp::after{ content:""; position:absolute; left:-16px; top:22px; width:10px; height:10px; background:var(--rk-accent); border-radius:50%; box-shadow:0 0 10px var(--rk-accent-soft); }
-
-.rk-theme-btn{
-  position:fixed; right:clamp(18px,2.5vw,28px); bottom:clamp(18px,2.5vw,28px);
-  width:54px; height:54px; border-radius:50%;
-  background:rgba(255,255,255,.85); color:#1b2430; cursor:pointer;
-  border:1px solid rgba(0,0,0,.12);
-  box-shadow:0 8px 26px rgba(0,0,0,.15), 0 0 14px var(--rk-accent-soft);
-  backdrop-filter: blur(6px);
-  transition:all .2s ease; z-index:999;
-}
-.rk-theme-btn:hover{ border-color:var(--rk-accent); color:#065; transform:translateY(-1px); box-shadow:0 8px 26px rgba(0,0,0,.2), 0 0 24px var(--rk-accent-soft); }
-
-.site-title, .site-logo, .site-branding{ display:none !important; }
+.rk-exp::after{ content:""; position:absolute; left:-16px; top:22px; width:10px; height:10px; background:var(--rk-accent); border-radius:50%; box-shadow:0 0 10px var(--rk-accent-sof
