@@ -1,4 +1,4 @@
-title: "Rahul Kalliadan"          # SEO only (not shown on masthead)
+title: "Rahul Kalliadan"          # SEO only
 description: "Engineer — Robotics hardware, mechanisms, DFM/DFA, GD&T."
 url: "https://rahulkalliadan.github.io"
 baseurl: ""
@@ -6,9 +6,7 @@ timezone: "Asia/Kolkata"
 
 remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 minimal_mistakes_skin: "dark"
-
-# Keep the left masthead empty; nav will be on the right
-masthead_title: ""
+masthead_title: ""                 # hide left brand; we use right-side nav
 
 plugins:
   - jekyll-remote-theme
@@ -22,7 +20,6 @@ permalink: /:categories/:title/
 paginate: 7
 paginate_path: "/page:num/"
 
-# We keep _pages for Experience
 collections:
   pages:
     output: true
@@ -36,21 +33,8 @@ defaults:
       layout: "single"
       author_profile: true
 
-author:
-  name: "Rahul Kalliadan"
-  avatar: "/assets/images/avatar.jpeg"
-  bio: "Mechanical Robotics Engineer — prototype to production."
-  links:
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/rahulkalliadan"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/rahulkalliadan"
-
-
+# Load our theme-switch scripts
 head_scripts:
-  - /assets/js/theme-init.js     # runs early to apply saved theme before paint
+  - /assets/js/theme-init.js
 footer_scripts:
-  - /assets/js/theme-toggle.js   # injects the floating button and handles clicks
-
+  - /assets/js/theme-toggle.js
