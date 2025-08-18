@@ -26,10 +26,11 @@
 .masthead__menu-item a:hover { color: var(--rk-accent) !important; }
 
 /* ========= Full-bleed wrapper so content hugs the left edge ========= */
+/* Increased side gap on both extremes */
 .rk-full {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding-inline: clamp(16px, 4vw, 48px);
+  padding-inline: clamp(24px, 6vw, 80px);   /* was 16/4vw/48 — now wider */
 }
 
 /* ===== Landing layout (left profile, right about) ===== */
@@ -64,17 +65,31 @@
   pointer-events: none;
 }
 
-/* Avatar */
+/* ===== Avatar (larger + glow) ===== */
 .rk-avatar {
-  width: 120px; height: 120px; display: block;
-  position: relative; z-index: 1;
+  width: 160px;             /* increased from 120px */
+  height: 160px;
+  display: block;
+  position: relative;
+  z-index: 1;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--rk-accent-soft);
-  box-shadow: 0 0 16px var(--rk-accent-soft);
+  border: 2px solid var(--rk-accent);
+  box-shadow:
+    0 0 0 3px rgba(100,255,218,.14),
+    0 0 32px 6px var(--rk-accent-soft);   /* neon glow */
+  transition: transform .12s ease, box-shadow .3s ease;
+  filter: saturate(1.05) contrast(1.02);
 }
-.rk-name { margin: .8rem 0 .15rem; font-size: 1.35rem; }
-.rk-role { margin: 0 0 .75rem; color: var(--rk-accent); }
+.rk-avatar:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 3px rgba(100,255,218,.18),
+    0 0 44px 10px var(--rk-accent-soft);
+}
+
+.rk-name { margin: .9rem 0 .2rem; font-size: 1.45rem; }
+.rk-role { margin: 0 0 .9rem; color: var(--rk-accent); }
 
 /* Social icons */
 .rk-socials a {
@@ -131,6 +146,3 @@
   box-shadow: 0 0 12px var(--rk-accent-soft);
 }
 .rk-exp__meta { color: var(--rk-dim); margin-top: -6px; }
-
-/* ===== Hide the left site title/logo block in the masthead ===== */
-.site-title, .site-logo, .site-branding { display: none !important; }
