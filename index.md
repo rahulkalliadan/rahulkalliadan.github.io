@@ -93,7 +93,7 @@ author_profile: false
       <!-- Botsync -->
       <li class="rk-item">
         <div class="rk-logo">
-          <img src="{{ '/assets/images/logos/botsync.png' | relative_url }}" alt="Botsync">
+          <img src="{{ '/assets/images/logos/botsync.jpeg' | relative_url }}" alt="Botsync">
         </div>
         <div class="rk-expcard">
           <header class="rk-exphead">
