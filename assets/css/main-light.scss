@@ -528,3 +528,45 @@ html[data-theme="light"] #rkThemeFab{
 
 /* If anything in the footer still tries to wrap it, force it floating */
 .page__footer #rkThemeFab{ position: fixed !important; }
+
+/* ===== Center the header nav (desktop), keep mobile as-is ===== */
+@media (min-width: 900px){
+  /* Make the inner wrap a centering flex container */
+  .masthead__inner-wrap{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Greedy nav spans full width and centers its links */
+  .greedy-nav{
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+  }
+
+  /* The links row itself is centered with a nice gap */
+  .greedy-nav .visible-links{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 28px;                /* spacing between menu items */
+    margin: 0 auto !important;
+  }
+
+  /* Remove anything that pushes links to the right */
+  .greedy-nav .site-logo,
+  .greedy-nav .site-title,
+  .greedy-nav .site-subtitle,
+  .greedy-nav .search__toggle,
+  .greedy-nav .menu-btn{
+    display: none !important;
+  }
+}
+
+/* Optional: ensure header has full width and sits on top (you already fixed header) */
+.masthead, .site-header{
+  left: 0; right: 0; width: 100%;
+}
