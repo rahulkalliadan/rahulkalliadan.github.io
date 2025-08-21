@@ -193,60 +193,49 @@ author_profile: false
   </div>
 </section>
 
-<!-- ======================= EDUCATION + PUBLICATIONS (side-by-side) ======================= -->
-<section id="academia" class="rk-section">
+<!-- ======================= EDUCATION ======================= -->
+<section id="education" class="rk-section">
   <div class="rk-container">
-    <h2 class="rk-h2 rk-center-text">Education &amp; Publications</h2>
-
-    <div class="rk-two-col rk-wide rk-balanced">
-      <!-- Left: Education (keep id so old anchors still work) -->
-      <div id="education">
-        <h3 class="rk-h3">Education</h3>
-        <div class="rk-exp-list">
-          <article class="rk-card">
-            <header class="rk-exphead">
-              <h3>M.Tech — Robotics &amp; Automation</h3>
-              <span>Amrita School of Engineering</span>
-            </header>
-          </article>
-          <article class="rk-card">
-            <header class="rk-exphead">
-              <h3>B.E. — Mechanical Engineering</h3>
-              <span>Visvesvaraya Technological University</span>
-            </header>
-          </article>
-        </div>
-      </div>
-
-      <!-- Right: Publications (keep id so old anchors still work) -->
-      <div id="publications">
-        <h3 class="rk-h3">Publications</h3>
-        <div class="rk-exp-list">
-          <article class="rk-card">
-            <h3 class="rk-h3">Design and validation of low-cost wearable assistive device for carrying back loads</h3>
-            <p class="rk-exp__meta">IConAMMA 2017.</p>
-            <p>
-              <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214785318325306" target="_blank" rel="noopener">
-                View on ScienceDirect
-              </a>
-            </p>
-          </article>
-
-          <article class="rk-card">
-            <h3 class="rk-h3">Low cost mechanical assistive aid for workers carrying head loads</h3>
-            <p class="rk-exp__meta">TIAR 2017.</p>
-            <p>
-              <a href="https://ieeexplore.ieee.org/abstract/document/8273693" target="_blank" rel="noopener">
-                View on IEEE Xplore
-              </a>
-            </p>
-          </article>
-        </div>
-      </div>
+    <h2 class="rk-h2 rk-center-text">Education</h2>
+    <div class="rk-exp-list">
+      <article class="rk-card">
+        <header class="rk-exphead">
+          <h3>M.Tech — Robotics &amp; Automation</h3>
+          <span>Amrita School of Engineering</span>
+        </header>
+      </article>
+      <article class="rk-card">
+        <header class="rk-exphead">
+          <h3>B.E. — Mechanical Engineering</h3>
+          <span>Visvesvaraya Technological University</span>
+        </header>
+      </article>
     </div>
   </div>
 </section>
 
+<!-- ======================= PUBLICATIONS ======================= -->
+<section id="publications" class="rk-section">
+  <div class="rk-container">
+    <h2 class="rk-h2 rk-center-text">Publications</h2>
+
+    <div class="rk-exp-list">
+      <article class="rk-card">
+        <h3 class="rk-h3">Low cost mechanical assistive aid for workers carrying head loads</h3>
+        <p class="rk-exp__meta">
+          TIAR 2017 — 
+          <a href="https://ieeexplore.ieee.org/abstract/document/8273693" target="_blank" rel="noopener">
+            IEEE Xplore
+          </a>
+        </p>
+      </article>
+
+      <article class="rk-card">
+        <h3 class="rk-h3">Design and validation of low-cost wearable assistive device for carrying back loads</h3>
+        <p class="rk-exp__meta">
+          IConAMMA 2017 — 
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214785318325306" target="_blank" rel="noopener">
+            ScienceDirect
           </a>
         </p>
       </article>
