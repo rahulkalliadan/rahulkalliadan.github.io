@@ -160,7 +160,7 @@ author_profile: false
           </header>
           <ul class="rk-bullets">
             <li>Ran Ansys CFD to optimise duct geometries for greenhouse drones; informed prototype architecture.</li>
-            <li>Supported CAD, ducted fan integration and sensor placement with the CV team.</li>
+            <li>Supported CAD, ducted fan integration and sensor placement with the Computer Vision team.</li>
           </ul>
         </div>
       </li>
