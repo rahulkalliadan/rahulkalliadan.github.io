@@ -230,3 +230,31 @@ body, .page, .archive, .initial-content {
 
 /* Keep the side-by-side layout only on wider screens; stack on mobile (already handled by .rk-two-col) */
 
+/* ===== Avatar hover: neon pulse + subtle pop ===== */
+.rk-avatar{
+  transition: transform .25s ease, box-shadow .35s ease, filter .25s ease;
+  will-change: transform;
+}
+
+/* Hover/focus: stronger glow + gentle pulse */
+.rk-avatar:hover,
+.rk-avatar:focus {
+  filter: saturate(1.08) contrast(1.04);
+  animation: rkAvatarPulse 1.6s ease-in-out infinite;
+  /* keep transform neutral here; JS tilt (below) will control it if enabled */
+}
+
+/* Pulse keyframes (dark uses teal glow; light uses the same var() accent) */
+@keyframes rkAvatarPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 3px rgba(100,255,218,.16),
+      0 0 32px 8px rgba(100,255,218,.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(100,255,218,.22),
+      0 0 44px 12px rgba(100,255,218,.28);
+  }
+}
+
