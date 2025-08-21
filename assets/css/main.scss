@@ -363,4 +363,51 @@ html[data-theme="light"] .rk-pill:hover{
   display: none !important;
 }
 
+/* === Hover effect for Education & Publications cards === */
+#education .rk-card,
+#publications .rk-card {
+  transition: transform .16s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+  cursor: default;
+}
+
+#education .rk-card:hover,
+#education .rk-card:focus-within,
+#publications .rk-card:hover,
+#publications .rk-card:focus-within {
+  transform: translateY(-3px);
+  border-color: var(--rk-accent);
+  box-shadow:
+    0 12px 30px rgba(100,255,218,.12),
+    0 0 22px rgba(100,255,218,.10);
+}
+
+/* Light theme tweak */
+html[data-theme="light"] #education .rk-card:hover,
+html[data-theme="light"] #education .rk-card:focus-within,
+html[data-theme="light"] #publications .rk-card:hover,
+html[data-theme="light"] #publications .rk-card:focus-within {
+  border-color: rgba(0,0,0,.20);
+  box-shadow:
+    0 12px 26px rgba(0,0,0,.12),
+    0 0 18px rgba(0,255,187,.12);
+}
+
+/* Links inside cards: subtle accent on hover */
+#education .rk-card a,
+#publications .rk-card a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+#education .rk-card a:hover,
+#publications .rk-card a:hover {
+  color: var(--rk-accent);
+  text-shadow: 0 0 10px rgba(100,255,218,.25);
+}
+html[data-theme="light"] #education .rk-card a:hover,
+html[data-theme="light"] #publications .rk-card a:hover {
+  color: #065; /* dark teal in light mode */
+  text-shadow: 0 0 8px rgba(0,255,187,.20);
+}
+
 
