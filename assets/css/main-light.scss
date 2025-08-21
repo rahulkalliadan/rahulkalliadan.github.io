@@ -402,3 +402,17 @@ html[data-theme="light"] #publications .rk-card a:hover {
   text-shadow: 0 0 8px rgba(0,255,187,.20);
 }
 
+/* Clickable logo node states */
+.rk-logo { text-decoration: none; cursor: pointer; }
+.rk-logo:focus-visible {
+  outline: 2px solid var(--rk-accent);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+.rk-logo:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 3px rgba(100,255,218,.20), 0 0 34px 8px rgba(100,255,218,.22);
+}
+html[data-theme="light"] .rk-logo:hover {
+  box-shadow: 0 0 0 3px rgba(0,255,187,.20), 0 0 28px 7px rgba(0,255,187,.18);
+}
