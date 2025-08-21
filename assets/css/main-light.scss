@@ -325,3 +325,38 @@ body{
     linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,0) 60%);
   filter: saturate(1.01) contrast(1.01);
 }
+
+
+/* === Pin theme toggle bottom-right; detach from footer bars === */
+#rkThemeDock {
+  position: fixed !important;
+  right: calc(18px + env(safe-area-inset-right));
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 9999 !important;
+  pointer-events: none;  /* dock ignores clicks */
+}
+#rkThemeDock > * {
+  pointer-events: auto;  /* the actual button is clickable */
+}
+
+/* If the old toggle is still inside footer, neutralise any full-width bar */
+.page__footer :is(#rkThemeFab, .rk-theme-fab, .rk-theme-toggle) {
+  position: static !important;
+}
+
+/* Optional: a little polish on the button itself (works with any toggle) */
+#rkThemeDock button, #rkThemeDock .rk-theme-fab, #rkThemeDock .rk-theme-toggle, #rkThemeDock #rkThemeFab {
+  width: 52px; height: 52px; border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  backdrop-filter: blur(6px);
+}
+html[data-theme="light"] #rkThemeDock button,
+html[data-theme="light"] #rkThemeDock .rk-theme-fab,
+html[data-theme="light"] #rkThemeDock .rk-theme-toggle,
+html[data-theme="light"] #rkThemeDock #rkThemeFab {
+  border-color: rgba(0,0,0,.12);
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
