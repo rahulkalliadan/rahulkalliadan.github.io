@@ -592,3 +592,20 @@ html[data-theme="light"] #rkThemeFab{
 .masthead, .site-header{
   left: 0; right: 0; width: 100%;
 }
+
+/* ===== Prevent content from sliding under the fixed header ===== */
+:root { --rk-header-h: 72px; }  /* fallback; JS will update this precisely */
+
+/* Push all content down by header height */
+body,
+.initial-content,
+.page {
+  padding-top: calc(var(--rk-header-h) + 8px) !important;
+}
+
+/* When clicking nav links (#about, #skills...), keep the section title clear of header */
+.rk-section,
+section[id],
+[id].rk-section {
+  scroll-margin-top: calc(var(--rk-header-h) + 12px);
+}
