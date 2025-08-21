@@ -1,83 +1,64 @@
-<script>
-(function () {
-  function cur() { return document.documentElement.getAttribute('data-theme') || 'dark'; }
-  function setTheme(theme){
-    var link = document.querySelector('link[rel="stylesheet"][href*="/assets/css/main"]');
-    if (link){
-      var href = link.getAttribute('href');
-      var target = (theme === 'light')
-        ? href.replace(/main(-light)?\.css/, 'main-light.css')
-        : href.replace(/main(-light)?\.css/, 'main.css');
-      if (href !== target) link.setAttribute('href', target);
-    }
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('rk-theme', theme);
-    updIcon(theme);
-  }
-  function updIcon(theme){
-    var b = document.getElementById('rk-theme-btn');
-    if (!b) return;
-    b.textContent = (theme === 'light') ? '🌙' : '☀️';
-    b.title = (theme === 'light') ? 'Switch to dark mode' : 'Switch to light mode';
-    b.setAttribute('aria-label', b.title);
-  }
+{%- comment -%}
+  Custom <footer> additions
+  - Creates a floating theme toggle FAB at bottom-right (always visible)
+  - Hides any previous footer-embedded theme buttons
+  - Optional: avatar tilt effect (kept lightweight)
+{%- endcomment -%}
 
-  document.addEventListener('DOMContentLoaded', function(){
-    // Floating toggle
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  /* Hide/neutralise any old theme toggles that may be inside the footer */
+  document.querySelectorAll(
+    '.page__footer .rk-theme-fab, .page__footer #rkThemeFab, ' +
+    '.page__footer [data-theme-toggle], .page__footer button[aria-label*="theme" i]'
+  ).forEach(function (n) { n.style.display = 'none'; });
+
+  /* Create a floating, fixed FAB once */
+  if (!document.getElementById('rkThemeFab')) {
     var btn = document.createElement('button');
-    btn.id = 'rk-theme-btn';
-    btn.className = 'rk-theme-btn';
+    btn.id = 'rkThemeFab';
     btn.type = 'button';
+    btn.setAttribute('aria-label', 'Toggle theme');
+    btn.setAttribute('title', 'Toggle theme');
+
+    /* Use emoji for simplicity; swap based on current theme */
+    var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+    btn.textContent = (cur === 'light') ? '☀️' : '🌙';
+
+    /* Minimal inline styles (CSS files also style this id) */
+    btn.style.position = 'fixed';
+    btn.style.right    = '20px';
+    btn.style.bottom   = '20px';
+    btn.style.zIndex   = '9999';
+
     document.body.appendChild(btn);
-    updIcon(cur());
-    btn.addEventListener('click', function(){ setTheme(cur()==='light'?'dark':'light'); });
 
-    // Anchor links in masthead -> smooth scroll + close mobile menu if open
-    document.querySelectorAll('.masthead a[href^="/#"], .masthead a[href^="#"]').forEach(function(a){
-      a.addEventListener('click', function(ev){
-        var id = a.getAttribute('href').replace('/','');
-        var el = document.querySelector(id);
-        if (el){
-          ev.preventDefault();
-          el.scrollIntoView({behavior:'smooth', block:'start'});
-          // update hash without jump
-          history.replaceState(null, '', id);
-        }
-      });
+    btn.addEventListener('click', function () {
+      var next = (document.documentElement.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
+      if (window.__rkSetTheme) window.__rkSetTheme(next);
+      btn.textContent = (next === 'light') ? '☀️' : '🌙';
     });
-  });
-})();
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const btn = document.querySelector('#rkThemeFab, .rk-theme-fab, .rk-theme-toggle');
-  if (btn && btn.closest('footer')) {
-    document.body.appendChild(btn); // detach from footer so no bar appears
   }
+
+  /* Optional: subtle avatar tilt on mouse move (no-op if .rk-avatar not present) */
+  (function () {
+    var av = document.querySelector('.rk-avatar');
+    if (!av) return;
+    var strength = 10;  // degrees
+    av.style.transformOrigin = 'center center';
+    av.addEventListener('mousemove', function (e) {
+      var r = av.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width;   // 0..1
+      var y = (e.clientY - r.top) / r.height;   // 0..1
+      var rx = (0.5 - y) * strength;
+      var ry = -(0.5 - x) * strength;
+      av.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.04)';
+    });
+    av.addEventListener('mouseleave', function () {
+      av.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+    });
+    av.addEventListener('focus', function () { av.style.transform = 'scale(1.03)'; });
+    av.addEventListener('blur', function ()  { av.style.transform = 'scale(1)'; });
+  })();
 });
 </script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  // Try multiple common selectors so it works with any earlier markup
-  var sel = '#rkThemeFab, .rk-theme-fab, .rk-theme-toggle, button[aria-label*="theme" i], button[title*="theme" i], button[data-theme-toggle]';
-  var btn = document.querySelector(sel);
-  if (!btn) return;
-
-  // Create a fixed dock once and append the button into it
-  var dock = document.getElementById('rkThemeDock');
-  if (!dock) {
-    dock = document.createElement('div');
-    dock.id = 'rkThemeDock';
-    document.body.appendChild(dock);
-  }
-  dock.appendChild(btn);
-
-  // Hard styles in case previous wrappers injected layout
-  btn.style.position = 'static';
-  btn.style.margin = '0';
-  btn.style.transform = 'none';
-});
-</script>
-
