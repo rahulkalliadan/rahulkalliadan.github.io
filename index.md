@@ -67,10 +67,8 @@ author_profile: false
 
       <!-- Robotics/Systems -->
       <button class="rk-pill" type="button">AMR Architecture</button>
-      <button class="rk-pill" type="button">Suspensions</button>
-      <button class="rk-pill" type="button">Lifting/Tug Modules</button>
-      <button class="rk-pill" type="button">Docking Stations</button>
-      <button class="rk-pill" type="button">IP Sealing</button>
+      <button class="rk-pill" type="button">Suspension System</button>
+      <button class="rk-pill" type="button">Compliance</button>
       <button class="rk-pill" type="button">Sensor Layout</button>
 
       <!-- Analysis/Software -->
@@ -81,10 +79,6 @@ author_profile: false
 
       <!-- Quality & Compliance -->
       <button class="rk-pill" type="button">DFMEA</button>
-      <button class="rk-pill" type="button">ECNs</button>
-      <button class="rk-pill" type="button">IEC&nbsp;60529 (IPX3)</button>
-      <button class="rk-pill" type="button">ISO&nbsp;12100</button>
-      <button class="rk-pill" type="button">ISO&nbsp;45001</button>
 
       <!-- Project & Ops -->
       <button class="rk-pill" type="button">BOM &amp; Cost Engineering</button>
