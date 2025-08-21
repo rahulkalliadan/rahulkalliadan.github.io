@@ -221,23 +221,21 @@ author_profile: false
 
     <div class="rk-exp-list">
       <article class="rk-card">
-        <h3 class="rk-h3">Low cost mechanical assistive aid for workers carrying head loads</h3>
-        <p class="rk-exp__meta">
-          TIAR 2017 — 
+        <h3 class="rk-h3">
           <a href="https://ieeexplore.ieee.org/abstract/document/8273693" target="_blank" rel="noopener">
-            IEEE Xplore
+            Low cost mechanical assistive aid for workers carrying head loads
           </a>
-        </p>
+        </h3>
+        <p class="rk-exp__meta">TIAR 2017</p>
       </article>
 
       <article class="rk-card">
-        <h3 class="rk-h3">Design and validation of low-cost wearable assistive device for carrying back loads</h3>
-        <p class="rk-exp__meta">
-          IConAMMA 2017 — 
+        <h3 class="rk-h3">
           <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214785318325306" target="_blank" rel="noopener">
-            ScienceDirect
+            Design and validation of low-cost wearable assistive device for carrying back loads
           </a>
-        </p>
+        </h3>
+        <p class="rk-exp__meta">IConAMMA 2017</p>
       </article>
     </div>
   </div>
