@@ -429,3 +429,31 @@ html, body {
   box-shadow: none !important;
 }
 
+/* ===== Lift hero so photo + intro + socials + CTA fit above the fold ===== */
+
+/* how much to lift on desktops; tweak 0–64px if needed */
+:root { --rk-hero-lift: 36px; }
+
+@media (min-width: 1100px){
+  /* bring the hero closer to the top */
+  .rk-hero { padding-top: 40px; padding-bottom: 8px; }
+
+  /* lift the entire stack upward */
+  .rk-hero__inner{
+    gap: 10px;                    /* slightly tighter stack */
+    transform: translateY(calc(-1 * var(--rk-hero-lift)));
+  }
+
+  /* tighten individual element spacings */
+  .rk-title   { margin: .15rem 0 0; }
+  .rk-tagline { margin: 0 0 .25rem; }
+  .rk-introline { margin: 6px 0 0; }
+  .rk-socials { margin-top: 6px; }
+  .rk-cta .btn { margin-top: 8px; }
+}
+
+/* On very large screens we can lift a touch more */
+@media (min-width: 1440px){
+  :root { --rk-hero-lift: 44px; }  /* adjust if you want even less gap */
+}
+
