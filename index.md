@@ -129,7 +129,7 @@ author_profile: false
         </a>
         <div class="rk-expcard">
           <header class="rk-exphead">
-            <h3>Botsync — Mechanical Engineer → Senior</h3>
+            <h3>Botsync — Senior Mechanical Engineer</h3>
             <span>India · 2020 — 2022</span>
           </header>
           <ul class="rk-bullets">
