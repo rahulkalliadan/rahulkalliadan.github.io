@@ -371,6 +371,37 @@ html, body {
   background: transparent !important;
 }
 
+/* ===== Remove the nav pill/rectangle behind menu links ===== */
+.masthead, .site-nav, .greedy-nav,
+.greedy-nav .visible-links,
+.greedy-nav .hidden-links {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Links should not paint a background on hover/focus */
+.greedy-nav a,
+.masthead__menu-item a {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.greedy-nav a:hover,
+.greedy-nav a:focus,
+.masthead__menu-item a:hover,
+.masthead__menu-item a:focus,
+.masthead__menu-item a:active {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* If the theme adds a container with its own rounded bg */
+.greedy-nav .wrap, .masthead__inner-wrap {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 /* Keep footer transparent to avoid a solid strip */
 .page__footer {
   background: transparent !important;
