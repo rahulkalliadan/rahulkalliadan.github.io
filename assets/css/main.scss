@@ -457,3 +457,36 @@ html, body {
   :root { --rk-hero-lift: 44px; }  /* adjust if you want even less gap */
 }
 
+/* === Floating theme toggle: fixed bottom-right, always on-screen === */
+#rkThemeFab{
+  position: fixed !important;
+  right: calc(20px + env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: 9999 !important;
+
+  width: 52px; height: 52px; border-radius: 9999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 26px; line-height: 1;
+
+  cursor: pointer; user-select: none;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  backdrop-filter: blur(6px);
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+}
+#rkThemeFab:hover{ transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.32); }
+#rkThemeFab:active{ transform: translateY(0); }
+
+html[data-theme="light"] #rkThemeFab{
+  border-color: rgba(0,0,0,.12);
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 8px 20px rgba(0,0,0,.14);
+}
+
+/* If any footer wrapper still tries to capture the button, force it floating */
+.page__footer #rkThemeFab{ position: fixed !important; }
+
+/* Optional: if an old full-width bar remains, make footer transparent */
+.page__footer{ background: transparent !important; }
+
