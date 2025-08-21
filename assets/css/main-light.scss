@@ -349,3 +349,9 @@ html[data-theme="light"] .rk-pill:hover{
   box-shadow: 0 0 14px rgba(0,255,187,.15);
 }
 
+/* Hide "Recent Posts" section on the home layout */
+.layout--home .archive,
+.layout--home .archive__subtitle {
+  display: none !important;
+}
+
