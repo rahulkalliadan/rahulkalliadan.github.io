@@ -48,3 +48,13 @@
   });
 })();
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const btn = document.querySelector('#rkThemeFab, .rk-theme-fab, .rk-theme-toggle');
+  if (btn && btn.closest('footer')) {
+    document.body.appendChild(btn); // detach from footer so no bar appears
+  }
+});
+</script>
+
