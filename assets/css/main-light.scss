@@ -482,3 +482,16 @@ html[data-theme="light"] #rkThemeFab{
 /* Smooth anchor scrolling + offset already handled via .rk-section scroll-margin-top */
 html { scroll-behavior: smooth; }
 
+/* ===== Fixed header pinned to top ===== */
+:root { --rk-header-h: 68px; }  /* tweak if your header is taller/shorter */
+
+.masthead,
+.site-header {
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 5000;                 /* above everything */
+}
+
+/* give the page breathing room so content isn't hidden */
+body { padding-top: calc(var(--rk-header-h) + 6px); }
+
