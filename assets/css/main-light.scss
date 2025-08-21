@@ -294,3 +294,7 @@ body, .page, .archive, .initial-content {
 .page__footer .rk-theme-toggle {
   position: fixed !important;
 }
+
+/* About section: gentle space between the two paragraphs */
+#about .rk-narrow + .rk-narrow { margin-top: 10px; }
+
