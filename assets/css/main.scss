@@ -5,13 +5,9 @@
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes";
 
-/* ===== Reset to avoid sideways scroll ===== */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-html, body { width: 100%; overflow-x: hidden; }
-
-/* ===== Theme tokens ===== */
+/* =========================================================
+   Base + Resets
+   ========================================================= */
 :root{
   --rk-accent: #64ffda;
   --rk-accent-soft: rgba(100,255,218,.22);
@@ -19,7 +15,18 @@ html, body { width: 100%; overflow-x: hidden; }
   --rk-header-h: 64px;
 }
 
-/* ===== Header ===== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+html, body { width: 100%; overflow-x: hidden; }
+
+/* Poppins everywhere */
+body, .page, .archive, .initial-content {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Header polish */
 .site-header{
   backdrop-filter: saturate(1.2) blur(6px);
   background: linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.45)) !important;
@@ -27,61 +34,71 @@ html, body { width: 100%; overflow-x: hidden; }
 }
 .masthead__menu-item a:hover{ color: var(--rk-accent) !important; }
 
-/* ===== Sections + centered container (75% width) ===== */
-.rk-section{
-  scroll-margin-top: var(--rk-header-h);
-  padding: 32px 0;
-}
+/* Hide brand text block */
+.site-title, .site-logo, .site-branding{ display: none !important; }
+
+/* =========================================================
+   Layout centering (75% width)
+   ========================================================= */
+.rk-section{ scroll-margin-top: var(--rk-header-h); padding: 32px 0; }
 @media (min-width: 900px){ .rk-section{ padding: 56px 0; } }
 
 .rk-container{
-  width: 75vw;           /* 3/4 screen */
-  max-width: 1200px;     /* cap */
-  margin: 0 auto;        /* center */
-  padding: 0 24px;       /* side breathing room */
+  width: 75vw;                /* 3/4 screen */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* ===== Typography helpers ===== */
-.rk-h2{ font-size: 1.6rem; margin: 0 0 .75rem; }
-.rk-h3{ font-size: 1.1rem; margin: 0 0 .5rem; color: #e6f1ff; }
-.rk-bullets{ margin: .25rem 0 0; padding-left: 1.1rem; }
-.rk-bullets li{ margin: .35rem 0; color: var(--rk-dim); }
+/* Remove theme paddings that pushed content to the right */
+.layout--home .initial-content,
+.layout--home #main,
+.layout--home .page,
+.layout--home .page__inner-wrap,
+.layout--home .archive {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
-/* ===== HERO (stacked center: photo → intro → socials) ===== */
+/* Keep archive wrapper visible, but hide ONLY Recent Posts bits */
+.layout--home .archive { display: block !important; }
+.layout--home .archive__subtitle,
+.layout--home .entries { display: none !important; }
+
+/* =========================================================
+   HERO
+   ========================================================= */
 .rk-hero{ padding-top: 64px; }
 @media (min-width: 900px){ .rk-hero{ padding-top: 96px; } }
 
 .rk-hero__inner{
-  display: flex; flex-direction: column;
-  align-items: center; text-align: center; gap: 16px;
+  display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;
 }
 
 .rk-avatar{
-  width: 180px; height: 180px; border-radius: 50%; object-fit: cover; display: block;
+  width: 190px; height: 190px; border-radius: 50%; object-fit: cover; display:block;
   border: 2px solid var(--rk-accent);
   box-shadow: 0 0 0 3px rgba(100,255,218,.14), 0 0 36px 8px var(--rk-accent-soft);
 }
-.rk-title   { margin: .4rem 0 .1rem; font-size: 2.1rem; }
-.rk-tagline { margin: 0 0 .6rem; color: var(--rk-accent); }
-.rk-blurb   { color: #c9d6f0; max-width: 70ch; }
 
-.rk-cta .btn{ margin: 12px 6px 0 0; }
-.rk-btn--neon{
-  border: 1px solid var(--rk-accent);
-  color: var(--rk-accent) !important;
-  box-shadow: 0 0 0 0 var(--rk-accent-soft);
+.rk-title   { margin:.4rem 0 .1rem; font-size: 2.2rem; }
+.rk-tagline { margin:0 0 .6rem; color: var(--rk-accent); }
+
+/* Bold short intro line */
+.rk-introline{
+  font-size: 1.2rem; line-height: 1.35; margin: 4px 0 6px; text-align:center;
 }
-.rk-btn--neon:hover{
-  box-shadow: 0 0 24px 2px var(--rk-accent-soft);
-  transform: translateY(-1px);
-}
+@media (min-width: 900px){ .rk-introline{ font-size: 1.5rem; } }
 
 /* Socials */
 .rk-socials{ margin-top: 6px; }
 .rk-socials a{
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 42px; height: 42px; margin: 0 6px; border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.15); color: #e6f1ff;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; margin:0 6px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.15); color:#e6f1ff;
   transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease;
 }
 .rk-socials a:hover{
@@ -91,337 +108,118 @@ html, body { width: 100%; overflow-x: hidden; }
   color: var(--rk-accent);
 }
 
-/* ===== Two columns (About) ===== */
-.rk-two-col{ display: grid; gap: 20px; grid-template-columns: 1fr; }
+/* CTA button */
+.rk-cta .btn{ margin:12px 6px 0 0; }
+.rk-btn--neon{
+  border:1px solid var(--rk-accent);
+  color: var(--rk-accent) !important;
+}
+.rk-btn--neon:hover{
+  box-shadow: 0 0 24px 2px var(--rk-accent-soft);
+  transform: translateY(-1px);
+}
+
+/* Center helpers */
+.rk-center-text{ text-align:center; }
+.rk-narrow{ max-width: 68ch; margin: 0 auto; text-align:center; }
+.rk-wide{ max-width: 1000px; margin: 0 auto; }
+
+/* =========================================================
+   About: two-col row (used earlier for Interests/Education)
+   ========================================================= */
+.rk-two-col{ display:grid; gap:20px; grid-template-columns:1fr; align-items:start; }
 @media (min-width: 820px){ .rk-two-col{ grid-template-columns: 1fr 1fr; } }
 
-/* ===== Cards (Experience items) ===== */
+/* =========================================================
+   Cards (Experience / Education / Publications)
+   ========================================================= */
 .rk-card{
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 18px;
-  padding: 18px;
-  background: linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
-  margin: 12px 0;
-}
-.rk-exp__head{
-  display: flex; gap: 12px; flex-wrap: wrap;
-  align-items: baseline; justify-content: space-between;
-}
-.rk-exp__meta{ color: var(--rk-dim); }
-
-/* Timeline line INSIDE the card (no negative offsets) */
-.rk-exp{
-  position: relative;
-  border-left: 2px solid rgba(100,255,218,.18);
-  padding-left: 16px;
-  overflow: hidden;
-}
-.rk-exp::before, .rk-exp::after{ content: none !important; }
-
-/* ===== Theme toggle button ===== */
-.rk-theme-btn{
-  position: fixed; right: 24px; bottom: 24px;
-  width: 54px; height: 54px; border-radius: 50%;
-  background: rgba(20,24,32,.75); color: #e6f1ff; cursor: pointer;
-  border: 1px solid rgba(255,255,255,.16);
-  box-shadow: 0 8px 26px rgba(0,0,0,.25), 0 0 18px var(--rk-accent-soft);
-  backdrop-filter: blur(6px);
-  transition: all .2s ease; z-index: 999;
-}
-.rk-theme-btn:hover{
-  border-color: var(--rk-accent); color: var(--rk-accent);
-  transform: translateY(-1px);
-  box-shadow: 0 8px 26px rgba(0,0,0,.3), 0 0 28px var(--rk-accent-soft);
-}
-@media print{ .rk-theme-btn{ display:none } }
-
-/* Hide the left brand block */
-.site-title, .site-logo, .site-branding{ display: none !important; }
-
-/* === Hard override: make theme wrappers full-width and centered on the home page === */
-.layout--home .initial-content,
-.layout--home #main,
-.layout--home .page,
-.layout--home .page__inner-wrap,
-.layout--home .archive {
-  max-width: none !important;
-  width: 100% !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Keep our content column strictly centered at 75% width */
-.rk-section { padding: 32px 0; }              /* vertical spacing only */
-.rk-container {
-  width: 75vw;                                 /* 3/4 of the viewport */
-  max-width: 1200px;
-  margin-left: auto;                            /* center */
-  margin-right: auto;                           /* center */
-  padding-left: 24px;                           /* gentle inner padding */
-  padding-right: 24px;
-}
-
-/* Safety: absolutely no sideways scroll from anything */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-html, body { width: 100%; overflow-x: hidden; }
-
-/* === Centering helpers for the new layout === */
-
-/* Center headings or any text block */
-.rk-center-text { text-align: center; }
-
-/* Centered narrow paragraph (About intro) */
-.rk-narrow {
-  max-width: 68ch;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-/* Wider container for the Interests/Education row, kept centered */
-.rk-wide {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Experience list container centered (slightly narrower for readability) */
-.rk-exp-list {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Make sure the two-col grid aligns nicely under About */
-.rk-two-col {
-  align-items: start;
-}
-
-/* Keep the timeline line inside the card and centered content overall */
-.rk-exp {
-  position: relative;
-  border-left: 2px solid rgba(100,255,218,.18); /* overridden in light file already */
-  padding-left: 16px;
-  overflow: hidden;
-}
-.rk-exp::before, .rk-exp::after { content: none !important; }
-
-/* ===== Experience timeline (circular logo nodes) ===== */
-
-/* Container for the list */
-.rk-timeline{
-  list-style:none;
-  margin: 16px auto;
-  padding: 0 0 0 12px;     /* room for the vertical line */
-  max-width: 900px;        /* keep it readable and centred */
-  position: relative;
-}
-
-/* Vertical line – stays INSIDE the container (no overflow) */
-.rk-timeline::before{
-  content:"";
-  position:absolute;
-  left: 44px;              /* aligns with logo centre (see .rk-logo size) */
-  top: 0; bottom: 0;
-  width: 2px;
-  background: rgba(100,255,218,.18);         /* dark */
-}
-html[data-theme="light"] .rk-timeline::before{
-  background: rgba(0,0,0,.12);               /* light */
-}
-
-/* Each item row */
-.rk-item{
-  display:flex;
-  gap:16px;
-  align-items:flex-start;
-  margin: 18px 0 26px;
-  position: relative;
-}
-
-/* Circular logo with halo */
-.rk-logo{
-  flex: 0 0 64px;
-  width:64px; height:64px;
-  border-radius:50%;
-  position:relative;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow: 0 0 0 3px rgba(100,255,218,.14), 0 0 28px 6px rgba(100,255,218,.18);
-  border:2px solid #64ffda;                  /* dark accent */
-  background: rgba(255,255,255,.02);
-  overflow:hidden;
-}
-html[data-theme="light"] .rk-logo{
-  border-color:#00ffbb;
-  box-shadow:0 0 0 3px rgba(0,255,187,.14), 0 0 24px 5px rgba(0,255,187,.18);
-}
-
-.rk-logo img{
-  width:100%; height:100%;
-  object-fit:cover; border-radius:50%;
-  display:block;
-}
-
-/* Card body */
-.rk-expcard{
-  flex:1;
-  border-radius:16px;
   border:1px solid rgba(255,255,255,.10);
+  border-radius:18px;
+  padding:18px;
   background:linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
-  padding:16px 18px;
+  margin:12px 0;
   transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
 }
-html[data-theme="light"] .rk-expcard{
-  border-color:rgba(0,0,0,.08);
-  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92));
+.rk-card:hover,
+#education .rk-card:hover,
+#education .rk-card:focus-within,
+#publications .rk-card:hover,
+#publications .rk-card:focus-within{
+  transform: translateY(-3px);
+  border-color: var(--rk-accent);
+  box-shadow: 0 12px 30px rgba(100,255,218,.12), 0 0 22px rgba(100,255,218,.10);
 }
 
-/* Hover accent */
-.rk-expcard:hover{
-  transform: translateY(-2px);
-  border-color: rgba(100,255,218,.35);
-  box-shadow: 0 0 24px rgba(100,255,218,.15);
-}
-html[data-theme="light"] .rk-expcard:hover{
-  border-color: rgba(0,0,0,.18);
-  box-shadow: 0 0 18px rgba(0,255,187,.12);
-}
+/* Experience card header & meta */
+.rk-exphead{ display:flex; gap:12px; flex-wrap:wrap; align-items:baseline; justify-content:space-between; margin-bottom:6px; }
+.rk-exphead h3{ font-size:1.05rem; margin:0; color:#e6f1ff; }
+.rk-exp__meta{ color:var(--rk-dim); }
+.rk-exp-list{ max-width:900px; margin:0 auto; }
 
-/* Headline + meta */
-.rk-exphead{
-  display:flex; gap:12px; flex-wrap:wrap;
-  align-items:baseline; justify-content:space-between;
-  margin-bottom:6px;
-}
-.rk-exphead h3{
-  font-size:1.05rem; margin:0; color:#e6f1ff;
-}
-.rk-exphead span{
-  color:#a8b2d1; font-size:.95rem;
-}
-html[data-theme="light"] .rk-exphead h3{ color:#1b2430; }
-html[data-theme="light"] .rk-exphead span{ color:#425466; }
-
-/* ===== Poppins as base font ===== */
-body, .page, .archive, .initial-content {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif !important;
-}
-
-/* ===== Short intro emphasis (bigger & bold) ===== */
-.rk-introline{
-  font-size: 1.2rem;            /* base */
-  line-height: 1.35;
-  margin: 4px 0 6px;
-  text-align: center;
-}
-@media (min-width: 900px){
-  .rk-introline{ font-size: 1.5rem; }   /* larger on wide screens */
-}
-
-/* ===== Skill pills ===== */
-.rk-pills{
-  display: flex; flex-wrap: wrap;
-  gap: 10px 10px;
-  justify-content: center;
-  margin-top: 8px;
-}
+/* =========================================================
+   Core Skills: pills
+   ========================================================= */
+.rk-pills{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
 .rk-pill{
-  appearance: none; border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.03);
-  color: #e6f1ff;
-  padding: 8px 12px;
-  border-radius: 9999px;
-  font-size: .92rem;
-  line-height: 1;
-  cursor: default;
+  appearance:none; border:1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03); color:#e6f1ff;
+  padding:8px 12px; border-radius:9999px; font-size:.92rem; line-height:1;
   transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
 }
 .rk-pill:hover{
   transform: translateY(-1px);
-  border-color: #64ffda;
-  box-shadow: 0 0 16px rgba(100,255,218,.18);
-  color: #64ffda;
-}
-html[data-theme="light"] .rk-pill{
-  border-color: rgba(0,0,0,.12);
-  background: rgba(0,0,0,.03);
-  color: #1b2430;
-}
-html[data-theme="light"] .rk-pill:hover{
-  border-color: #00ffbb;
-  color: #065;
-  box-shadow: 0 0 14px rgba(0,255,187,.15);
-}
-
-/* Hide "Recent Posts" section on the home layout */
-.layout--home .archive,
-.layout--home .archive__subtitle {
-  display: none !important;
-}
-
-/* === Hover effect for Education & Publications cards === */
-#education .rk-card,
-#publications .rk-card {
-  transition: transform .16s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
-  cursor: default;
-}
-
-#education .rk-card:hover,
-#education .rk-card:focus-within,
-#publications .rk-card:hover,
-#publications .rk-card:focus-within {
-  transform: translateY(-3px);
   border-color: var(--rk-accent);
-  box-shadow:
-    0 12px 30px rgba(100,255,218,.12),
-    0 0 22px rgba(100,255,218,.10);
-}
-
-/* Light theme tweak */
-html[data-theme="light"] #education .rk-card:hover,
-html[data-theme="light"] #education .rk-card:focus-within,
-html[data-theme="light"] #publications .rk-card:hover,
-html[data-theme="light"] #publications .rk-card:focus-within {
-  border-color: rgba(0,0,0,.20);
-  box-shadow:
-    0 12px 26px rgba(0,0,0,.12),
-    0 0 18px rgba(0,255,187,.12);
-}
-
-/* Links inside cards: subtle accent on hover */
-#education .rk-card a,
-#publications .rk-card a {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color .2s ease, text-shadow .2s ease;
-}
-#education .rk-card a:hover,
-#publications .rk-card a:hover {
+  box-shadow: 0 0 16px var(--rk-accent-soft);
   color: var(--rk-accent);
-  text-shadow: 0 0 10px rgba(100,255,218,.25);
-}
-html[data-theme="light"] #education .rk-card a:hover,
-html[data-theme="light"] #publications .rk-card a:hover {
-  color: #065; /* dark teal in light mode */
-  text-shadow: 0 0 8px rgba(0,255,187,.20);
 }
 
-/* Clickable logo node states */
-.rk-logo { text-decoration: none; cursor: pointer; }
-.rk-logo:focus-visible {
-  outline: 2px solid var(--rk-accent);
-  outline-offset: 3px;
-  border-radius: 50%;
+/* =========================================================
+   Experience timeline with clickable logos
+   ========================================================= */
+.rk-timeline{
+  list-style:none; margin:16px auto; padding:0 0 0 12px; max-width:900px; position:relative;
 }
-.rk-logo:hover {
+.rk-timeline::before{
+  content:""; position:absolute; left:44px; top:0; bottom:0; width:2px; background: rgba(100,255,218,.18);
+}
+
+.rk-item{ display:flex; gap:16px; align-items:flex-start; margin:18px 0 26px; position:relative; }
+
+/* Clickable circular logo */
+.rk-logo{
+  flex:0 0 64px; width:64px; height:64px; border-radius:50%; position:relative;
+  display:flex; align-items:center; justify-content:center; overflow:hidden; text-decoration:none; cursor:pointer;
+  border:2px solid var(--rk-accent);
+  box-shadow: 0 0 0 3px rgba(100,255,218,.14), 0 0 28px 6px rgba(100,255,218,.18);
+  background: rgba(255,255,255,.02);
+  transition: transform .12s ease, box-shadow .2s ease;
+}
+.rk-logo:hover{
   transform: translateY(-1px);
   box-shadow: 0 0 0 3px rgba(100,255,218,.20), 0 0 34px 8px rgba(100,255,218,.22);
 }
-html[data-theme="light"] .rk-logo:hover {
-  box-shadow: 0 0 0 3px rgba(0,255,187,.20), 0 0 28px 7px rgba(0,255,187,.18);
-}
+.rk-logo:focus-visible{ outline:2px solid var(--rk-accent); outline-offset:3px; border-radius:50%; }
 
+.rk-logo img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
+
+.rk-expcard{
+  flex:1; border-radius:16px; border:1px solid rgba(255,255,255,.10);
+  background:linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
+  padding:16px 18px;
+  transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.rk-expcard:hover{ transform: translateY(-2px); border-color: rgba(100,255,218,.35); box-shadow: 0 0 24px rgba(100,255,218,.15); }
+
+/* =========================================================
+   Publications / Education link accent
+   ========================================================= */
+#education .rk-card a,
+#publications .rk-card a{
+  text-decoration: underline; text-underline-offset: 2px;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+#education .rk-card a:hover,
+#publications .rk-card a:hover{
+  color: var(--rk-accent); text-shadow: 0 0 10px rgba(100,255,218,.25);
+}
