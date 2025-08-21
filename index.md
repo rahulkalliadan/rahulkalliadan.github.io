@@ -37,9 +37,10 @@ author_profile: false
     <h2 class="rk-h2 rk-center-text">About Me</h2>
 
     <p class="rk-narrow">
-      Senior Mechanical Engineer (Robotics) with 7+ years designing and launching industrial AMRs and commercial cleaning robots.
+      Senior Mechanical Engineer with 7+ years designing and launching industrial AMRs and commercial cleaning robots.
       Delivered 25% cost down and 33% faster assembly through DFM/DFA, GD&amp;T (ASME&nbsp;Y14.5) and supplier optimisation.
       Helped deploy 1.8k robots in service with IEC&nbsp;60529 IPX3 validation and reliability improvements.
+      
       Off work, you’ll find me hiking, exploring new places, riding my Himalayan, and dabbling in photography.
     </p>
   </div>
