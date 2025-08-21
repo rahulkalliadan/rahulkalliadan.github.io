@@ -58,3 +58,26 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Try multiple common selectors so it works with any earlier markup
+  var sel = '#rkThemeFab, .rk-theme-fab, .rk-theme-toggle, button[aria-label*="theme" i], button[title*="theme" i], button[data-theme-toggle]';
+  var btn = document.querySelector(sel);
+  if (!btn) return;
+
+  // Create a fixed dock once and append the button into it
+  var dock = document.getElementById('rkThemeDock');
+  if (!dock) {
+    dock = document.createElement('div');
+    dock.id = 'rkThemeDock';
+    document.body.appendChild(dock);
+  }
+  dock.appendChild(btn);
+
+  // Hard styles in case previous wrappers injected layout
+  btn.style.position = 'static';
+  btn.style.margin = '0';
+  btn.style.transform = 'none';
+});
+</script>
+
