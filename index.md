@@ -11,12 +11,10 @@ author_profile: false
       <img class="rk-avatar" src="{{ '/assets/images/avatar.jpeg' | relative_url }}" alt="Rahul Kalliadan">
 
       <h1 class="rk-title">Rahul Kalliadan</h1>
-      <p class="rk-tagline">Engineer — Mechanical Robotics</p>
+      <p class="rk-tagline">Engineer – Mechanical and Robotics</p>
 
-      <p class="rk-blurb rk-narrow">
-        Hello, I’m Rahul — a Mechanical Robotics Engineer with 7+ years building reliable AMRs and commercial cleaning robots.
-        I work end-to-end: first-principles design, DFM/DFA, GD&amp;T/tolerance stacks, validation and scaling from prototype to production.
-      </p>
+      <!-- Short, bold intro -->
+      <p class="rk-introline"><strong>Hello, I’m Rahul — a mechanical engineer designing the future of automation. I love building things end-to-end and will do what it takes to ship robust systems.</strong></p>
 
       <div class="rk-socials">
         <a href="https://www.linkedin.com/in/rahulkalliadan" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
@@ -24,7 +22,6 @@ author_profile: false
         <a href="mailto:rahulkalliadan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
 
-      <!-- Only the resume button here -->
       <div class="rk-cta">
         <a class="btn rk-btn--neon" href="{{ '/assets/resume/Rahul_Kalliadan_Resume.pdf' | relative_url }}" download>
           <i class="fas fa-download"></i> Download Resume
@@ -34,34 +31,65 @@ author_profile: false
   </div>
 </section>
 
-<!-- ======================= ABOUT (centered) ======================= -->
+<!-- ======================= ABOUT ME ======================= -->
 <section id="about" class="rk-section">
   <div class="rk-container">
-    <h2 class="rk-h2 rk-center-text">About</h2>
+    <h2 class="rk-h2 rk-center-text">About Me</h2>
 
     <p class="rk-narrow">
-      I design, validate and ship robust robotics hardware: mechanisms, chassis, suspensions,
-      lifters/tugs, water/vacuum subsystems, and sensor layouts. I care about clean drawings,
-      stack-ups that pass, fixtures that speed assembly, and field reliability.
+      Senior Mechanical Engineer (Robotics) with 7+ years designing and launching industrial AMRs and commercial cleaning robots.
+      Delivered 25% cost down and 33% faster assembly through DFM/DFA, GD&amp;T (ASME&nbsp;Y14.5) and supplier optimisation.
+      Helped deploy 1.8k robots in service with IEC&nbsp;60529 IPX3 validation and reliability improvements.
+      Off work, you’ll find me hiking, exploring new places, riding my Himalayan, and dabbling in photography.
     </p>
+  </div>
+</section>
 
-    <!-- Interests (left) & Education (right) -->
-    <div class="rk-two-col rk-wide">
-      <div>
-        <h3 class="rk-h3">Interests</h3>
-        <ul class="rk-bullets">
-          <li>Robotics hardware systems &amp; mechanisms</li>
-          <li>DFM/DFA, GD&amp;T, reliability engineering</li>
-          <li>Field validation, IP sealing, lifecycle testing</li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="rk-h3">Education</h3>
-        <ul class="rk-bullets">
-          <li>M.S. Robotics &amp; Automation</li>
-          <li>B.E. Mechanical Engineering</li>
-        </ul>
-      </div>
+<!-- ======================= CORE SKILLS (PILLS) ======================= -->
+<section id="skills" class="rk-section">
+  <div class="rk-container">
+    <h2 class="rk-h2 rk-center-text">Core Skills</h2>
+
+    <div class="rk-pills">
+      <!-- Mechanical Design -->
+      <button class="rk-pill" type="button">DFM/DFA</button>
+      <button class="rk-pill" type="button">GD&amp;T (ASME Y14.5)</button>
+      <button class="rk-pill" type="button">Tolerance Stacks</button>
+      <button class="rk-pill" type="button">Value Engineering (VAVE)</button>
+
+      <!-- Manufacturing -->
+      <button class="rk-pill" type="button">CNC</button>
+      <button class="rk-pill" type="button">Injection Molding</button>
+      <button class="rk-pill" type="button">Die Casting</button>
+      <button class="rk-pill" type="button">Sheet Metal</button>
+      <button class="rk-pill" type="button">Jigs &amp; Fixtures</button>
+
+      <!-- Robotics/Systems -->
+      <button class="rk-pill" type="button">AMR Architecture</button>
+      <button class="rk-pill" type="button">Suspensions</button>
+      <button class="rk-pill" type="button">Lifting/Tug Modules</button>
+      <button class="rk-pill" type="button">Docking Stations</button>
+      <button class="rk-pill" type="button">IP Sealing</button>
+      <button class="rk-pill" type="button">Sensor Layout</button>
+
+      <!-- Analysis/Software -->
+      <button class="rk-pill" type="button">SolidWorks PDM / 3DExperience</button>
+      <button class="rk-pill" type="button">Ansys (FEA/CFD)</button>
+      <button class="rk-pill" type="button">MATLAB</button>
+      <button class="rk-pill" type="button">ROS</button>
+
+      <!-- Quality & Compliance -->
+      <button class="rk-pill" type="button">DFMEA</button>
+      <button class="rk-pill" type="button">ECNs</button>
+      <button class="rk-pill" type="button">IEC&nbsp;60529 (IPX3)</button>
+      <button class="rk-pill" type="button">ISO&nbsp;12100</button>
+      <button class="rk-pill" type="button">ISO&nbsp;45001</button>
+
+      <!-- Project & Ops -->
+      <button class="rk-pill" type="button">BOM &amp; Cost Engineering</button>
+      <button class="rk-pill" type="button">Supplier Coordination</button>
+      <button class="rk-pill" type="button">Agile (Confluence/Notion)</button>
+      <button class="rk-pill" type="button">Cross-functional Execution</button>
     </div>
   </div>
 </section>
@@ -80,50 +108,104 @@ author_profile: false
         <div class="rk-expcard">
           <header class="rk-exphead">
             <h3>Lionsbot — Senior Mechanical Engineer</h3>
-            <span>Commercial cleaning robots · 2022 — 2024</span>
+            <span>Singapore · 2022 — 2025</span>
           </header>
           <ul class="rk-bullets">
-            <li>Owned mechanical design for handlebar, cleaning mechanism, vacuum chamber, safety bumper, water-line, sensor layout.</li>
-            <li>Shipped <strong>1,800+ robots</strong> and achieved <strong>IPX3</strong> ingress compliance.</li>
-            <li><strong>25% cost down</strong> &amp; <strong>33% faster assembly</strong> via DFM/DFA and fixture redesign.</li>
+            <li>Owned mechanical &amp; system design for R3 Scrub Pro from concept to production; <strong>1.8k+</strong> units in market with <strong>IPX3</strong> compliance.</li>
+            <li>Achieved <strong>25% cost down</strong> and <strong>33% faster assembly</strong> via DFM/DFA, fixture redesign and supplier process changes.</li>
+            <li>Delivered handlebar, cleaning mechanism, vacuum chamber, bumper, sensor layout &amp; water-line; led validation and ramp.</li>
           </ul>
         </div>
       </li>
 
       <!-- Botsync -->
       <li class="rk-item">
-<div class="rk-logo">
-  <img src="{{ '/assets/images/logos/botsync.jpeg' | relative_url }}" alt="Botsync">
-</div>
-
+        <div class="rk-logo">
+          <img src="{{ '/assets/images/logos/botsync.jpeg' | relative_url }}" alt="Botsync">
+        </div>
         <div class="rk-expcard">
           <header class="rk-exphead">
             <h3>Botsync — Mechanical Engineer → Senior</h3>
-            <span>AMRs for warehouses &amp; factories · 2020 — 2022</span>
+            <span>India · 2020 — 2022</span>
           </header>
           <ul class="rk-bullets">
-            <li>Sole mechanical owner for MAG500/1000: chassis, suspension, lifter/tug modules, docking stations.</li>
-            <li>Validation plans (drop/rumble, slope, ingress), tolerance stacks, FEA; release to production.</li>
-            <li>Standardised PDM/BOM/ECN workflows; reduced design cycle time.</li>
+            <li>Sole mechanical owner for MAG500/1000 AMRs: chassis, suspension, lifter/tug modules, docking stations.</li>
+            <li>Ran CAD, tolerance stacks, FEA and release; set up PDM/BOM/ECN workflows; led supplier prototyping → production.</li>
+            <li>Supported client pilots (TVS, Ford); closed CAPAs within two weeks enabling POC approvals.</li>
           </ul>
         </div>
       </li>
 
-      <!-- Material Handling / FMCG -->
+      <!-- Addverb -->
       <li class="rk-item">
         <div class="rk-logo">
-          <img src="{{ '/assets/images/logos/fmcg.png' | relative_url }}" alt="Material Handling (FMCG)">
+          <img src="{{ '/assets/images/logos/addverb.png' | relative_url }}" alt="Addverb">
         </div>
         <div class="rk-expcard">
           <header class="rk-exphead">
-            <h3>Early Roles — Material Handling (FMCG)</h3>
-            <span>Conveyors &amp; on-site commissioning · 2018 — 2019</span>
+            <h3>Addverb — Solution Design Engineer</h3>
+            <span>India · 2019 — 2020</span>
           </header>
           <ul class="rk-bullets">
-            <li>Designed conveyors; commissioned unit at HUL site with stable 3-week run during handover.</li>
+            <li>Delivered AMR pilots for FMCG clients (e.g., HUL); 100% first-pass site acceptance.</li>
+            <li>Designed conveyors (belt/roller) and produced GD&amp;T-standard drawings; supported vendor development.</li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- Airlitix -->
+      <li class="rk-item">
+        <div class="rk-logo">
+          <img src="{{ '/assets/images/logos/airlitix.png' | relative_url }}" alt="Airlitix">
+        </div>
+        <div class="rk-expcard">
+          <header class="rk-exphead">
+            <h3>Airlitix — Mechanical Engineer</h3>
+            <span>Remote (US) · 2017 — 2018</span>
+          </header>
+          <ul class="rk-bullets">
+            <li>Ran Ansys CFD to optimise duct geometries for greenhouse drones; informed prototype architecture.</li>
+            <li>Supported CAD, ducted fan integration and sensor placement with the CV team.</li>
+          </ul>
+        </div>
+      </li>
+
+      <!-- EY -->
+      <li class="rk-item">
+        <div class="rk-logo">
+          <img src="{{ '/assets/images/logos/ey.png' | relative_url }}" alt="Ernst &amp; Young">
+        </div>
+        <div class="rk-expcard">
+          <header class="rk-exphead">
+            <h3>Ernst &amp; Young — Mechanical Intern</h3>
+            <span>India · 2017</span>
+          </header>
+          <ul class="rk-bullets">
+            <li>Early design for underwater inspection robot; explored HoloLens visualisation and ROS CV pipelines.</li>
           </ul>
         </div>
       </li>
     </ul>
+  </div>
+</section>
+
+<!-- ======================= EDUCATION ======================= -->
+<section id="education" class="rk-section">
+  <div class="rk-container">
+    <h2 class="rk-h2 rk-center-text">Education</h2>
+    <div class="rk-exp-list">
+      <article class="rk-card">
+        <header class="rk-exphead">
+          <h3>M.Tech — Robotics &amp; Automation</h3>
+          <span>Amrita School of Engineering</span>
+        </header>
+      </article>
+      <article class="rk-card">
+        <header class="rk-exphead">
+          <h3>B.E. — Mechanical Engineering</h3>
+          <span>Visvesvaraya Technological University</span>
+        </header>
+      </article>
+    </div>
   </div>
 </section>
