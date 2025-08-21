@@ -121,7 +121,7 @@ author_profile: false
       <!-- Botsync -->
       <li class="rk-item">
         <a class="rk-logo" href="https://www.botsync.co/" target="_blank" rel="noopener">
-          <img src="{{ '/assets/images/logos/botsync.jpeg' | relative_url }}" alt="Botsync">
+          <img src="{{ '/assets/images/logos/botsync.png' | relative_url }}" alt="Botsync">
         </a>
         <div class="rk-expcard">
           <header class="rk-exphead">
