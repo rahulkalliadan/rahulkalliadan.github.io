@@ -276,3 +276,21 @@ body, .page, .archive, .initial-content {
 .rk-h2 { margin: 10px 0 16px; }   /* was 6px 0 12px */
 .rk-card { margin: 10px 0; }      /* was 8px */
 
+/* === Theme toggle: fixed bottom-right, always visible === */
+#rkThemeFab,
+.rk-theme-fab,
+.rk-theme-toggle {
+  position: fixed !important;
+  right: calc(18px + env(safe-area-inset-right));
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 9999 !important;
+  margin: 0 !important;
+  transform: none !important; /* prevent centering transforms */
+}
+
+/* if any parent added width/position styles (e.g., footer), neutralise them */
+.page__footer #rkThemeFab,
+.page__footer .rk-theme-fab,
+.page__footer .rk-theme-toggle {
+  position: fixed !important;
+}
