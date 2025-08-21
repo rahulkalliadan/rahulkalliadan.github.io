@@ -315,6 +315,35 @@ body, .page, .archive, .initial-content {
 /* About section: gentle space between the two paragraphs */
 #about .rk-narrow + .rk-narrow { margin-top: 10px; }
 
+/* ===== Layered, blended background (DARK) ===== */
+
+/* Global page gradient (subtle depth + teal tint near top) */
+body{
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(100,255,218,.06), rgba(0,0,0,0) 60%),
+    linear-gradient(180deg, #101722 0%, #0d1420 42%, #0b121c 100%);
+  background-repeat: no-repeat;
+}
+
+/* Footer transparent so the gradient flows end-to-end */
+.page__footer{
+  background: transparent !important;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+/* Hero gets a soft, brighter shade that blends into the body */
+.rk-hero{ position: relative; z-index: 0; }
+.rk-hero::before{
+  content: "";
+  position: absolute; inset: -24px 0 -16px 0;
+  pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(900px 480px at 50% 0, rgba(100,255,218,.10), rgba(0,0,0,0) 70%),
+    linear-gradient(180deg, rgba(14,22,35,.75), rgba(14,22,35,0) 60%);
+  /* no hard edges, no banding */
+  filter: saturate(1.02) contrast(1.01);
+}
+
 
 /* Headline and card stack breathing room */
 .rk-h2 { margin: 10px 0 16px; }   /* was 6px 0 12px */
