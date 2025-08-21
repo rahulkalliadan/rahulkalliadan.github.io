@@ -223,3 +223,24 @@ body, .page, .archive, .initial-content {
 #publications .rk-card a:hover{
   color: var(--rk-accent); text-shadow: 0 0 10px rgba(100,255,218,.25);
 }
+
+/* ===== Compact vertical spacing (≈ half the gap) ===== */
+
+/* All sections: reduce top/bottom padding */
+.rk-section { padding: 16px 0; }                /* was 32px */
+@media (min-width: 900px){
+  .rk-section { padding: 28px 0; }              /* was 56px */
+}
+
+/* Hero: shrink space below the CTA and slightly reduce top padding */
+.rk-hero { padding-top: 48px; padding-bottom: 8px; }         /* was 64px top, ~no bottom */
+@media (min-width: 900px){
+  .rk-hero { padding-top: 72px; padding-bottom: 10px; }      /* was 96px top */
+}
+
+/* Headings + paragraphs: tighter margins */
+.rk-h2 { margin: 6px 0 12px; }                  /* default was larger */
+.rk-narrow { margin-top: 6px; }                 /* bring text closer to heading */
+
+/* Cards (Experience/Education/Publications): slightly closer stack */
+.rk-card { margin: 8px 0; }                     /* was 12px */
