@@ -279,3 +279,21 @@ body, .page, .archive, .initial-content {
   }
 }
 
+/* === +30% vertical spacing between sections (override) === */
+
+/* Sections (was 16px / 28px) */
+.rk-section { padding: 21px 0; }
+@media (min-width: 900px){
+  .rk-section { padding: 36px 0; }
+}
+
+/* Hero (was 48/72 top, 8/10 bottom) */
+.rk-hero { padding-top: 62px; padding-bottom: 12px; }
+@media (min-width: 900px){
+  .rk-hero { padding-top: 94px; padding-bottom: 13px; }
+}
+
+/* Headline and card stack breathing room */
+.rk-h2 { margin: 10px 0 16px; }   /* was 6px 0 12px */
+.rk-card { margin: 10px 0; }      /* was 8px */
+
