@@ -298,3 +298,54 @@ html[data-theme="light"] .rk-expcard:hover{
 html[data-theme="light"] .rk-exphead h3{ color:#1b2430; }
 html[data-theme="light"] .rk-exphead span{ color:#425466; }
 
+/* ===== Poppins as base font ===== */
+body, .page, .archive, .initial-content {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* ===== Short intro emphasis (bigger & bold) ===== */
+.rk-introline{
+  font-size: 1.2rem;            /* base */
+  line-height: 1.35;
+  margin: 4px 0 6px;
+  text-align: center;
+}
+@media (min-width: 900px){
+  .rk-introline{ font-size: 1.5rem; }   /* larger on wide screens */
+}
+
+/* ===== Skill pills ===== */
+.rk-pills{
+  display: flex; flex-wrap: wrap;
+  gap: 10px 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.rk-pill{
+  appearance: none; border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.03);
+  color: #e6f1ff;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  font-size: .92rem;
+  line-height: 1;
+  cursor: default;
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
+}
+.rk-pill:hover{
+  transform: translateY(-1px);
+  border-color: #64ffda;
+  box-shadow: 0 0 16px rgba(100,255,218,.18);
+  color: #64ffda;
+}
+html[data-theme="light"] .rk-pill{
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.03);
+  color: #1b2430;
+}
+html[data-theme="light"] .rk-pill:hover{
+  border-color: #00ffbb;
+  color: #065;
+  box-shadow: 0 0 14px rgba(0,255,187,.15);
+}
+
