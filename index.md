@@ -204,3 +204,33 @@ author_profile: false
     </div>
   </div>
 </section>
+
+<!-- ======================= PUBLICATIONS ======================= -->
+<section id="publications" class="rk-section">
+  <div class="rk-container">
+    <h2 class="rk-h2 rk-center-text">Publications</h2>
+
+    <div class="rk-exp-list">
+      <article class="rk-card">
+        <h3 class="rk-h3">Design and validation of low-cost wearable assistive device for carrying back loads</h3>
+        <p>IConAMMA 2017.</p>
+        <p>
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214785318325306" target="_blank" rel="noopener">
+            View on ScienceDirect
+          </a>
+        </p>
+      </article>
+
+      <article class="rk-card">
+        <h3 class="rk-h3">Low cost mechanical assistive aid for workers carrying head loads</h3>
+        <p>TIAR 2017.</p>
+        <p>
+          <a href="https://ieeexplore.ieee.org/abstract/document/8273693" target="_blank" rel="noopener">
+            View on IEEE Xplore
+          </a>
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
