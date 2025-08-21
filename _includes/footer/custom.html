@@ -62,3 +62,22 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 });
 </script>
+
+    <script>
+/* Dynamically set --rk-header-h to the actual header height */
+(function () {
+  function headerEl() {
+    return document.querySelector('.masthead') || document.querySelector('.site-header');
+  }
+  function setHeaderOffset() {
+    var h = headerEl();
+    if (!h) return;
+    var hh = Math.ceil(h.getBoundingClientRect().height || 0);
+    document.documentElement.style.setProperty('--rk-header-h', hh + 'px');
+  }
+  setHeaderOffset();
+  window.addEventListener('resize', setHeaderOffset);
+  // In case fonts load later and change header height
+  window.addEventListener('load', setHeaderOffset);
+})();
+</script>
