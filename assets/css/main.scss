@@ -312,6 +312,9 @@ body, .page, .archive, .initial-content {
   position: fixed !important;
 }
 
+/* About section: gentle space between the two paragraphs */
+#about .rk-narrow + .rk-narrow { margin-top: 10px; }
+
 
 /* Headline and card stack breathing room */
 .rk-h2 { margin: 10px 0 16px; }   /* was 6px 0 12px */
