@@ -360,3 +360,18 @@ html[data-theme="light"] #rkThemeDock #rkThemeFab {
   background: rgba(255,255,255,.85);
   box-shadow: 0 8px 20px rgba(0,0,0,.12);
 }
+
+/* Ensure our page background shows everywhere */
+html, body {
+  background-repeat: no-repeat !important;
+}
+
+/* Make wrappers transparent so the body gradient is visible */
+.page, .initial-content {
+  background: transparent !important;
+}
+
+/* Keep footer transparent to avoid a solid strip */
+.page__footer {
+  background: transparent !important;
+}
