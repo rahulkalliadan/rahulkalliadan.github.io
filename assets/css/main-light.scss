@@ -223,3 +223,10 @@ body, .page, .archive, .initial-content {
 
 /* Cards (Experience/Education/Publications): slightly closer stack */
 .rk-card { margin: 8px 0; }                     /* was 12px */
+
+/* Two-column balance for Education + Publications */
+.rk-two-col.rk-balanced { gap: 24px; align-items: start; }
+#education .rk-h3, #publications .rk-h3 { margin: 6px 0 10px; }
+
+/* Keep the side-by-side layout only on wider screens; stack on mobile (already handled by .rk-two-col) */
+
