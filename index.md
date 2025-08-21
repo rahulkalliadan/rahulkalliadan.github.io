@@ -38,12 +38,16 @@ author_profile: false
 
     <p class="rk-narrow">
       Senior Mechanical Engineer (Robotics) with 7+ years designing and launching industrial AMRs and commercial cleaning robots.
-      Delivered 25% unit cost reduction and 33% faster assembly through DFM/DFA, GD&amp;T (ASME&nbsp;Y14.5) and supplier optimisation.
-      Helped deploy 1.8k robots in service with IEC&nbsp;60529 IPX3 validation and reliability improvements.
+      Delivered 25% unit cost reduction and 33% faster assembly through DFM/DFA, GD&amp;T (ASME Y14.5) and supplier optimisation.
+      Helped deploy 1.8k robots in service with IEC 60529 IPX3 validation and reliability improvements.
+    </p>
+
+    <p class="rk-narrow">
       Off work, I enjoy hiking, exploring new places, riding my Himalayan, and photography.
     </p>
   </div>
 </section>
+
 
 <!-- ======================= CORE SKILLS (PILLS) ======================= -->
 <section id="skills" class="rk-section">
