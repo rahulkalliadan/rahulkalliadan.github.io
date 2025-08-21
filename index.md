@@ -92,9 +92,10 @@ author_profile: false
 
       <!-- Botsync -->
       <li class="rk-item">
-        <div class="rk-logo">
-          <img src="{{ '/assets/images/logos/botsync.jpeg' | relative_url }}" alt="Botsync">
-        </div>
+<div class="rk-logo">
+  <img src="{{ '/assets/images/logos/botsync.jpeg' | relative_url }}" alt="Botsync">
+</div>
+
         <div class="rk-expcard">
           <header class="rk-exphead">
             <h3>Botsync — Mechanical Engineer → Senior</h3>
