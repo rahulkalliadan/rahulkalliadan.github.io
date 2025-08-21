@@ -14,7 +14,7 @@ author_profile: false
       <p class="rk-tagline">Engineer – Mechanical and Robotics</p>
 
       <!-- Short, bold intro -->
-      <p class="rk-introline"><strong>Hello, I’m Rahul — a mechanical engineer designing the future of automation. I love building things end-to-end and will do what it takes to ship robust systems.</strong></p>
+      <p class="rk-introline"><strong>Hello, I’m Rahul — an engineer designing the future of automation. I love building things end-to-end and will do what it takes to ship robust systems.</strong></p>
 
       <div class="rk-socials">
         <a href="https://www.linkedin.com/in/rahulkalliadan" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
