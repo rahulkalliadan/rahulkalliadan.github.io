@@ -516,3 +516,37 @@ html { scroll-behavior: smooth; }
 
 /* give the page breathing room so content isn't hidden */
 body { padding-top: calc(var(--rk-header-h) + 6px); }
+
+/* ===== Theme toggle: pure circular FAB, no native button box ===== */
+#rkThemeFab{
+  all: unset;                       /* strip native button styles */
+  position: fixed !important;
+  right: calc(20px + env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: 9999 !important;
+
+  width: 52px; height: 52px;
+  display: grid; place-items: center;
+  border-radius: 9999px;
+
+  font-size: 26px; line-height: 1;
+  cursor: pointer; user-select: none;
+
+  background: rgba(255,255,255,.06);       /* subtle glass on dark */
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  backdrop-filter: blur(6px);
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+
+#rkThemeFab:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.32); }
+#rkThemeFab:active{ transform: translateY(0); }
+
+html[data-theme="light"] #rkThemeFab{
+  background: rgba(255,255,255,.92);       /* clean on light */
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,.14);
+}
+
+/* If anything in the footer still tries to wrap it, force it floating */
+.page__footer #rkThemeFab{ position: fixed !important; }
