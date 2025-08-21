@@ -490,3 +490,17 @@ html[data-theme="light"] #rkThemeFab{
 /* Optional: if an old full-width bar remains, make footer transparent */
 .page__footer{ background: transparent !important; }
 
+/* ===== Sticky header (always visible on scroll) ===== */
+.site-header, .masthead {
+  position: sticky;
+  position: -webkit-sticky;   /* Safari */
+  top: 0;
+  z-index: 3000;              /* above cards & content */
+}
+
+/* Optional: a touch of padding and keep the glassy look you already have */
+.masthead__inner-wrap { padding-top: 8px; padding-bottom: 8px; }
+
+/* Smooth anchor scrolling + offset already handled via .rk-section scroll-margin-top */
+html { scroll-behavior: smooth; }
+
