@@ -667,3 +667,32 @@ html { scroll-behavior: smooth; }
   }
 }
 
+/* === Home: blend header into hero when at top; solid after scroll === */
+
+/* color tokens for solid header */
+html:not([data-theme="light"]){
+  --rk-header-solid: #0f1a26;
+  --rk-header-border: rgba(255,255,255,.06);
+}
+html[data-theme="light"]{
+  --rk-header-solid: #ffffff;
+  --rk-header-border: rgba(0,0,0,.08);
+}
+
+/* HOME, at top: header fully transparent, no divider */
+.layout--home header.masthead,
+.layout--home .masthead,
+.layout--home .site-header{
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* When scrolled: bring back the solid header (dark/light) */
+html.rk-scrolled header.masthead,
+html.rk-scrolled .masthead,
+html.rk-scrolled .site-header{
+  background: var(--rk-header-solid) !important;
+  border-bottom: 1px solid var(--rk-header-border) !important;
+}
+
