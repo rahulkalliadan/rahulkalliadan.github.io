@@ -16,7 +16,7 @@ author_profile: false
       <h1 class="rk-title">Rahul Kalliadan</h1>
       <p class="rk-tagline">Engineer – Mechanical and Robotics</p>
 
-      <p class="rk-introline"><strong>Hello, I’m Rahul — a mechanical engineer designing the future of automation. I love building things end-to-end and will do what it takes to ship robust systems.</strong></p>
+      <p class="rk-introline"><strong>Hello, I’m Rahul — an engineer designing the future of automation. I love building things end-to-end and will do what it takes to ship robust systems.</strong></p>
 
       <div class="rk-socials">
         <a href="https://www.linkedin.com/in/rahulkalliadan" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
@@ -39,7 +39,7 @@ author_profile: false
     <h2 class="rk-h2 rk-center-text">About Me</h2>
 
     <p class="rk-narrow">
-      Senior Mechanical Engineer (Robotics) with 7+ years designing and launching industrial AMRs and commercial cleaning robots.
+      Senior Mechanical Engineer with 7+ years designing and launching industrial AMRs and commercial cleaning robots.
       Delivered 25% unit cost reduction and 33% faster assembly through DFM/DFA, GD&amp;T (ASME Y14.5) and supplier optimisation.
       Helped deploy 1.8k robots in service with IEC 60529 IPX3 validation and reliability improvements.
     </p>
