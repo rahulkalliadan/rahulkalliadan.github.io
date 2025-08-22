@@ -20,6 +20,7 @@ author_profile: false
 
       <div class="rk-socials">
         <a href="https://www.linkedin.com/in/rahulkalliadan" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/rahulkalliadan" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
         <a href="mailto:rahulkalliadan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
 
