@@ -89,38 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-  /* --------- Header spacer (prevents overlap) --------- */
-  (function () {
-    function headerEl() {
-      return document.querySelector('header.masthead') ||
-             document.querySelector('.masthead') ||
-             document.querySelector('header.site-header') ||
-             document.querySelector('.site-header');
-    }
-    function ensureSpacer() {
-      var h = headerEl();
-      if (!h) return null;
-      var s = document.getElementById('rk-header-spacer');
-      if (!s) {
-        s = document.createElement('div');
-        s.id = 'rk-header-spacer';
-        s.style.width = '100%';
-        h.insertAdjacentElement('afterend', s); // sits right under header
-      }
-      return s;
-    }
-    function sizeSpacer() {
-      var h = headerEl();
-      var s = ensureSpacer();
-      if (!h || !s) return;
-      var hh = Math.ceil(h.getBoundingClientRect().height || 0);
-      document.documentElement.style.setProperty('--rk-header-h', hh + 'px');
-      s.style.height = 'calc(var(--rk-header-h) + 6px)'; // small cushion
-    }
-    sizeSpacer();
-    window.addEventListener('resize', sizeSpacer);
-    window.addEventListener('load', sizeSpacer);
-  })();
 
   /* --------- Optional: avatar tilt (safe no-op if missing) --------- */
   (function () {
