@@ -14,6 +14,22 @@
   --rk-dim: #a8b2d1;
   --rk-header-h: 64px;
 }
+/* DUSK palette for hero blend */
+:root{
+  --rk-dusk-plum:   161,126,186;  /* warm plum / mauve glow */
+  --rk-dusk-indigo:  92, 74,160;  /* indigo */
+  --rk-dusk-blue:    46, 78,152;  /* steel blue */
+  --rk-dusk-navy1:   21, 29, 42;  /* base navy */
+  --rk-dusk-navy2:   11, 18, 28;  /* deeper navy */
+}
+/* softer/lighter variant for light theme */
+html[data-theme="light"]{
+  --rk-dusk-plum:   208,186,228;
+  --rk-dusk-indigo: 157,146,215;
+  --rk-dusk-blue:   170,196,242;
+  --rk-dusk-navy1:  241,245,252;
+  --rk-dusk-navy2:  231,238,249;
+}
 
 *,
 *::before,
