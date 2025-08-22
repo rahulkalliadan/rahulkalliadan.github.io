@@ -76,6 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(btn);
   }
 
+  <script>
+  (function () {
+    const html = document.documentElement;
+    const onScroll = () => {
+      if (window.scrollY > 8) html.classList.add('rk-scrolled');
+      else html.classList.remove('rk-scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+</script>
+
+
   /* --------- Header spacer (prevents overlap) --------- */
   (function () {
     function headerEl() {
