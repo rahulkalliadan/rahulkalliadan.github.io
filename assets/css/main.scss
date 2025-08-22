@@ -1206,3 +1206,34 @@ html[data-theme="light"]{
   position: relative;
   z-index: 1;
 }
+
+/* ============================================================
+   PATCH: make the hero blend visible
+   - keep the aurora overlay above the section background
+   - keep hero content above the overlay
+   ============================================================ */
+
+.rk-hero{
+  position: relative !important;
+  isolation: isolate;       /* creates a stacking context for safety */
+  overflow: hidden;
+  background: var(--rk-bg) !important;
+}
+
+/* The blend lives on ::before / ::after – put them above the bg */
+.rk-hero::before,
+.rk-hero::after{
+  z-index: 0 !important;    /* <-- was -1; this is the key change */
+}
+
+/* Make sure the content sits above the overlay */
+.rk-hero > *,
+.rk-hero .rk-hero__inner,
+.rk-hero h1,
+.rk-hero h2,
+.rk-hero p,
+.rk-hero .btn,
+.rk-hero .rk-socials {
+  position: relative;
+  z-index: 1 !important;
+}
