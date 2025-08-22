@@ -859,4 +859,70 @@ html[data-theme="light"] .rk-expcard{
 }
 
 /* Hero blend respects the new light tints (no change to your structure needed) */
+/* =========================
+   LIGHT MODE: Make all text dark/high-contrast
+   ========================= */
+html[data-theme="light"]{
+  --rk-fg: #0f172a;      /* primary text – slate-900 */
+  --rk-fg-dim: #334155;  /* secondary text – slate-600 */
+}
+
+/* Global text */
+html[data-theme="light"] body,
+html[data-theme="light"] .page,
+html[data-theme="light"] .initial-content,
+html[data-theme="light"] .archive,
+html[data-theme="light"] .page__content{
+  color: var(--rk-fg) !important;
+}
+
+/* Headings */
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6{
+  color: var(--rk-fg) !important;
+}
+
+/* HERO: name, tagline, intro line */
+html[data-theme="light"] .rk-title,
+html[data-theme="light"] .rk-hero h1,
+html[data-theme="light"] .rk-hero h2,
+html[data-theme="light"] .rk-hero p,
+html[data-theme="light"] .rk-introline{
+  color: var(--rk-fg) !important;
+}
+html[data-theme="light"] .rk-tagline{
+  color: var(--rk-accent) !important; /* keep the (now calmer) teal for the subtitle */
+}
+
+/* Cards / timeline / meta copy */
+html[data-theme="light"] .rk-card p,
+html[data-theme="light"] .rk-expcard p,
+html[data-theme="light"] .rk-exp__meta,
+html[data-theme="light"] .rk-pills{
+  color: var(--rk-fg-dim) !important;
+}
+
+/* Links: readable by default; accent on hover */
+html[data-theme="light"] a{ color: var(--rk-fg) !important; }
+html[data-theme="light"] a:hover{ color: var(--rk-accent) !important; }
+
+/* Social icon buttons */
+html[data-theme="light"] .rk-socials a{
+  color: var(--rk-fg) !important;
+  border-color: rgba(15,23,42,.22) !important;
+}
+html[data-theme="light"] .rk-socials a:hover{
+  color: var(--rk-accent) !important;
+  border-color: var(--rk-accent) !important;
+}
+
+/* Buttons (e.g., Download Resume) keep strong contrast */
+html[data-theme="light"] .btn,
+html[data-theme="light"] .btn a{
+  color: var(--rk-fg) !important;
+}
 
