@@ -87,27 +87,4 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', onScroll, { passive: true });
   })();
 </script>
-
-
-
-  /* --------- Optional: avatar tilt (safe no-op if missing) --------- */
-  (function () {
-    var av = document.querySelector('.rk-avatar');
-    if (!av) return;
-    var strength = 10;  // degrees
-    av.style.transformOrigin = 'center center';
-    av.addEventListener('mousemove', function (e) {
-      var r = av.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width;
-      var y = (e.clientY - r.top) / r.height;
-      var rx = (0.5 - y) * strength;
-      var ry = -(0.5 - x) * strength;
-      av.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.04)';
-    });
-    av.addEventListener('mouseleave', function () {
-      av.style.transform = 'rotateX(0) rotateY(0) scale(1)';
-    });
-  })();
-
-});
 </script>
