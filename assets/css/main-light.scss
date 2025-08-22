@@ -587,3 +587,17 @@ section[id],
 [id].rk-section {
   scroll-margin-top: calc(var(--rk-header-h) + 12px);
 }
+
+/* === Global top offset so content never sits under the fixed header === */
+:root{
+  /* JS sets --rk-header-h precisely; fallback here */
+  --rk-header-h: 72px;
+  --rk-hero-lift: 36px; /* if you changed earlier, mirror the same value here */
+}
+
+/* Push the whole page down by header height (+ tiny cushion) */
+body,
+.initial-content,
+.page{
+  padding-top: calc(var(--rk-header-h) + var(--rk-hero-lift, 0px) + 8px) !important;
+}
