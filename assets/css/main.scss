@@ -1121,3 +1121,88 @@ body::before, body::after { content: none !important; }
   position: relative;
   z-index: 1;
 }
+
+/* ============================================================
+   HOME-ONLY AURORA BLEND (solid elsewhere)
+   ============================================================ */
+
+/* Color tuples for safe rgba(var(--x), a) usage */
+:root{
+  /* dark theme aurora palette (RGB tuples) */
+  --rk-aur1: 26,127,208;   /* blue */
+  --rk-aur2: 107,43,217;   /* purple */
+  --rk-aur3: 0,194,169;    /* teal/mint */
+  --rk-aur4: 255,138,0;    /* amber */
+  --rk-hero-alpha: .22;    /* overall glow strength */
+}
+
+/* softer tints for light theme */
+html[data-theme="light"]{
+  --rk-aur1: 191,227,255;
+  --rk-aur2: 227,210,255;
+  --rk-aur3: 199,255,243;
+  --rk-aur4: 255,225,179;
+  --rk-hero-alpha: .14;
+}
+
+/* keep every section solid by default (you already do this, harmless to repeat) */
+.rk-section{ background: var(--rk-bg) !important; }
+
+/* blend lives only inside the hero */
+.rk-hero{
+  position: relative;
+  isolation: isolate;   /* new stacking context so ::before stays behind */
+  overflow: hidden;     /* tidy edges on mobile */
+  background: var(--rk-bg) !important;
+  z-index: 0;
+}
+
+/* Main aurora layer */
+.rk-hero::before{
+  content: "";
+  position: absolute;
+  inset: -60px -12vw -40px -12vw;   /* extend for smooth edges */
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-aur1), calc(var(--rk-hero-alpha)*1.05)) 0%, transparent 58%),
+    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-aur2), calc(var(--rk-hero-alpha)*0.95)) 0%, transparent 60%),
+    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-aur3), calc(var(--rk-hero-alpha)*1.00)) 0%, transparent 60%),
+    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-aur4), .10) 0 25%, transparent 25% 100%),
+    linear-gradient(180deg, var(--rk-bg-2, #0e1730) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
+  filter: saturate(110%);
+  opacity: .95;
+}
+
+/* Soft fade into the solid page background at the bottom of hero */
+.rk-hero::after{
+  content: "";
+  position: absolute;
+  left: -12vw; right: -12vw; bottom: -1px;
+  height: 140px; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(52% 28% at 82% 10%, rgba(var(--rk-aur2), .18), transparent 65%),
+    radial-gradient(48% 26% at 18% 90%, rgba(var(--rk-aur3), .16), transparent 70%),
+    linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--rk-bg) 85%);
+  filter: blur(34px) saturate(112%);
+  opacity: .60;
+}
+
+/* Gentle drift (disabled for reduced-motion users) */
+@media (prefers-reduced-motion: no-preference){
+  .rk-hero::before{
+    animation: rkAuroraDrift 26s ease-in-out infinite alternate;
+    background-size: 100% 100%;
+  }
+  @keyframes rkAuroraDrift{
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: 1.8% -0.6%, -1.2% 0.4%, 1.2% 1.0%, 0 0, 0 0; }
+  }
+}
+
+/* Make sure hero text & buttons sit above the glow */
+.rk-hero h1, .rk-hero h2, .rk-hero p, .rk-hero .btn, .rk-hero .icon-row{
+  position: relative;
+  z-index: 1;
+}
