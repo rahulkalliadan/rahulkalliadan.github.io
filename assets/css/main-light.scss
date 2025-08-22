@@ -620,3 +620,27 @@ section[id]::before{
   pointer-events: none;
   visibility: hidden;
 }
+
+/* ===== Fixed header & overlap-proof layout ===== */
+
+/* Make sure header is fixed and above content */
+.masthead, .site-header {
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 5000;
+}
+
+/* We now use a real spacer node; remove any earlier padding offsets */
+body, .initial-content, .page { padding-top: 0 !important; }
+
+/* Spacer (injected by JS) occupies the header height */
+#rk-header-spacer { height: var(--rk-header-h, 72px); }
+
+/* Anchor jumps and manual scroll stop below the header */
+.rk-section, section[id] {
+  position: relative;
+  scroll-margin-top: calc(var(--rk-header-h, 72px) + 12px);
+}
+
+/* (optional) keep nav centered, already set earlier */
+.masthead, .site-header { width: 100%; }
