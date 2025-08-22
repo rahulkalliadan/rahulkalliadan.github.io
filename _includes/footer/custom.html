@@ -88,3 +88,38 @@ document.addEventListener('DOMContentLoaded', function () {
   })();
 </script>
 </script>
+
+<!-- Floating theme toggle button -->
+<button id="rkThemeFab" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var KEY = 'rk-theme';
+  var btn = document.getElementById('rkThemeFab');
+
+  function current() {
+    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+  function apply(theme) {
+    if (theme === 'light') {
+      root.setAttribute('data-theme', 'light');
+      btn.textContent = '🌙';       // show moon (tap to go dark)
+    } else {
+      root.removeAttribute('data-theme'); // dark is the default palette
+      btn.textContent = '☀️';       // show sun (tap to go light)
+    }
+    localStorage.setItem(KEY, theme);
+  }
+
+  // initialize from storage or system
+  var saved = localStorage.getItem(KEY);
+  if (!saved) saved = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  apply(saved);
+
+  btn.addEventListener('click', function () {
+    apply(current() === 'light' ? 'dark' : 'light');
+  });
+})();
+</script>
+
