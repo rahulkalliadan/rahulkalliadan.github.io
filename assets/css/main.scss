@@ -18,16 +18,22 @@
   --rk-header-h: 72px;
 
   /* Page base (dark) */
-  --rk-bg:   #0a1220;   /* page base */
-  --rk-bg-2: #0e1730;   /* slightly deeper top */
+  --rk-bg:   #0a1220;
+  --rk-bg-2: #0e1730;
 
-  /* Aurora (RGB tuples so we can set alpha per-stop) */
-  --rk-aur1: 161,126,186;  /* plum/mauve */
-  --rk-aur2:  92, 74,160;  /* indigo */
-  --rk-aur3:  46, 78,152;  /* blue */
-  --rk-aur4:  11, 18, 28;  /* deep navy vignette helper */
+  /* Precomputed aurora colors (Sass-safe) */
+  --rk-aur1-42: rgba(161,126,186,.42); /* plum */
+  --rk-aur1-28: rgba(161,126,186,.28);
+  --rk-aur2-22: rgba(92,74,160,.22);   /* indigo */
+  --rk-aur3-26: rgba(46,78,152,.26);   /* blue  */
+  --rk-vignette-25: rgba(0,0,0,.25);   /* dark vignette */
 
-  --rk-hero-alpha: .95;    /* overall blend strength in hero */
+  /* Strength of the blend layer */
+  --rk-hero-alpha: .95;
+
+  /* Section spacing (compact ~25%) */
+  --rk-sec-pad-m: 14px;
+  --rk-sec-pad-d: 27px;
 }
 
 /* Light theme palette */
@@ -35,10 +41,12 @@ html[data-theme="light"]{
   --rk-bg:   #f7faff;
   --rk-bg-2: #eef4ff;
 
-  --rk-aur1: 208,186,228;  /* soft plum */
-  --rk-aur2: 157,146,215;  /* soft indigo */
-  --rk-aur3: 170,196,242;  /* soft blue */
-  --rk-aur4: 231,238,249;  /* light vignette helper */
+  /* Softer light tints with similar feel */
+  --rk-aur1-42: rgba(208,186,228,.36);
+  --rk-aur1-28: rgba(208,186,228,.22);
+  --rk-aur2-22: rgba(157,146,215,.20);
+  --rk-aur3-26: rgba(170,196,242,.22);
+  --rk-vignette-25: rgba(0,0,0,.15);
 
   --rk-hero-alpha: .88;
 }
@@ -70,8 +78,6 @@ header.masthead, .masthead, header.site-header, .site-header{
   position: fixed !important;
   top: 0; left: 0; right: 0;
   z-index: 99999 !important;
-
-  /* solid header (no blur) */
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow: none;
@@ -137,8 +143,16 @@ body, .initial-content, .page{ padding-top: 0 !important; }
 /* =========================================================
    LAYOUT / CONTAINERS / SPACING
    ========================================================= */
-.rk-section{ padding: 36px 0; } /* global rhythm */
-@media (min-width: 900px){ .rk-section{ padding: 56px 0; } }
+.rk-section{
+  padding-top: var(--rk-sec-pad-m);
+  padding-bottom: var(--rk-sec-pad-m);
+}
+@media (min-width: 900px){
+  .rk-section{
+    padding-top: var(--rk-sec-pad-d);
+    padding-bottom: var(--rk-sec-pad-d);
+  }
+}
 
 .rk-container{
   width: 75vw;
@@ -163,71 +177,96 @@ body, .initial-content, .page{ padding-top: 0 !important; }
 .layout--home .entries{ display:none !important; }
 
 /* =========================================================
-   HERO (structure; content sits above blend)
+   HERO (full-viewport, CTA visible, dusk blend)
    ========================================================= */
+:root { --rk-hero-lift: 0px; }
+
 .rk-hero{
   position: relative !important;
-  isolation: isolate;    /* new stacking context */
-  overflow: hidden;      /* clean edges on mobile */
+  isolation: isolate;
+  overflow: hidden;
   background: var(--rk-bg) !important;
-  padding-top: 94px;     /* you liked a slightly lifted hero */
-  padding-bottom: 13px;
+
+  /* full viewport, centered stack */
+  min-height: 100dvh !important;
+  display: flex; align-items: center; justify-content: center;
+
+  /* comfortable, responsive paddings */
+  padding-top:  clamp(6px, 2.2vh, 20px) !important;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px) !important;
 }
-@media (max-width: 899px){
-  .rk-hero{ padding-top: 62px; padding-bottom: 12px; }
+
+@supports not (height: 100dvh) {
+  .rk-hero{ min-height: 100vh !important; }
 }
 
 .rk-hero__inner{
-  display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  gap: clamp(10px, 1.8vh, 16px);
+  transform: translateY(calc(-1 * var(--rk-hero-lift)));
 }
 
+/* Avatar / name / intro sizing */
 .rk-avatar{
-  width: 190px; height: 190px; border-radius: 50%; object-fit: cover; display:block;
+  width:  clamp(150px, 18vw, 220px);
+  height: clamp(150px, 18vw, 220px);
+  border-radius: 50%;
+  object-fit: cover; display:block;
   border: 2px solid var(--rk-accent);
   box-shadow: 0 0 0 3px rgba(100,255,218,.14), 0 0 36px 8px var(--rk-accent-soft);
   transition: transform .25s ease, box-shadow .35s ease, filter .25s ease;
 }
 .rk-avatar:hover{ filter:saturate(1.08) contrast(1.04); }
 
-.rk-title   { margin:.4rem 0 .1rem; font-size: 2.2rem; }
-.rk-tagline { margin:0 0 .6rem; color: var(--rk-accent); }
+.rk-title{
+  /* slightly smaller title as requested */
+  font-size: clamp(1.9rem, 1.9rem + 1vw, 2.6rem);
+  line-height: 1.1;
+  margin: .2rem 0 .1rem;
+}
+.rk-tagline { margin:0 0 .3rem; color: var(--rk-accent); }
 
-.rk-introline{ font-size:1.5rem; line-height:1.35; margin:6px 0 10px; text-align:center; }
+.rk-introline,
+.rk-introline strong{
+  /* larger intro for emphasis */
+  font-size: clamp(1.35rem, 1.15rem + 1.2vw, 2.0rem);
+  line-height: 1.38;
+  margin: 6px 0 0;
+}
 
-/* Keep hero text/buttons above any blend layer */
+/* Keep hero text/buttons above the blend layer */
 .rk-hero > *:not(.rk-aurora),
 .rk-hero .rk-hero__inner,
 .rk-hero h1, .rk-hero h2, .rk-hero p,
 .rk-hero .btn, .rk-hero .rk-socials { position:relative; z-index:1; }
 
-/* Disable ANY older hero pseudo-layers you had */
+/* Disable older pseudo-layers if any */
 .rk-hero::before, .rk-hero::after { content:none !important; }
 
-/* ======= THE BLEND (dusk style) – lives on .rk-aurora ======= */
+/* The blend (as a real child DIV: <div class="rk-aurora"></div>) */
 .rk-hero .rk-aurora{
   position: absolute;
-  inset: -90px -14vw -60px -14vw;
+  inset: -90px -14vw -60px -14vw;  /* bleed beyond edges */
   z-index: 0;
   pointer-events: none;
 
-  /* Sass-safe: use rgba#{(}var(--x), a#{)} instead of rgba(var(--x), a) */
   background:
     radial-gradient(1200px 700px at 50% -12%,
-      rgba#{(}var(--rk-aur1), .42#{)} 0%,
-      rgba#{(}var(--rk-aur1), .28#{)} 32%,
+      var(--rk-aur1-42) 0%,
+      var(--rk-aur1-28) 32%,
       rgba(0,0,0,0) 62%
     ),
     radial-gradient(1000px 800px at -10% 15%,
-      rgba#{(}var(--rk-aur2), .22#{)} 0%,
+      var(--rk-aur2-22) 0%,
       rgba(0,0,0,0) 60%
     ),
     radial-gradient(1100px 850px at 110% 10%,
-      rgba#{(}var(--rk-aur3), .26#{)} 0%,
+      var(--rk-aur3-26) 0%,
       rgba(0,0,0,0) 68%
     ),
     radial-gradient(150% 120% at 50% 40%,
       rgba(0,0,0,0) 60%,
-      rgba(0,0,0,.25) 100%
+      var(--rk-vignette-25) 100%
     ),
     linear-gradient(180deg,
       var(--rk-bg-2) 0%,
@@ -239,9 +278,7 @@ body, .initial-content, .page{ padding-top: 0 !important; }
   opacity: var(--rk-hero-alpha);
 }
 
-
-
-/* Optional, subtle animated drift (respects reduced motion) */
+/* Optional, subtle drift (respect reduced motion) */
 @media (prefers-reduced-motion: no-preference){
   .rk-hero .rk-aurora{
     animation: rkAuroraDrift 26s ease-in-out infinite alternate;
@@ -253,10 +290,13 @@ body, .initial-content, .page{ padding-top: 0 !important; }
   }
 }
 
+/* Socials & CTA spacing tuned for visibility */
+.rk-socials{ margin-top: 8px; }
+.rk-cta .btn{ margin-top: 10px; }
+
 /* =========================================================
    BUTTONS / SOCIALS
    ========================================================= */
-.rk-socials{ margin-top: 6px; }
 .rk-socials a{
   display:inline-flex; align-items:center; justify-content:center;
   width:42px; height:42px; margin:0 6px; border-radius:12px;
@@ -270,7 +310,6 @@ body, .initial-content, .page{ padding-top: 0 !important; }
   color: var(--rk-accent);
 }
 
-.rk-cta .btn{ margin:12px 6px 0 0; }
 .rk-btn--neon{
   border:1px solid var(--rk-accent);
   color: var(--rk-accent) !important;
@@ -281,7 +320,7 @@ body, .initial-content, .page{ padding-top: 0 !important; }
 }
 
 /* =========================================================
-   CARDS / LISTS / TIMELINE / PILLS  (unchanged from your good setup)
+   CARDS / LISTS / TIMELINE / PILLS
    ========================================================= */
 .rk-center-text{ text-align:center; }
 .rk-narrow{ max-width: 68ch; margin: 0 auto; text-align:center; }
@@ -295,7 +334,7 @@ body, .initial-content, .page{ padding-top: 0 !important; }
   border-radius:18px;
   padding:18px;
   background:linear-gradient(180deg, rgba(20,24,32,.85), rgba(20,24,32,.55));
-  margin:12px 0;
+  margin:8px 0;
   transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .rk-card:hover,
@@ -313,7 +352,7 @@ body, .initial-content, .page{ padding-top: 0 !important; }
 .rk-exp__meta{ color:var(--rk-dim); }
 .rk-exp-list{ max-width:900px; margin:0 auto; }
 
-.rk-pills{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
+.rk-pills{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:6px; }
 .rk-pill{
   appearance:none; border:1px solid rgba(255,255,255,.18);
   background: rgba(255,255,255,.03); color:#e6f1ff;
@@ -401,277 +440,7 @@ html[data-theme="light"] #rkThemeFab{
 #about .rk-narrow + .rk-narrow { margin-top: 10px; }
 html { scroll-behavior: smooth; }
 
-/* ===== Compact vertical spacing (~25% tighter) ===== */
-:root{
-  --rk-sec-pad-m: 14px;   /* mobile/top+bottom per section (was ~21px) */
-  --rk-sec-pad-d: 27px;   /* desktop/top+bottom per section (was ~36px) */
-}
-
-/* All sections: reduce top & bottom padding */
-.rk-section{
-  padding-top: var(--rk-sec-pad-m) !important;
-  padding-bottom: var(--rk-sec-pad-m) !important;
-}
-@media (min-width: 900px){
-  .rk-section{
-    padding-top: var(--rk-sec-pad-d) !important;
-    padding-bottom: var(--rk-sec-pad-d) !important;
-  }
-}
-
-/* Keep hero compact but still balanced */
-.rk-hero{
-  /* you already tuned top padding elsewhere; just keep the bottom neat */
-  padding-bottom: 8px !important;
-}
-
-/* Headings a touch tighter */
-.rk-h2{ margin: 4px 0 10px !important; }
-
-/* Pills and cards: tiny trims so blocks sit closer */
-.rk-pills{ margin-top: 6px !important; }       /* was 8px */
-.rk-card{ margin: 8px 0 !important; }          /* keep compact */
-
-/* === HERO: fit the whole stack (incl. Download Resume) above the fold === */
-@media (min-width: 1100px){
-  /* lift the stack a bit more */
-  :root{ --rk-hero-lift: 68px; } /* was ~36–44 */
-
-  /* trim hero paddings */
-  .rk-hero{
-    padding-top: 36px !important;
-    padding-bottom: 6px !important;
-  }
-
-  /* pull the whole column up and tighten gaps */
-  .rk-hero__inner{
-    transform: translateY(calc(-1 * var(--rk-hero-lift))) !important;
-    gap: 8px !important;
-  }
-
-  /* very small visual trims so everything fits comfortably */
-  .rk-avatar{ width: 176px; height: 176px; }               /* was 190px */
-  .rk-title{ margin: .1rem 0 0 !important; }
-  .rk-tagline{ margin: 2px 0 6px !important; }
-  .rk-introline{
-    font-size: 1.28rem !important;                         /* was ~1.5rem */
-    margin: 6px 0 6px !important;
-  }
-  .rk-socials{ margin-top: 4px !important; }
-  .rk-cta .btn{ margin-top: 6px !important; }
-}
-
-/* on very wide screens give a touch more lift */
-@media (min-width: 1440px){
-  :root{ --rk-hero-lift: 60px; }
-}
-
-/* === HERO: fill viewport, keep CTA visible, never show next section === */
-
-/* cancel any earlier manual lift */
-:root{ --rk-hero-lift: 0px; }
-
-.rk-hero__inner{ transform: none !important; }
-
-/* responsive paddings so the stack breathes but fits on small screens */
-:root{
-  --rk-hero-pad-top: clamp(16px, 5vh, 48px);
-  --rk-hero-pad-bot: clamp(18px, 6vh, 56px);
-}
-
-/* make hero occupy the full viewport (minus header) */
-.rk-hero{
-  position: relative;
-  display: flex;                 /* center vertically */
-  align-items: center;
-  padding-top: var(--rk-hero-pad-top) !important;
-  padding-bottom: var(--rk-hero-pad-bot) !important;
-  min-height: calc(100vh - var(--rk-header-h)) !important;  /* fallback */
-  background: var(--rk-bg) !important;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* modern viewport units (prevents mobile URL bar jump) */
-@supports (height: 100dvh) {
-  .rk-hero{
-    min-height: calc(100dvh - var(--rk-header-h)) !important;
-  }
-}
-
-/* gentle, size-aware spacing in the stack */
-.rk-hero__inner{ gap: clamp(6px, 1.5vh, 14px) !important; }
-.rk-socials{ margin-top: clamp(6px, 1.5vh, 10px) !important; }
-.rk-cta .btn{ margin-top: clamp(6px, 1.6vh, 12px) !important; }
-
-/* scale avatar and intro a touch so the whole stack fits on short screens */
-.rk-avatar{
-  width: clamp(128px, 17vw, 186px) !important;
-  height: clamp(128px, 17vw, 186px) !important;
-}
-.rk-introline{
-  font-size: clamp(1.02rem, 2.1vw, 1.4rem) !important;
-}
-
-/* keep the blend layer – no change needed if you already added it */
-
-/* === HERO should fill the viewport on every screen === */
-/* Put this at the END of main.scss */
-
-:root { --rk-header-h: 72px; } /* keep your value; harmless if already set */
-
-.rk-hero{
-  /* fill the *entire* viewport height; we don't subtract the header here
-     because your fixed-header spacer already accounts for it */
-  min-height: 100dvh !important;            /* modern mobile friendly */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;       /* centers the stack */
-  padding-top:  clamp(10px, 4vh, 36px) !important;
-  padding-bottom: clamp(12px, 5vh, 40px) !important;
-  overflow: hidden;
-}
-
-/* fallback for browsers without dvh */
-@supports not (height: 100dvh) {
-  .rk-hero{ min-height: 100vh !important; }
-}
-
-/* keep the stack compact so the CTA fits on short screens */
-.rk-hero__inner{ gap: clamp(8px, 1.6vh, 14px) !important; }
-
-.rk-title      { margin: .2rem 0 .1rem !important; }
-.rk-tagline    { margin: 0 0 .3rem !important; }
-.rk-introline  { margin: 6px 0 0 !important; font-size: clamp(1.02rem, 2.1vw, 1.4rem) !important; }
-.rk-socials    { margin-top: clamp(4px, 1.2vh, 10px) !important; }
-.rk-cta .btn   { margin-top: clamp(6px, 1.4vh, 12px) !important; }
-
-/* slight responsive scaling so everything fits comfortably */
-.rk-avatar{
-  width:  clamp(128px, 17vw, 186px) !important;
-  height: clamp(128px, 17vw, 186px) !important;
-}
-
-/* make sure any earlier “lift” is disabled */
-:root{ --rk-hero-lift: 0px; }
-.rk-hero__inner{ transform: none !important; }
-
-/* === Keep CTA fully visible in the hero on any screen === */
-
-/* Full-height hero + safe area at bottom */
-.rk-hero{
-  min-height: 100dvh !important;                  /* fills the viewport */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding-top:  clamp(10px, 4vh, 36px) !important;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 14px) !important;
-  overflow: hidden;
-}
-@supports not (height: 100dvh) {
-  .rk-hero{ min-height: 100vh !important; }
-}
-
-/* Keep the stack compact and the CTA above the fold */
-.rk-hero__inner{ gap: clamp(8px, 1.4vh, 14px) !important; }
-.rk-cta .btn{ margin-top: clamp(6px, 1.4vh, 12px) !important; }
-.rk-cta{ margin-bottom: clamp(10px, 2vh, 16px) !important; }
-
-/* Make the intro text responsive (often the tall piece) */
-.rk-introline,
-.rk-introline strong{
-  font-size: clamp(1rem, 2.0vw, 1.35rem) !important;
-  line-height: 1.35 !important;
-}
-
-/* Avatar / title scale responsively so the CTA always fits */
-.rk-avatar{ width: clamp(120px, 16vw, 180px) !important; height: clamp(120px, 16vw, 180px) !important; }
-.rk-title{ font-size: clamp(1.9rem, 5.6vw, 3rem) !important; margin: .2rem 0 .1rem !important; }
-
-/* Tighten a bit more on short screens */
-@media (max-height: 820px){
-  .rk-hero__inner{ gap: 10px !important; }
-  .rk-avatar{ width: clamp(110px, 14vw, 160px) !important; height: clamp(110px, 14vw, 160px) !important; }
-  .rk-introline, .rk-introline strong{ font-size: clamp(.96rem, 1.7vw, 1.2rem) !important; }
-}
-
-@media (max-height: 700px){
-  .rk-avatar{ width: clamp(98px, 13vw, 140px) !important; height: clamp(98px, 13vw, 140px) !important; }
-  .rk-title{ font-size: clamp(1.7rem, 5vw, 2.4rem) !important; }
-  .rk-introline, .rk-introline strong{ font-size: clamp(.92rem, 1.6vw, 1.1rem) !important; }
-  .rk-cta .btn{ margin-top: 8px !important; }
-}
-
-/* Ensure older “lift” rules don’t push content down */
-:root{ --rk-hero-lift: 0px; }
-.rk-hero__inner{ transform: none !important; }
-
-/* === HERO tune (bigger photo, closer to top, larger intro; CTA still visible) === */
-
-/* Lift the hero stack up a bit (bigger lift on tall screens, smaller on short) */
-:root{
-  --rk-hero-lift: clamp(10px, 4vh, 52px);
-}
-
-/* Full-viewport hero with reduced top padding and safe bottom padding */
-.rk-hero{
-  min-height: 100dvh !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding-top:  clamp(6px, 2.2vh, 20px) !important;                      /* less gap to header */
-  padding-bottom: calc(env(safe-area-inset-bottom) + 16px) !important;   /* keep CTA clear */
-  overflow: hidden;
-}
-
-.rk-hero__inner{
-  gap: clamp(10px, 1.8vh, 16px) !important;
-  transform: translateY(calc(-1 * var(--rk-hero-lift)));                 /* move stack upward */
-}
-
-/* 1) Photo slightly bigger */
-.rk-avatar{
-  width:  clamp(150px, 18vw, 220px) !important;
-  height: clamp(150px, 18vw, 220px) !important;
-}
-
-/* 2) Intro copy larger again */
-.rk-introline,
-.rk-introline strong{
-  font-size: clamp(1.10rem, 2.6vw, 1.65rem) !important;
-  line-height: 1.35 !important;
-}
-
-/* 3) Keep CTA comfortably inside the viewport */
-.rk-cta .btn{ margin-top: clamp(8px, 1.6vh, 12px) !important; }
-.rk-cta{ margin-bottom: clamp(12px, 2.6vh, 18px) !important; }
-
-/* — Tighten for shorter screens so CTA still fits — */
-@media (max-height: 820px){
-  :root{ --rk-hero-lift: clamp(8px, 3vh, 36px); }
-  .rk-avatar{
-    width:  clamp(132px, 16vw, 190px) !important;
-    height: clamp(132px, 16vw, 190px) !important;
-  }
-  .rk-introline, .rk-introline strong{
-    font-size: clamp(1.02rem, 2.1vw, 1.40rem) !important;
-  }
-}
-
-@media (max-height: 700px){
-  :root{ --rk-hero-lift: clamp(6px, 2vh, 24px); }
-  .rk-avatar{
-    width:  clamp(118px, 14vw, 168px) !important;
-    height: clamp(118px, 14vw, 168px) !important;
-  }
-  .rk-introline, .rk-introline strong{
-    font-size: clamp(.98rem, 1.9vw, 1.25rem) !important;
-  }
-}
-
-/* === Home: blend header into hero when at top; solid after scroll === */
-
-/* color tokens for solid header */
+/* Home header blending: transparent at top, solid after scroll (if your JS adds .rk-scrolled on <html>) */
 html:not([data-theme="light"]){
   --rk-header-solid: #0f1a26;
   --rk-header-border: rgba(255,255,255,.06);
@@ -681,7 +450,6 @@ html[data-theme="light"]{
   --rk-header-border: rgba(0,0,0,.08);
 }
 
-/* HOME, at top: header fully transparent, no divider */
 .layout--home header.masthead,
 .layout--home .masthead,
 .layout--home .site-header{
@@ -689,46 +457,9 @@ html[data-theme="light"]{
   border-bottom: 0 !important;
   box-shadow: none !important;
 }
-
-/* When scrolled: bring back the solid header (dark/light) */
 html.rk-scrolled header.masthead,
 html.rk-scrolled .masthead,
 html.rk-scrolled .site-header{
   background: var(--rk-header-solid) !important;
   border-bottom: 1px solid var(--rk-header-border) !important;
-}
-
-/* === HERO type tweaks: slightly smaller name, bigger intro === */
-
-/* Name (Rahul Kalliadan): trim ~10–15% on large screens, responsive on smaller */
-.rk-title{
-  /* min 2.0rem, scales with viewport, caps around 2.85rem */
-  font-size: clamp(2.0rem, 2.3rem + 1.1vw, 2.85rem);
-  line-height: 1.1;
-  margin-bottom: .25rem;
-}
-
-/* Intro paragraph (“Hello, I’m Rahul — …”): make it larger, still readable */
-.rk-introline{
-  /* min 1.25rem, scales with viewport, caps around 1.85rem */
-  font-size: clamp(1.25rem, 1.05rem + 1.1vw, 1.85rem);
-  line-height: 1.38;
-}
-
-/* (Tiny spacing touch so the CTA remains in view comfortably) */
-.rk-socials{ margin-top: 8px; }
-.rk-cta .btn{ margin-top: 10px; }
-
-/* === HERO type tweaks: title a bit smaller, intro bigger === */
-.rk-title{
-  /* slightly reduced cap */
-  font-size: clamp(1.9rem, 1.9rem + 1vw, 2.6rem);
-  line-height: 1.1;
-}
-
-.rk-introline,
-.rk-introline strong{
-  /* slightly larger than before */
-  font-size: clamp(1.35rem, 1.15rem + 1.2vw, 2.0rem);
-  line-height: 1.38;
 }
