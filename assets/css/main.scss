@@ -461,5 +461,5 @@ html { scroll-behavior: smooth; }
 
 /* on very wide screens give a touch more lift */
 @media (min-width: 1440px){
-  :root{ --rk-hero-lift: 80px; }
+  :root{ --rk-hero-lift: 60px; }
 }
