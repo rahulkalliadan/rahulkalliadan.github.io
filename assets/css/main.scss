@@ -398,3 +398,35 @@ html[data-theme="light"] #rkThemeFab{
    ========================================================= */
 #about .rk-narrow + .rk-narrow { margin-top: 10px; }
 html { scroll-behavior: smooth; }
+
+/* ===== Compact vertical spacing (~25% tighter) ===== */
+:root{
+  --rk-sec-pad-m: 14px;   /* mobile/top+bottom per section (was ~21px) */
+  --rk-sec-pad-d: 27px;   /* desktop/top+bottom per section (was ~36px) */
+}
+
+/* All sections: reduce top & bottom padding */
+.rk-section{
+  padding-top: var(--rk-sec-pad-m) !important;
+  padding-bottom: var(--rk-sec-pad-m) !important;
+}
+@media (min-width: 900px){
+  .rk-section{
+    padding-top: var(--rk-sec-pad-d) !important;
+    padding-bottom: var(--rk-sec-pad-d) !important;
+  }
+}
+
+/* Keep hero compact but still balanced */
+.rk-hero{
+  /* you already tuned top padding elsewhere; just keep the bottom neat */
+  padding-bottom: 8px !important;
+}
+
+/* Headings a touch tighter */
+.rk-h2{ margin: 4px 0 10px !important; }
+
+/* Pills and cards: tiny trims so blocks sit closer */
+.rk-pills{ margin-top: 6px !important; }       /* was 8px */
+.rk-card{ margin: 8px 0 !important; }          /* keep compact */
+
