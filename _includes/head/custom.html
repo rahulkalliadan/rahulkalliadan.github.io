@@ -1,23 +1,20 @@
 {%- comment -%}
-  Custom <head> additions
-  - Loads Poppins
-  - Loads BOTH dark & light CSS and toggles them via JS
-  - Persists user preference in localStorage ("rk-theme")
+  HEAD custom:
+  - Load Poppins
+  - Load BOTH dark & light CSS and toggle by enabling/disabling
+  - Persist theme in localStorage
 {%- endcomment -%}
 
-<!-- Poppins (UI font) -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- Site stylesheets: dark + light (we toggle by disabling one) -->
 <link id="rk-theme-dark"  rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link id="rk-theme-light" rel="stylesheet" href="{{ '/assets/css/main-light.css' | relative_url }}">
 
 <script>
-/* Initialise theme early to avoid flash */
 (function () {
   var KEY   = 'rk-theme';
-  var pref  = localStorage.getItem(KEY) || 'dark';   // default = dark
+  var pref  = localStorage.getItem(KEY) || 'dark';   // default: dark
   var dark  = document.getElementById('rk-theme-dark');
   var light = document.getElementById('rk-theme-light');
 
@@ -29,10 +26,6 @@
   }
 
   apply(pref);
-  /* Expose a setter for the footer button */
-  window.__rkSetTheme = function (t) {
-    localStorage.setItem(KEY, t);
-    apply(t);
-  };
+  window.__rkSetTheme = function (t) { localStorage.setItem(KEY, t); apply(t); };
 })();
 </script>
