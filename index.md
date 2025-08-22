@@ -60,6 +60,7 @@ author_profile: false
       <button class="rk-pill" type="button">GD&amp;T (ASME Y14.5)</button>
       <button class="rk-pill" type="button">Tolerance Stacks</button>
       <button class="rk-pill" type="button">Value Engineering (VAVE)</button>
+      <button class="rk-pill" type="button">Product Management</button>
 
       <!-- Manufacturing -->
       <button class="rk-pill" type="button">CNC</button>
