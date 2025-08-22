@@ -800,3 +800,103 @@ html { scroll-behavior: smooth; }
 /* Hide GitHub icon in hero socials (if it’s the middle button) */
 .rk-socials a:nth-child(2) { display: none !important; }
 
+/* === Light mode readability + soft palette (place at end of main.scss) === */
+
+html[data-theme="light"]{
+  /* Softer background (not pure white) */
+  --rk-bg:   #f5f8ff;   /* misty blue/eggshell */
+  --rk-bg-2: #eaf1ff;
+
+  /* Pastel aurora for the hero blend */
+  --rk-aur1: 214,206,238;   /* soft plum */
+  --rk-aur2: 178,185,238;   /* soft indigo */
+  --rk-aur3: 168,198,250;   /* soft blue */
+  --rk-aur4: 241,245,255;   /* light vignette helper */
+  --rk-hero-alpha: .92;
+
+  /* Muted text tone for secondary copy */
+  --rk-dim: #475569;
+}
+
+/* --- Force legible text in light mode (the dark skin sets it too light) --- */
+html[data-theme="light"] body,
+html[data-theme="light"] .page,
+html[data-theme="light"] .page__content,
+html[data-theme="light"] .archive,
+html[data-theme="light"] .initial-content{
+  color:#0b132b !important;   /* deep slate */
+}
+
+html[data-theme="light"] h1,
+html[data-theme="light"] h2,
+html[data-theme="light"] h3,
+html[data-theme="light"] h4,
+html[data-theme="light"] h5,
+html[data-theme="light"] h6{
+  color:#0b132b !important;
+}
+
+/* Hero text specifically (intro line, etc.) */
+html[data-theme="light"] .rk-hero h1,
+html[data-theme="light"] .rk-hero h2,
+html[data-theme="light"] .rk-hero p,
+html[data-theme="light"] .rk-hero .rk-introline{
+  color:#0b132b !important;
+}
+
+/* Softer, readable surfaces */
+html[data-theme="light"] .rk-card,
+html[data-theme="light"] .rk-expcard{
+  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.86));
+  border-color:#d7e0ef;
+  box-shadow: 0 10px 22px rgba(15,23,42,.06);
+  color:#0b132b;
+}
+html[data-theme="light"] .rk-card:hover,
+html[data-theme="light"] #education .rk-card:hover,
+html[data-theme="light"] #education .rk-card:focus-within,
+html[data-theme="light"] #publications .rk-card:hover,
+html[data-theme="light"] #publications .rk-card:focus-within,
+html[data-theme="light"] .rk-expcard:hover{
+  border-color: rgba(100,255,218,.55); /* accent on hover */
+  box-shadow: 0 14px 28px rgba(15,23,42,.08), 0 0 18px rgba(100,255,218,.12);
+}
+
+/* Pills */
+html[data-theme="light"] .rk-pill{
+  background: rgba(0,0,0,.03);
+  border-color:#d6dee9;
+  color:#0b132b;
+}
+
+/* Timeline guide */
+html[data-theme="light"] .rk-timeline::before{
+  background: rgba(13,148,136,.28); /* teal-ish, subtle */
+}
+
+/* Logos and socials */
+html[data-theme="light"] .rk-logo{
+  background: rgba(0,0,0,.025);
+  border-color:#86efac; /* soft green ring still visible on light bg */
+}
+html[data-theme="light"] .rk-socials a{
+  border-color:#cfd8e3;
+  color:#0b132b;
+}
+html[data-theme="light"] .rk-socials a:hover{
+  border-color: var(--rk-accent);
+  box-shadow: 0 0 18px rgba(100,255,218,.22);
+  color: var(--rk-accent);
+}
+
+/* Header: keep a subtle divider in light mode after scroll */
+html[data-theme="light"] header.masthead,
+html[data-theme="light"] .masthead,
+html[data-theme="light"] header.site-header,
+html[data-theme="light"] .site-header{
+  background:#ffffff !important;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+/* Hero blend stays pastel (uses the updated --rk-aur* and --rk-bg vars) */
+/* nothing else needed here — the existing .rk-aurora uses those tokens */
