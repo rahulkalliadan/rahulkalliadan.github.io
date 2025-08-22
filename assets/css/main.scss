@@ -941,4 +941,68 @@ html[data-theme="light"] .rk-pill:focus-visible{
   border-color: var(--rk-accent) !important;
   color: var(--rk-fg) !important;
 }
+/* =========================
+   FOOTER — clear, readable
+   ========================= */
+
+/* Tokens */
+:root{
+  --rk-footer-bg-dark: #0f1a26;     /* dark theme footer */
+  --rk-footer-fg-dark: #e6f1ff;
+  --rk-footer-dim-dark: #a8b2d1;
+}
+
+html[data-theme="light"]{
+  --rk-footer-bg-light: #171a22;    /* soft charcoal (not pure black) */
+  --rk-footer-fg-light: #eef2f7;    /* almost white, easier on eyes */
+  --rk-footer-dim-light: #c5cfdb;
+}
+
+/* Base footer block (Minimal Mistakes: .page__footer) */
+.page__footer{
+  background: var(--rk-footer-bg-dark) !important;
+  color: var(--rk-footer-fg-dark) !important;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.page__footer p,
+.page__footer small,
+.page__footer .copyright,
+.page__footer span{
+  color: inherit !important;
+  opacity: .95;
+}
+
+/* Links/icons inside the footer: use your accent, high contrast */
+.page__footer a{
+  color: var(--rk-accent) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.page__footer a:hover{
+  color: #ffffff !important;
+  text-shadow: 0 0 10px rgba(255,255,255,.18);
+}
+
+.page__footer .svg-inline--fa,
+.page__footer .fa,
+.page__footer .feed__icon{
+  color: var(--rk-accent) !important;
+  opacity: .9;
+}
+
+/* Light mode overrides */
+html[data-theme="light"] .page__footer{
+  background: var(--rk-footer-bg-light) !important;
+  color: var(--rk-footer-fg-light) !important;
+  border-top: 1px solid rgba(0,0,0,.08);
+}
+html[data-theme="light"] .page__footer p,
+html[data-theme="light"] .page__footer small,
+html[data-theme="light"] .page__footer .copyright{
+  color: var(--rk-footer-fg-light) !important;
+}
+html[data-theme="light"] .page__footer a{
+  color: var(--rk-accent) !important; /* your light-mode accent */
+}
 
