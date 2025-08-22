@@ -463,3 +463,52 @@ html { scroll-behavior: smooth; }
 @media (min-width: 1440px){
   :root{ --rk-hero-lift: 60px; }
 }
+
+/* === HERO: fill viewport, keep CTA visible, never show next section === */
+
+/* cancel any earlier manual lift */
+:root{ --rk-hero-lift: 0px; }
+
+.rk-hero__inner{ transform: none !important; }
+
+/* responsive paddings so the stack breathes but fits on small screens */
+:root{
+  --rk-hero-pad-top: clamp(16px, 5vh, 48px);
+  --rk-hero-pad-bot: clamp(18px, 6vh, 56px);
+}
+
+/* make hero occupy the full viewport (minus header) */
+.rk-hero{
+  position: relative;
+  display: flex;                 /* center vertically */
+  align-items: center;
+  padding-top: var(--rk-hero-pad-top) !important;
+  padding-bottom: var(--rk-hero-pad-bot) !important;
+  min-height: calc(100vh - var(--rk-header-h)) !important;  /* fallback */
+  background: var(--rk-bg) !important;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* modern viewport units (prevents mobile URL bar jump) */
+@supports (height: 100dvh) {
+  .rk-hero{
+    min-height: calc(100dvh - var(--rk-header-h)) !important;
+  }
+}
+
+/* gentle, size-aware spacing in the stack */
+.rk-hero__inner{ gap: clamp(6px, 1.5vh, 14px) !important; }
+.rk-socials{ margin-top: clamp(6px, 1.5vh, 10px) !important; }
+.rk-cta .btn{ margin-top: clamp(6px, 1.6vh, 12px) !important; }
+
+/* scale avatar and intro a touch so the whole stack fits on short screens */
+.rk-avatar{
+  width: clamp(128px, 17vw, 186px) !important;
+  height: clamp(128px, 17vw, 186px) !important;
+}
+.rk-introline{
+  font-size: clamp(1.02rem, 2.1vw, 1.4rem) !important;
+}
+
+/* keep the blend layer – no change needed if you already added it */
