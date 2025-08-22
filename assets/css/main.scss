@@ -666,3 +666,42 @@ html { scroll-behavior: smooth; }
     font-size: clamp(.98rem, 1.9vw, 1.25rem) !important;
   }
 }
+
+/* === Avatar hover: subtle lift + neon border glow ======================= */
+.rk-avatar{
+  /* keep your existing border; these lines just ensure smooth animation */
+  will-change: transform, box-shadow, filter;
+  transition: transform .25s ease, box-shadow .35s ease, filter .25s ease;
+}
+
+.rk-avatar:hover{
+  transform: translateY(-2px) scale(1.03);
+  filter: saturate(1.08) contrast(1.05);
+
+  /* brighter ring + outer halo using your accent color */
+  box-shadow:
+    0 0 0 4px rgba(100,255,218,.35),   /* crisp ring just outside border */
+    0 0 30px 10px rgba(100,255,218,.32), /* neon halo */
+    0 0 80px 22px rgba(100,255,218,.18); /* far soft glow */
+}
+
+/* gentle pulsing of the halo only while hovered (respects reduced motion) */
+@media (prefers-reduced-motion: no-preference){
+  .rk-avatar:hover{
+    animation: rkHalo 1.8s ease-in-out infinite alternate;
+  }
+  @keyframes rkHalo{
+    from{
+      box-shadow:
+        0 0 0 4px rgba(100,255,218,.30),
+        0 0 24px 8px  rgba(100,255,218,.28),
+        0 0 64px 16px rgba(100,255,218,.16);
+    }
+    to{
+      box-shadow:
+        0 0 0 6px rgba(100,255,218,.42),
+        0 0 40px 12px rgba(100,255,218,.36),
+        0 0 90px 22px rgba(100,255,218,.22);
+    }
+  }
+}
