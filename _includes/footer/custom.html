@@ -1,21 +1,21 @@
 {%- comment -%}
-  _includes/footer/custom.html
+  FOOTER custom:
   - Floating theme toggle (bottom-right)
-  - Remove old footer-embedded toggles
-  - Header spacer to prevent overlap with fixed header
+  - Insert a real spacer under the fixed header to avoid overlap
   - Optional avatar tilt effect
 {%- endcomment -%}
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  /* 1) Hide any old theme toggles that might be inside the footer */
+
+  /* --------- Floating theme toggle (bottom-right) --------- */
+  // Hide any legacy toggles inside the footer
   document.querySelectorAll(
     '.page__footer .rk-theme-fab, .page__footer #rkThemeFab, ' +
     '.page__footer [data-theme-toggle], .page__footer button[aria-label*="theme" i], ' +
     '.page__footer button[title*="theme" i]'
   ).forEach(function (n) { n.style.display = 'none'; });
 
-  /* 2) Create a floating theme FAB once (bottom-right, always visible) */
   if (!document.getElementById('rkThemeFab')) {
     var btn = document.createElement('button');
     btn.id = 'rkThemeFab';
@@ -23,14 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.setAttribute('aria-label', 'Toggle theme');
     btn.setAttribute('title', 'Toggle theme');
 
-    /* Minimal inline styling so it never falls back to a white box.
-       (You also have CSS for #rkThemeFab in main.scss / main-light.scss) */
+    // Inline styles so it never shows a white native box
     Object.assign(btn.style, {
       all: 'unset',
       position: 'fixed',
       right: '20px',
       bottom: '20px',
-      zIndex: '9999',
+      zIndex: '99999',
       width: '52px',
       height: '52px',
       display: 'grid',
@@ -63,8 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var next = (document.documentElement.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
       if (window.__rkSetTheme) window.__rkSetTheme(next);
       btn.textContent = (next === 'light') ? '☀️' : '🌙';
-
-      /* adjust inline colors for light/dark quickly (CSS also handles this) */
       if (next === 'light') {
         btn.style.background = 'rgba(255,255,255,.92)';
         btn.style.borderColor = 'rgba(0,0,0,.12)';
@@ -79,10 +76,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.appendChild(btn);
   }
 
-  /* 3) Insert a spacer just below the fixed header to prevent content overlap */
+  /* --------- Header spacer (prevents overlap) --------- */
   (function () {
     function headerEl() {
-      return document.querySelector('.masthead') || document.querySelector('.site-header');
+      return document.querySelector('header.masthead') ||
+             document.querySelector('.masthead') ||
+             document.querySelector('header.site-header') ||
+             document.querySelector('.site-header');
     }
     function ensureSpacer() {
       var h = headerEl();
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         s = document.createElement('div');
         s.id = 'rk-header-spacer';
         s.style.width = '100%';
-        h.insertAdjacentElement('afterend', s);
+        h.insertAdjacentElement('afterend', s); // sits right under header
       }
       return s;
     }
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('load', sizeSpacer);
   })();
 
-  /* 4) Optional: subtle avatar tilt (no-op if .rk-avatar not present) */
+  /* --------- Optional: avatar tilt (safe no-op if missing) --------- */
   (function () {
     var av = document.querySelector('.rk-avatar');
     if (!av) return;
@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', function () {
     av.style.transformOrigin = 'center center';
     av.addEventListener('mousemove', function (e) {
       var r = av.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width;   // 0..1
-      var y = (e.clientY - r.top) / r.height;   // 0..1
+      var x = (e.clientX - r.left) / r.width;
+      var y = (e.clientY - r.top) / r.height;
       var rx = (0.5 - y) * strength;
       var ry = -(0.5 - x) * strength;
       av.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) scale(1.04)';
@@ -126,8 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
     av.addEventListener('mouseleave', function () {
       av.style.transform = 'rotateX(0) rotateY(0) scale(1)';
     });
-    av.addEventListener('focus', function () { av.style.transform = 'scale(1.03)'; });
-    av.addEventListener('blur',  function () { av.style.transform = 'scale(1)'; });
   })();
+
 });
 </script>
