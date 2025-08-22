@@ -1007,156 +1007,76 @@ html[data-theme="light"] .page__footer a{
 }
 
 /* =========================================================
-   MOBILE TUNE-UPS (<= 680px)
-   ========================================================= */
-@media (max-width: 680px){
-
-  /* 0) Global rhythm: trim vertical padding and gaps */
-  :root{
-    --rk-sec-pad-m: 10px;   /* was 14px */
-  }
-  .rk-section{ padding-top: var(--rk-sec-pad-m) !important;
-               padding-bottom: var(--rk-sec-pad-m) !important; }
-  .rk-card{ margin: 6px 0 !important; }   /* tighter cards everywhere */
-
-  /* 1) Experience: use the left column (logo) and give content more width */
-  .rk-item{
-    /* Turn each timeline row into a compact grid:
-       [ logo | content ] */
-    display: grid !important;
-    grid-template-columns: 56px 1fr;
-    column-gap: 10px;
-    align-items: start;
-    margin: 12px 0 18px !important;
-  }
-
-  .rk-timeline{ padding-left: 0 !important; }
-  .rk-timeline::before{
-    left: 28px !important;                 /* align timeline line with smaller logo */
-  }
-
-  .rk-logo{
-    width: 52px !important;
-    height: 52px !important;
-    box-shadow: 0 0 0 2px rgba(100,255,218,.14),
-                0 0 18px 5px rgba(100,255,218,.12);
-    margin: 0 !important;
-  }
-
-  .rk-expcard{
-    /* sits to the right of logo now, less padding = more content per screen */
-    padding: 12px 14px !important;
-    margin: 0 !important;
-  }
-
-  /* Title/meta inside experience cards: smaller but clear */
-  .rk-expcard h3,
-  .rk-exphead h3{ font-size: 1.02rem !important; }
-  .rk-exp__meta{ font-size: .86rem !important; }
-
-  /* Bullet lists inside exp cards: compact indents & spacing */
-  .rk-expcard ul{ margin: 6px 0 0 16px !important; }
-  .rk-expcard li{ margin: 6px 0 !important; line-height: 1.45 !important; }
-
-  /* 2) Core Skills: make a responsive multi-column grid instead of a long list */
-  .rk-pills{
-    display: grid !important;
-    /* auto-fit as many as will fit; each pill gets at least 140px */
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 10px 10px !important;
-    justify-items: stretch;
-  }
-
-  .rk-pill{
-    width: 100% !important;
-    text-align: center !important;
-    white-space: normal !important;   /* allow wrapping */
-    padding: 10px 8px !important;
-    font-size: .95rem !important;
-  }
-
-  /* Optional: on larger small phones allow slightly narrower pills for more columns */
-  @media (min-width: 420px){
-    .rk-pills{
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    }
-  }
-
-  /* 3) Hero: keep compact so CTA is above the fold on small screens */
-  .rk-hero{
-    padding-top: clamp(8px, 3vh, 20px) !important;
-    padding-bottom: clamp(10px, 4vh, 24px) !important;
-    min-height: calc(100dvh - var(--rk-header-h)) !important;
-  }
-  .rk-avatar{
-    width: clamp(120px, 28vw, 156px) !important;
-    height: clamp(120px, 28vw, 156px) !important;
-  }
-  .rk-title{ font-size: clamp(1.8rem, 5.2vw, 2.2rem) !important; }
-  .rk-introline{ font-size: clamp(1.02rem, 3.4vw, 1.22rem) !important; }
-  .rk-cta .btn{ margin-top: 8px !important; }
-}
-
-/* =========================================================
-   MOBILE LAYOUT FIXES — force compact view on phones
+   MOBILE: use the full width (small gutters only)
    ========================================================= */
 @media screen and (max-width: 900px){
+  /* a small, responsive gutter that respects safe areas */
+  :root{ --rk-gutter: clamp(10px, 4.5vw, 16px); }
 
-  /* Global trim so pages aren’t long */
-  .rk-section{ padding-top: 10px !important; padding-bottom: 14px !important; }
-  .rk-card{ margin: 6px 0 !important; }
-
-  /* HERO stays compact so CTA is visible */
-  .rk-hero{
-    padding-top: 12px !important;
-    padding-bottom: 16px !important;
-    min-height: auto !important;          /* don’t stretch on short screens */
+  /* Remove theme max-widths + big paddings on wrappers */
+  .rk-container,
+  .initial-content,
+  .page,
+  .page__content,
+  .page__inner-wrap,
+  .archive,
+  .layout--home .page,
+  .layout--home .page__inner-wrap,
+  .layout--single .page,
+  .layout--single .page__inner-wrap{
+    width: 100vw !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: calc(var(--rk-gutter) + env(safe-area-inset-left)) !important;
+    padding-right: calc(var(--rk-gutter) + env(safe-area-inset-right)) !important;
   }
-  .rk-cta .btn{ margin-top: 8px !important; }
 
-  /* ========= Experience timeline ========= */
-  /* Use a two-column grid: [ logo | content ] */
-  .rk-timeline{ padding-left: 0 !important; }
-  .rk-timeline::before{ left: 27px !important; } /* align the vertical line */
+  /* Hero + center blocks follow the same narrow gutter */
+  .rk-hero__inner,
+  .rk-center-text,
+  .rk-wide,
+  .rk-narrow{
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: calc(var(--rk-gutter) + env(safe-area-inset-left)) !important;
+    padding-right: calc(var(--rk-gutter) + env(safe-area-inset-right)) !important;
+  }
 
+  /* Cards take the full width with small side padding */
+  .rk-card,
+  .rk-expcard{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: var(--rk-gutter) !important;
+    padding-right: var(--rk-gutter) !important;
+    border-radius: 16px !important;
+  }
+
+  /* ===== Experience timeline: logo left, content fills right ===== */
+  .rk-timeline{ max-width: none !important; padding-left: 0 !important; }
   .rk-item{
     display: grid !important;
-    grid-template-columns: 54px 1fr !important;   /* logo | content */
-    column-gap: 10px !important;
+    grid-template-columns: 56px 1fr !important;  /* [logo | content] */
+    column-gap: 12px !important;
     align-items: start !important;
-    margin: 12px 0 18px !important;
   }
-
-  .rk-item .rk-logo{
-    grid-column: 1 !important;
-    width: 50px !important; height: 50px !important;
-    margin: 0 !important;
-  }
-
-  /* Put every non-logo element in the content column */
+  .rk-item .rk-logo{ width: 52px !important; height: 52px !important; }
   .rk-item > *:not(.rk-logo){ grid-column: 2 !important; }
 
-  .rk-expcard{
-    margin: 0 !important;
-    padding: 12px 14px !important;        /* tighter content block */
-  }
-  .rk-expcard h3, .rk-exphead h3{ font-size: 1rem !important; }
-  .rk-exp__meta{ font-size: .86rem !important; }
-  .rk-expcard ul{ margin: 6px 0 0 14px !important; }
-  .rk-expcard li{ margin: 5px 0 !important; line-height: 1.42 !important; }
-
-  /* ========= Core Skills grid (no long list) ========= */
-  /* Turn pills into a responsive multi-column grid */
-  #skills .rk-pills, .rk-pills{
+  /* ===== Core Skills: multi-column pills, full-width ===== */
+  .rk-pills{
     display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
-    gap: 10px !important;
-    justify-items: stretch !important;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 10px 12px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
   .rk-pill{
     width: 100% !important;
     text-align: center !important;
-    white-space: normal !important;       /* allow wrapping */
+    white-space: normal !important;
     padding: 10px 8px !important;
     font-size: .95rem !important;
   }
