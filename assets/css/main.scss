@@ -603,3 +603,67 @@ html { scroll-behavior: smooth; }
 /* Ensure older “lift” rules don’t push content down */
 :root{ --rk-hero-lift: 0px; }
 .rk-hero__inner{ transform: none !important; }
+
+/* === HERO tune (bigger photo, closer to top, larger intro; CTA still visible) === */
+
+/* Lift the hero stack up a bit (bigger lift on tall screens, smaller on short) */
+:root{
+  --rk-hero-lift: clamp(10px, 4vh, 52px);
+}
+
+/* Full-viewport hero with reduced top padding and safe bottom padding */
+.rk-hero{
+  min-height: 100dvh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding-top:  clamp(6px, 2.2vh, 20px) !important;                      /* less gap to header */
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px) !important;   /* keep CTA clear */
+  overflow: hidden;
+}
+
+.rk-hero__inner{
+  gap: clamp(10px, 1.8vh, 16px) !important;
+  transform: translateY(calc(-1 * var(--rk-hero-lift)));                 /* move stack upward */
+}
+
+/* 1) Photo slightly bigger */
+.rk-avatar{
+  width:  clamp(150px, 18vw, 220px) !important;
+  height: clamp(150px, 18vw, 220px) !important;
+}
+
+/* 2) Intro copy larger again */
+.rk-introline,
+.rk-introline strong{
+  font-size: clamp(1.10rem, 2.6vw, 1.65rem) !important;
+  line-height: 1.35 !important;
+}
+
+/* 3) Keep CTA comfortably inside the viewport */
+.rk-cta .btn{ margin-top: clamp(8px, 1.6vh, 12px) !important; }
+.rk-cta{ margin-bottom: clamp(12px, 2.6vh, 18px) !important; }
+
+/* — Tighten for shorter screens so CTA still fits — */
+@media (max-height: 820px){
+  :root{ --rk-hero-lift: clamp(8px, 3vh, 36px); }
+  .rk-avatar{
+    width:  clamp(132px, 16vw, 190px) !important;
+    height: clamp(132px, 16vw, 190px) !important;
+  }
+  .rk-introline, .rk-introline strong{
+    font-size: clamp(1.02rem, 2.1vw, 1.40rem) !important;
+  }
+}
+
+@media (max-height: 700px){
+  :root{ --rk-hero-lift: clamp(6px, 2vh, 24px); }
+  .rk-avatar{
+    width:  clamp(118px, 14vw, 168px) !important;
+    height: clamp(118px, 14vw, 168px) !important;
+  }
+  .rk-introline, .rk-introline strong{
+    font-size: clamp(.98rem, 1.9vw, 1.25rem) !important;
+  }
+}
+
