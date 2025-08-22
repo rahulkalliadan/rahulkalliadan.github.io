@@ -1121,3 +1121,91 @@ body::before, body::after { content: none !important; }
   position: relative;
   z-index: 1;
 }
+
+/* ---------- THEME VARIABLES ---------- */
+:root {
+  /* dark (fallback if no theme attribute) */
+  --rk-bg: #0f1725;             /* page background */
+  --rk-teal: 20 184 166;        /* rgb triplets for gradients */
+  --rk-cyan: 14 165 233;
+  --rk-indigo: 99 102 241;
+}
+
+body[data-theme="dark"] {
+  --rk-bg: #0f1725;
+  --rk-teal: 20 184 166;
+  --rk-cyan: 14 165 233;
+  --rk-indigo: 99 102 241;
+}
+
+body[data-theme="light"] {
+  --rk-bg: #f6f8fb;
+  --rk-teal: 13 148 136;
+  --rk-cyan: 2 132 199;
+  --rk-indigo: 79 70 229;
+}
+
+/* Base page background stays solid everywhere */
+body { background: var(--rk-bg); }
+
+/* ---------- HOME / HERO BLENDED BACKDROP ---------- */
+/* Only the #home section gets the blended “fog” gradients */
+#home.rk-section.rk-hero {
+  position: relative;
+  overflow: hidden;
+  /* three soft radial layers, very subtle on purpose */
+  background:
+    radial-gradient(1200px 560px at 50% -260px,
+      rgba(var(--rk-teal) / .12) 0%,
+      rgba(var(--rk-teal) / 0) 60%)
+    ,
+    radial-gradient(900px 440px at 85% 12%,
+      rgba(var(--rk-indigo) / .10) 0%,
+      rgba(var(--rk-indigo) / 0) 70%)
+    ,
+    radial-gradient(860px 460px at 12% 30%,
+      rgba(var(--rk-cyan) / .10) 0%,
+      rgba(var(--rk-cyan) / 0) 72%);
+}
+
+/* A faint top halo to “lift” the hero content */
+#home.rk-section.rk-hero::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(520px 240px at 50% 0%,
+      rgba(255 255 255 / .05),
+      transparent 60%);
+  pointer-events: none;
+}
+
+/* Make sure the hero content sits above the gradient layers */
+#home .rk-container { position: relative; z-index: 1; }
+
+/* Optional: gentle animated shimmer (very subtle) */
+@media (prefers-reduced-motion: no-preference) {
+  #home.rk-section.rk-hero {
+    background-size: 100% 100%, 100% 100%, 100% 100%;
+    animation: rk-hero-drift 28s ease-in-out infinite alternate;
+  }
+  @keyframes rk-hero-drift {
+    0%   { background-position: 50% -260px, 85% 12%, 12% 30%; }
+    100% { background-position: 50% -220px, 83% 10%, 14% 28%; }
+  }
+}
+
+/* ---------- OTHER SECTIONS ---------- */
+/* Keep them solid by not adding gradients; inherit body bg */
+.rk-section:not(#home) {
+  background: transparent; /* appears solid because body is solid */
+}
+
+/* ---------- SMALL POLISH ---------- */
+/* Slight glow around the avatar so it blends with the hero nicely */
+.rk-avatar {
+  box-shadow: 0 0 28px rgba(0 255 204 / .18);
+  border: 3px solid rgba(0 255 204 / .35);
+  border-radius: 50%;
+}
+
