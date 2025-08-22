@@ -666,3 +666,67 @@ body, .initial-content, .page { padding-top: 0 !important; }
 
 /* (optional) keep nav centered, already set earlier */
 .masthead, .site-header { width: 100%; }
+
+/* ===== Fixed header with highest stacking; content never overlaps ===== */
+:root { --rk-header-h: 72px; } /* fallback; JS updates this precisely */
+
+header.masthead, .masthead, header.site-header, .site-header{
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 99999 !important;      /* above everything else */
+}
+
+/* Keep the header readable (you can tune opacity) */
+html:not([data-theme="light"]) header.masthead,
+html:not([data-theme="light"]) .masthead,
+html:not([data-theme="light"]) header.site-header,
+html:not([data-theme="light"]) .site-header{
+  background: rgba(16,23,34,.72);
+  backdrop-filter: saturate(140%) blur(8px);
+}
+html[data-theme="light"] header.masthead,
+html[data-theme="light"] .masthead,
+html[data-theme="light"] header.site-header,
+html[data-theme="light"] .site-header{
+  background: rgba(255,255,255,.78);
+  backdrop-filter: saturate(140%) blur(8px);
+}
+
+/* Spacer injected by JS — ensures content starts after the header */
+#rk-header-spacer{ height: var(--rk-header-h,72px); }
+
+/* Remove any earlier attempts that pushed content down */
+body, .initial-content, .page{ padding-top: 0 !important; }
+
+/* Anchor jumps and manual scroll should never tuck under the header */
+.rk-section, section[id]{
+  position: relative;
+  scroll-margin-top: calc(var(--rk-header-h,72px) + 12px);
+}
+
+/* Ensure page content never stacks above the header */
+.page, .initial-content, .rk-hero{ position: relative; z-index: 0; }
+
+/* Floating theme toggle: if CSS missed, keep it round and clean */
+#rkThemeFab{
+  all: unset;
+  position: fixed !important;
+  right: calc(20px + env(safe-area-inset-right));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: 99999 !important;
+  width: 52px; height: 52px; border-radius: 9999px;
+  display: grid; place-items: center;
+  font-size: 26px; line-height: 1;
+  cursor: pointer; user-select: none;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+  backdrop-filter: blur(6px);
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+}
+#rkThemeFab:hover{ transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.32); }
+html[data-theme="light"] #rkThemeFab{
+  background: rgba(255,255,255,.92);
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 8px 20px rgba(0,0,0,.14);
+}
