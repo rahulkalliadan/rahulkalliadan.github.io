@@ -926,3 +926,19 @@ html[data-theme="light"] .btn a{
   color: var(--rk-fg) !important;
 }
 
+/* Light mode: make skill pills readable by default */
+html[data-theme="light"] .rk-pill{
+  color: var(--rk-fg) !important;                           /* dark text */
+  background: rgba(15, 23, 42, .06) !important;             /* soft slate tint */
+  border-color: rgba(15, 23, 42, .18) !important;           /* faint outline */
+  box-shadow: none !important;
+}
+
+/* Hover/focus: a gentle accent tint, not too bright */
+html[data-theme="light"] .rk-pill:hover,
+html[data-theme="light"] .rk-pill:focus-visible{
+  background: rgba(14, 165, 233, .12) !important;           /* or use your light accent */
+  border-color: var(--rk-accent) !important;
+  color: var(--rk-fg) !important;
+}
+
