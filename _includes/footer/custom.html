@@ -1,19 +1,21 @@
 {%- comment -%}
-  Custom <footer> additions
-  - Creates a floating theme toggle FAB at bottom-right (always visible)
-  - Hides any previous footer-embedded theme buttons
-  - Optional: avatar tilt effect (kept lightweight)
+  _includes/footer/custom.html
+  - Floating theme toggle (bottom-right)
+  - Remove old footer-embedded toggles
+  - Header spacer to prevent overlap with fixed header
+  - Optional avatar tilt effect
 {%- endcomment -%}
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  /* Hide/neutralise any old theme toggles that may be inside the footer */
+  /* 1) Hide any old theme toggles that might be inside the footer */
   document.querySelectorAll(
     '.page__footer .rk-theme-fab, .page__footer #rkThemeFab, ' +
-    '.page__footer [data-theme-toggle], .page__footer button[aria-label*="theme" i]'
+    '.page__footer [data-theme-toggle], .page__footer button[aria-label*="theme" i], ' +
+    '.page__footer button[title*="theme" i]'
   ).forEach(function (n) { n.style.display = 'none'; });
 
-  /* Create a floating, fixed FAB once */
+  /* 2) Create a floating theme FAB once (bottom-right, always visible) */
   if (!document.getElementById('rkThemeFab')) {
     var btn = document.createElement('button');
     btn.id = 'rkThemeFab';
@@ -21,26 +23,93 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.setAttribute('aria-label', 'Toggle theme');
     btn.setAttribute('title', 'Toggle theme');
 
-    /* Use emoji for simplicity; swap based on current theme */
+    /* Minimal inline styling so it never falls back to a white box.
+       (You also have CSS for #rkThemeFab in main.scss / main-light.scss) */
+    Object.assign(btn.style, {
+      all: 'unset',
+      position: 'fixed',
+      right: '20px',
+      bottom: '20px',
+      zIndex: '9999',
+      width: '52px',
+      height: '52px',
+      display: 'grid',
+      placeItems: 'center',
+      borderRadius: '9999px',
+      fontSize: '26px',
+      lineHeight: '1',
+      cursor: 'pointer',
+      userSelect: 'none',
+      background: 'rgba(255,255,255,.06)',
+      border: '1px solid rgba(255,255,255,.18)',
+      boxShadow: '0 10px 24px rgba(0,0,0,.28)',
+      backdropFilter: 'blur(6px)',
+      transition: 'transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease'
+    });
+
     var cur = document.documentElement.getAttribute('data-theme') || 'dark';
     btn.textContent = (cur === 'light') ? '☀️' : '🌙';
 
-    /* Minimal inline styles (CSS files also style this id) */
-    btn.style.position = 'fixed';
-    btn.style.right    = '20px';
-    btn.style.bottom   = '20px';
-    btn.style.zIndex   = '9999';
-
-    document.body.appendChild(btn);
+    btn.addEventListener('mouseenter', function () {
+      btn.style.transform = 'translateY(-2px)';
+      btn.style.boxShadow = '0 14px 28px rgba(0,0,0,.32)';
+    });
+    btn.addEventListener('mouseleave', function () {
+      btn.style.transform = 'translateY(0)';
+      btn.style.boxShadow = '0 10px 24px rgba(0,0,0,.28)';
+    });
 
     btn.addEventListener('click', function () {
       var next = (document.documentElement.getAttribute('data-theme') === 'light') ? 'dark' : 'light';
       if (window.__rkSetTheme) window.__rkSetTheme(next);
       btn.textContent = (next === 'light') ? '☀️' : '🌙';
+
+      /* adjust inline colors for light/dark quickly (CSS also handles this) */
+      if (next === 'light') {
+        btn.style.background = 'rgba(255,255,255,.92)';
+        btn.style.borderColor = 'rgba(0,0,0,.12)';
+        btn.style.boxShadow = '0 8px 20px rgba(0,0,0,.14)';
+      } else {
+        btn.style.background = 'rgba(255,255,255,.06)';
+        btn.style.borderColor = 'rgba(255,255,255,.18)';
+        btn.style.boxShadow = '0 10px 24px rgba(0,0,0,.28)';
+      }
     });
+
+    document.body.appendChild(btn);
   }
 
-  /* Optional: subtle avatar tilt on mouse move (no-op if .rk-avatar not present) */
+  /* 3) Insert a spacer just below the fixed header to prevent content overlap */
+  (function () {
+    function headerEl() {
+      return document.querySelector('.masthead') || document.querySelector('.site-header');
+    }
+    function ensureSpacer() {
+      var h = headerEl();
+      if (!h) return null;
+      var s = document.getElementById('rk-header-spacer');
+      if (!s) {
+        s = document.createElement('div');
+        s.id = 'rk-header-spacer';
+        s.style.width = '100%';
+        h.insertAdjacentElement('afterend', s);
+      }
+      return s;
+    }
+    function sizeSpacer() {
+      var h = headerEl();
+      var s = ensureSpacer();
+      if (!h || !s) return;
+      var hh = Math.ceil(h.getBoundingClientRect().height || 0);
+      document.documentElement.style.setProperty('--rk-header-h', hh + 'px');
+      s.style.height = 'calc(var(--rk-header-h) + 6px)'; // small cushion
+    }
+    sizeSpacer();
+    window.addEventListener('resize', sizeSpacer);
+    window.addEventListener('load', sizeSpacer);
+  })();
+
+  /* 4) Optional: subtle avatar tilt (no-op if .rk-avatar not present) */
   (function () {
     var av = document.querySelector('.rk-avatar');
     if (!av) return;
@@ -58,26 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
       av.style.transform = 'rotateX(0) rotateY(0) scale(1)';
     });
     av.addEventListener('focus', function () { av.style.transform = 'scale(1.03)'; });
-    av.addEventListener('blur', function ()  { av.style.transform = 'scale(1)'; });
+    av.addEventListener('blur',  function () { av.style.transform = 'scale(1)'; });
   })();
 });
-</script>
-
-    <script>
-/* Dynamically set --rk-header-h to the actual header height */
-(function () {
-  function headerEl() {
-    return document.querySelector('.masthead') || document.querySelector('.site-header');
-  }
-  function setHeaderOffset() {
-    var h = headerEl();
-    if (!h) return;
-    var hh = Math.ceil(h.getBoundingClientRect().height || 0);
-    document.documentElement.style.setProperty('--rk-header-h', hh + 'px');
-  }
-  setHeaderOffset();
-  window.addEventListener('resize', setHeaderOffset);
-  // In case fonts load later and change header height
-  window.addEventListener('load', setHeaderOffset);
-})();
 </script>
