@@ -717,3 +717,16 @@ html.rk-scrolled .site-header{
 .rk-socials{ margin-top: 8px; }
 .rk-cta .btn{ margin-top: 10px; }
 
+/* === HERO type tweaks: title a bit smaller, intro bigger === */
+.rk-title{
+  /* slightly reduced cap */
+  font-size: clamp(1.9rem, 1.9rem + 1vw, 2.6rem);
+  line-height: 1.1;
+}
+
+.rk-introline,
+.rk-introline strong{
+  /* slightly larger than before */
+  font-size: clamp(1.35rem, 1.15rem + 1.2vw, 2.0rem);
+  line-height: 1.38;
+}
