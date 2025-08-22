@@ -1237,3 +1237,42 @@ html[data-theme="light"]{
   position: relative;
   z-index: 1 !important;
 }
+
+/* --- Disable any older pseudo layers to avoid conflicts --- */
+.rk-hero::before,
+.rk-hero::after {
+  content: none !important;
+}
+
+/* --- Home section: blended background ONLY in the hero --- */
+.rk-hero{
+  position: relative !important;
+  background: var(--rk-bg) !important;  /* solid everywhere else */
+  isolation: isolate;                   /* safe stacking */
+  overflow: hidden;
+}
+
+/* The actual aurora layer (real element) */
+.rk-hero .rk-aurora{
+  position: absolute;
+  inset: -80px -12vw -50px -12vw;   /* bleed a bit around edges */
+  z-index: 0;
+  pointer-events: none;
+
+  /* Aurora-style blend (dark/light adapt via your CSS vars) */
+  background:
+    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-a1), .28) 0%, transparent 58%),
+    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-a2), .22) 0%, transparent 60%),
+    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-a3), .26) 0%, transparent 60%),
+    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-a4), .16) 0 25%, transparent 25% 100%),
+    linear-gradient(180deg, var(--rk-bg-2) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
+  filter: saturate(112%);
+  opacity: .95;
+}
+
+/* Keep the hero content above the blend */
+.rk-hero .rk-hero__inner,
+.rk-hero > *:not(.rk-aurora){
+  position: relative;
+  z-index: 1;
+}
