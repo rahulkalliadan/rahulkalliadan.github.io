@@ -6,34 +6,50 @@
 @import "minimal-mistakes";
 
 /* =========================================================
-   Base + Resets
+   VARIABLES
    ========================================================= */
 :root{
+  /* Brand */
   --rk-accent: #64ffda;
   --rk-accent-soft: rgba(100,255,218,.22);
   --rk-dim: #a8b2d1;
-  --rk-header-h: 64px;
-}
-/* DUSK palette for hero blend */
-:root{
-  --rk-dusk-plum:   161,126,186;  /* warm plum / mauve glow */
-  --rk-dusk-indigo:  92, 74,160;  /* indigo */
-  --rk-dusk-blue:    46, 78,152;  /* steel blue */
-  --rk-dusk-navy1:   21, 29, 42;  /* base navy */
-  --rk-dusk-navy2:   11, 18, 28;  /* deeper navy */
-}
-/* softer/lighter variant for light theme */
-html[data-theme="light"]{
-  --rk-dusk-plum:   208,186,228;
-  --rk-dusk-indigo: 157,146,215;
-  --rk-dusk-blue:   170,196,242;
-  --rk-dusk-navy1:  241,245,252;
-  --rk-dusk-navy2:  231,238,249;
+
+  /* Layout */
+  --rk-header-h: 72px;
+
+  /* Page base (dark) */
+  --rk-bg:   #0a1220;   /* page base */
+  --rk-bg-2: #0e1730;   /* slightly deeper top */
+
+  /* Aurora (RGB tuples so we can set alpha per-stop) */
+  --rk-aur1: 161,126,186;  /* plum/mauve */
+  --rk-aur2:  92, 74,160;  /* indigo */
+  --rk-aur3:  46, 78,152;  /* blue */
+  --rk-aur4:  11, 18, 28;  /* deep navy vignette helper */
+
+  --rk-hero-alpha: .95;    /* overall blend strength in hero */
 }
 
+/* Light theme palette */
+html[data-theme="light"]{
+  --rk-bg:   #f7faff;
+  --rk-bg-2: #eef4ff;
+
+  --rk-aur1: 208,186,228;  /* soft plum */
+  --rk-aur2: 157,146,215;  /* soft indigo */
+  --rk-aur3: 170,196,242;  /* soft blue */
+  --rk-aur4: 231,238,249;  /* light vignette helper */
+
+  --rk-hero-alpha: .88;
+}
+
+/* =========================================================
+   BASE / RESET
+   ========================================================= */
 *,
 *::before,
 *::after { box-sizing: border-box; }
+
 html, body { width: 100%; overflow-x: hidden; }
 
 /* Poppins everywhere */
@@ -42,31 +58,95 @@ body, .page, .archive, .initial-content {
                Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif !important;
 }
 
-/* Header polish */
-.site-header{
-  backdrop-filter: saturate(1.2) blur(6px);
-  background: linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.45)) !important;
-  border-bottom: 1px solid rgba(100,255,218,.12);
+/* Solid page background (no global blends) */
+html, body { background: var(--rk-bg) !important; }
+.page, .initial-content, .page__content, .page__inner-wrap,
+.layout--home, .archive, .layout--single { background: transparent !important; }
+
+/* =========================================================
+   HEADER (fixed, centered)
+   ========================================================= */
+header.masthead, .masthead, header.site-header, .site-header{
+  position: fixed !important;
+  top: 0; left: 0; right: 0;
+  z-index: 99999 !important;
+
+  /* solid header (no blur) */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none;
 }
+
+html:not([data-theme="light"]) header.masthead,
+html:not([data-theme="light"]) .masthead,
+html:not([data-theme="light"]) header.site-header,
+html:not([data-theme="light"]) .site-header{
+  background: #0f1a26 !important;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+html[data-theme="light"] header.masthead,
+html[data-theme="light"] .masthead,
+html[data-theme="light"] header.site-header,
+html[data-theme="light"] .site-header{
+  background: #ffffff !important;
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+/* Center the nav on desktop */
+@media (min-width: 900px){
+  .masthead__inner-wrap{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    padding-top: 8px; padding-bottom: 8px;
+  }
+  .greedy-nav{
+    width:100% !important;
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    margin:0 auto !important;
+    background: transparent !important;
+    box-shadow:none !important;
+  }
+  .greedy-nav .visible-links{
+    display:flex !important;
+    justify-content:center !important;
+    gap:28px;
+    margin:0 auto !important;
+  }
+  .greedy-nav .site-logo,
+  .greedy-nav .site-title,
+  .greedy-nav .site-subtitle,
+  .greedy-nav .search__toggle,
+  .greedy-nav .menu-btn{ display:none !important; }
+}
+
+/* Keep content clear of the fixed header */
+#rk-header-spacer{ height: var(--rk-header-h, 72px); }
+body, .initial-content, .page{ padding-top: 0 !important; }
+.rk-section, section[id]{ scroll-margin-top: calc(var(--rk-header-h,72px) + 12px); }
+
+/* Hover tint */
 .masthead__menu-item a:hover{ color: var(--rk-accent) !important; }
 
-/* Hide brand text block */
+/* Hide theme brand block if any */
 .site-title, .site-logo, .site-branding{ display: none !important; }
 
 /* =========================================================
-   Layout centering (75% width)
+   LAYOUT / CONTAINERS / SPACING
    ========================================================= */
-.rk-section{ scroll-margin-top: var(--rk-header-h); padding: 32px 0; }
+.rk-section{ padding: 36px 0; } /* global rhythm */
 @media (min-width: 900px){ .rk-section{ padding: 56px 0; } }
 
 .rk-container{
-  width: 75vw;                /* 3/4 screen */
+  width: 75vw;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* Remove theme paddings that pushed content to the right */
 .layout--home .initial-content,
 .layout--home #main,
 .layout--home .page,
@@ -78,17 +158,24 @@ body, .page, .archive, .initial-content {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-
-/* Keep archive wrapper visible, but hide ONLY Recent Posts bits */
-.layout--home .archive { display: block !important; }
+.layout--home .archive{ display:block !important; }
 .layout--home .archive__subtitle,
-.layout--home .entries { display: none !important; }
+.layout--home .entries{ display:none !important; }
 
 /* =========================================================
-   HERO
+   HERO (structure; content sits above blend)
    ========================================================= */
-.rk-hero{ padding-top: 64px; }
-@media (min-width: 900px){ .rk-hero{ padding-top: 96px; } }
+.rk-hero{
+  position: relative !important;
+  isolation: isolate;    /* new stacking context */
+  overflow: hidden;      /* clean edges on mobile */
+  background: var(--rk-bg) !important;
+  padding-top: 94px;     /* you liked a slightly lifted hero */
+  padding-bottom: 13px;
+}
+@media (max-width: 899px){
+  .rk-hero{ padding-top: 62px; padding-bottom: 12px; }
+}
 
 .rk-hero__inner{
   display:flex; flex-direction:column; align-items:center; gap:16px; text-align:center;
@@ -98,18 +185,75 @@ body, .page, .archive, .initial-content {
   width: 190px; height: 190px; border-radius: 50%; object-fit: cover; display:block;
   border: 2px solid var(--rk-accent);
   box-shadow: 0 0 0 3px rgba(100,255,218,.14), 0 0 36px 8px var(--rk-accent-soft);
+  transition: transform .25s ease, box-shadow .35s ease, filter .25s ease;
 }
+.rk-avatar:hover{ filter:saturate(1.08) contrast(1.04); }
 
 .rk-title   { margin:.4rem 0 .1rem; font-size: 2.2rem; }
 .rk-tagline { margin:0 0 .6rem; color: var(--rk-accent); }
 
-/* Bold short intro line */
-.rk-introline{
-  font-size: 1.2rem; line-height: 1.35; margin: 4px 0 6px; text-align:center;
-}
-@media (min-width: 900px){ .rk-introline{ font-size: 1.5rem; } }
+.rk-introline{ font-size:1.5rem; line-height:1.35; margin:6px 0 10px; text-align:center; }
 
-/* Socials */
+/* Keep hero text/buttons above any blend layer */
+.rk-hero > *:not(.rk-aurora),
+.rk-hero .rk-hero__inner,
+.rk-hero h1, .rk-hero h2, .rk-hero p,
+.rk-hero .btn, .rk-hero .rk-socials { position:relative; z-index:1; }
+
+/* Disable ANY older hero pseudo-layers you had */
+.rk-hero::before, .rk-hero::after { content:none !important; }
+
+/* ======= THE BLEND (dusk style) – lives on .rk-aurora ======= */
+.rk-hero .rk-aurora{
+  position: absolute;
+  inset: -90px -14vw -60px -14vw;   /* bleed beyond edges to avoid lines */
+  z-index: 0;
+  pointer-events: none;
+
+  /* Dusk-like mix: plum middle, indigo left, blue right, soft navy vignette + base */
+  background:
+    radial-gradient(1200px 700px at 50% -12%,
+      rgba(var(--rk-aur1), .42) 0%,
+      rgba(var(--rk-aur1), .28) 32%,
+      rgba(0,0,0,0) 62%
+    ),
+    radial-gradient(1000px 800px at -10% 15%,
+      rgba(var(--rk-aur2), .22) 0%,
+      rgba(0,0,0,0) 60%
+    ),
+    radial-gradient(1100px 850px at 110% 10%,
+      rgba(var(--rk-aur3), .26) 0%,
+      rgba(0,0,0,0) 68%
+    ),
+    radial-gradient(150% 120% at 50% 40%,
+      rgba(0,0,0,0) 60%,
+      rgba(0,0,0,.25) 100%
+    ),
+    linear-gradient(180deg,
+      var(--rk-bg-2) 0%,
+      var(--rk-bg)   40%,
+      var(--rk-bg)   100%
+    );
+
+  filter: saturate(108%) contrast(102%);
+  opacity: var(--rk-hero-alpha);
+}
+
+/* Optional, subtle animated drift (respects reduced motion) */
+@media (prefers-reduced-motion: no-preference){
+  .rk-hero .rk-aurora{
+    animation: rkAuroraDrift 26s ease-in-out infinite alternate;
+    background-size: 100% 100%;
+  }
+  @keyframes rkAuroraDrift{
+    0%   { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: 1.6% -0.6%, -1.0% 0.4%, 1.1% 0.9%, 0 0, 0 0; }
+  }
+}
+
+/* =========================================================
+   BUTTONS / SOCIALS
+   ========================================================= */
 .rk-socials{ margin-top: 6px; }
 .rk-socials a{
   display:inline-flex; align-items:center; justify-content:center;
@@ -124,7 +268,6 @@ body, .page, .archive, .initial-content {
   color: var(--rk-accent);
 }
 
-/* CTA button */
 .rk-cta .btn{ margin:12px 6px 0 0; }
 .rk-btn--neon{
   border:1px solid var(--rk-accent);
@@ -135,20 +278,16 @@ body, .page, .archive, .initial-content {
   transform: translateY(-1px);
 }
 
-/* Center helpers */
+/* =========================================================
+   CARDS / LISTS / TIMELINE / PILLS  (unchanged from your good setup)
+   ========================================================= */
 .rk-center-text{ text-align:center; }
 .rk-narrow{ max-width: 68ch; margin: 0 auto; text-align:center; }
 .rk-wide{ max-width: 1000px; margin: 0 auto; }
 
-/* =========================================================
-   About: two-col row (used earlier for Interests/Education)
-   ========================================================= */
 .rk-two-col{ display:grid; gap:20px; grid-template-columns:1fr; align-items:start; }
 @media (min-width: 820px){ .rk-two-col{ grid-template-columns: 1fr 1fr; } }
 
-/* =========================================================
-   Cards (Experience / Education / Publications)
-   ========================================================= */
 .rk-card{
   border:1px solid rgba(255,255,255,.10);
   border-radius:18px;
@@ -167,15 +306,11 @@ body, .page, .archive, .initial-content {
   box-shadow: 0 12px 30px rgba(100,255,218,.12), 0 0 22px rgba(100,255,218,.10);
 }
 
-/* Experience card header & meta */
 .rk-exphead{ display:flex; gap:12px; flex-wrap:wrap; align-items:baseline; justify-content:space-between; margin-bottom:6px; }
 .rk-exphead h3{ font-size:1.05rem; margin:0; color:#e6f1ff; }
 .rk-exp__meta{ color:var(--rk-dim); }
 .rk-exp-list{ max-width:900px; margin:0 auto; }
 
-/* =========================================================
-   Core Skills: pills
-   ========================================================= */
 .rk-pills{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:8px; }
 .rk-pill{
   appearance:none; border:1px solid rgba(255,255,255,.18);
@@ -190,19 +325,14 @@ body, .page, .archive, .initial-content {
   color: var(--rk-accent);
 }
 
-/* =========================================================
-   Experience timeline with clickable logos
-   ========================================================= */
 .rk-timeline{
   list-style:none; margin:16px auto; padding:0 0 0 12px; max-width:900px; position:relative;
 }
 .rk-timeline::before{
   content:""; position:absolute; left:44px; top:0; bottom:0; width:2px; background: rgba(100,255,218,.18);
 }
-
 .rk-item{ display:flex; gap:16px; align-items:flex-start; margin:18px 0 26px; position:relative; }
 
-/* Clickable circular logo */
 .rk-logo{
   flex:0 0 64px; width:64px; height:64px; border-radius:50%; position:relative;
   display:flex; align-items:center; justify-content:center; overflow:hidden; text-decoration:none; cursor:pointer;
@@ -215,8 +345,6 @@ body, .page, .archive, .initial-content {
   transform: translateY(-1px);
   box-shadow: 0 0 0 3px rgba(100,255,218,.20), 0 0 34px 8px rgba(100,255,218,.22);
 }
-.rk-logo:focus-visible{ outline:2px solid var(--rk-accent); outline-offset:3px; border-radius:50%; }
-
 .rk-logo img{ width:100%; height:100%; object-fit:cover; border-radius:50%; display:block; }
 
 .rk-expcard{
@@ -227,9 +355,6 @@ body, .page, .archive, .initial-content {
 }
 .rk-expcard:hover{ transform: translateY(-2px); border-color: rgba(100,255,218,.35); box-shadow: 0 0 24px rgba(100,255,218,.15); }
 
-/* =========================================================
-   Publications / Education link accent
-   ========================================================= */
 #education .rk-card a,
 #publications .rk-card a{
   text-decoration: underline; text-underline-offset: 2px;
@@ -240,500 +365,21 @@ body, .page, .archive, .initial-content {
   color: var(--rk-accent); text-shadow: 0 0 10px rgba(100,255,218,.25);
 }
 
-/* ===== Compact vertical spacing (≈ half the gap) ===== */
-
-/* All sections: reduce top/bottom padding */
-.rk-section { padding: 16px 0; }                /* was 32px */
-@media (min-width: 900px){
-  .rk-section { padding: 28px 0; }              /* was 56px */
-}
-
-/* Hero: shrink space below the CTA and slightly reduce top padding */
-.rk-hero { padding-top: 48px; padding-bottom: 8px; }         /* was 64px top, ~no bottom */
-@media (min-width: 900px){
-  .rk-hero { padding-top: 72px; padding-bottom: 10px; }      /* was 96px top */
-}
-
-/* Headings + paragraphs: tighter margins */
-.rk-h2 { margin: 6px 0 12px; }                  /* default was larger */
-.rk-narrow { margin-top: 6px; }                 /* bring text closer to heading */
-
-/* Cards (Experience/Education/Publications): slightly closer stack */
-.rk-card { margin: 8px 0; }                     /* was 12px */
-
-/* Two-column balance for Education + Publications */
-.rk-two-col.rk-balanced { gap: 24px; align-items: start; }
-#education .rk-h3, #publications .rk-h3 { margin: 6px 0 10px; }
-
-/* Keep the side-by-side layout only on wider screens; stack on mobile (already handled by .rk-two-col) */
-
-/* ===== Avatar hover: neon pulse + subtle pop ===== */
-.rk-avatar{
-  transition: transform .25s ease, box-shadow .35s ease, filter .25s ease;
-  will-change: transform;
-}
-
-/* Hover/focus: stronger glow + gentle pulse */
-.rk-avatar:hover,
-.rk-avatar:focus {
-  filter: saturate(1.08) contrast(1.04);
-  animation: rkAvatarPulse 1.6s ease-in-out infinite;
-  /* keep transform neutral here; JS tilt (below) will control it if enabled */
-}
-
-/* Pulse keyframes (dark uses teal glow; light uses the same var() accent) */
-@keyframes rkAvatarPulse {
-  0%, 100% {
-    box-shadow:
-      0 0 0 3px rgba(100,255,218,.16),
-      0 0 32px 8px rgba(100,255,218,.18);
-  }
-  50% {
-    box-shadow:
-      0 0 0 4px rgba(100,255,218,.22),
-      0 0 44px 12px rgba(100,255,218,.28);
-  }
-}
-
-/* === +30% vertical spacing between sections (override) === */
-
-/* Sections (was 16px / 28px) */
-.rk-section { padding: 21px 0; }
-@media (min-width: 900px){
-  .rk-section { padding: 36px 0; }
-}
-
-/* Hero (was 48/72 top, 8/10 bottom) */
-.rk-hero { padding-top: 62px; padding-bottom: 12px; }
-@media (min-width: 900px){
-  .rk-hero { padding-top: 94px; padding-bottom: 13px; }
-}
-
-/* === Theme toggle: fixed bottom-right, always visible === */
-#rkThemeFab,
-.rk-theme-fab,
-.rk-theme-toggle {
-  position: fixed !important;
-  right: calc(18px + env(safe-area-inset-right));
-  bottom: calc(18px + env(safe-area-inset-bottom));
-  z-index: 9999 !important;
-  margin: 0 !important;
-  transform: none !important; /* prevent centering transforms */
-}
-
-/* if any parent added width/position styles (e.g., footer), neutralise them */
-.page__footer #rkThemeFab,
-.page__footer .rk-theme-fab,
-.page__footer .rk-theme-toggle {
-  position: fixed !important;
-}
-
-/* About section: gentle space between the two paragraphs */
-#about .rk-narrow + .rk-narrow { margin-top: 10px; }
-
-/* ===== Layered, blended background (DARK) ===== */
-
-/* Global page gradient (subtle depth + teal tint near top) */
-body{
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(100,255,218,.06), rgba(0,0,0,0) 60%),
-    linear-gradient(180deg, #101722 0%, #0d1420 42%, #0b121c 100%);
-  background-repeat: no-repeat;
-}
-
-/* Footer transparent so the gradient flows end-to-end */
-.page__footer{
-  background: transparent !important;
-  border-top: 1px solid rgba(255,255,255,.06);
-}
-
-/* Hero gets a soft, brighter shade that blends into the body */
-.rk-hero{ position: relative; z-index: 0; }
-.rk-hero::before{
-  content: "";
-  position: absolute; inset: -24px 0 -16px 0;
-  pointer-events: none; z-index: -1;
-  background:
-    radial-gradient(900px 480px at 50% 0, rgba(100,255,218,.10), rgba(0,0,0,0) 70%),
-    linear-gradient(180deg, rgba(14,22,35,.75), rgba(14,22,35,0) 60%);
-  /* no hard edges, no banding */
-  filter: saturate(1.02) contrast(1.01);
-}
-
-
-/* Headline and card stack breathing room */
-.rk-h2 { margin: 10px 0 16px; }   /* was 6px 0 12px */
-.rk-card { margin: 10px 0; }      /* was 8px */
-
-/* === Pin theme toggle bottom-right; detach from footer bars === */
-#rkThemeDock {
-  position: fixed !important;
-  right: calc(18px + env(safe-area-inset-right));
-  bottom: calc(18px + env(safe-area-inset-bottom));
-  z-index: 9999 !important;
-  pointer-events: none;  /* dock ignores clicks */
-}
-#rkThemeDock > * {
-  pointer-events: auto;  /* the actual button is clickable */
-}
-
-/* If the old toggle is still inside footer, neutralise any full-width bar */
-.page__footer :is(#rkThemeFab, .rk-theme-fab, .rk-theme-toggle) {
-  position: static !important;
-}
-
-/* Optional: a little polish on the button itself (works with any toggle) */
-#rkThemeDock button, #rkThemeDock .rk-theme-fab, #rkThemeDock .rk-theme-toggle, #rkThemeDock #rkThemeFab {
-  width: 52px; height: 52px; border-radius: 9999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  backdrop-filter: blur(6px);
-}
-html[data-theme="light"] #rkThemeDock button,
-html[data-theme="light"] #rkThemeDock .rk-theme-fab,
-html[data-theme="light"] #rkThemeDock .rk-theme-toggle,
-html[data-theme="light"] #rkThemeDock #rkThemeFab {
-  border-color: rgba(0,0,0,.12);
-  background: rgba(255,255,255,.85);
-  box-shadow: 0 8px 20px rgba(0,0,0,.12);
-}
-
-/* Ensure our page background shows everywhere */
-html, body {
-  background-repeat: no-repeat !important;
-}
-
-/* Make wrappers transparent so the body gradient is visible */
-.page, .initial-content {
-  background: transparent !important;
-}
-
-/* Keep footer transparent to avoid a solid strip */
-.page__footer {
-  background: transparent !important;
-}
-
-/* ===== Remove the nav pill/rectangle behind menu links ===== */
-.masthead, .site-nav, .greedy-nav,
-.greedy-nav .visible-links,
-.greedy-nav .hidden-links {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: 0 !important;
-}
-
-/* Links should not paint a background on hover/focus */
-.greedy-nav a,
-.masthead__menu-item a {
-  background: transparent !important;
-  border-radius: 0 !important;
-}
-
-.greedy-nav a:hover,
-.greedy-nav a:focus,
-.masthead__menu-item a:hover,
-.masthead__menu-item a:focus,
-.masthead__menu-item a:active {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* If the theme adds a container with its own rounded bg */
-.greedy-nav .wrap, .masthead__inner-wrap {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* ===== Lift hero so photo + intro + socials + CTA fit above the fold ===== */
-
-/* how much to lift on desktops; tweak 0–64px if needed */
-:root { --rk-hero-lift: 36px; }
-
-@media (min-width: 1100px){
-  /* bring the hero closer to the top */
-  .rk-hero { padding-top: 40px; padding-bottom: 8px; }
-
-  /* lift the entire stack upward */
-  .rk-hero__inner{
-    gap: 10px;                    /* slightly tighter stack */
-    transform: translateY(calc(-1 * var(--rk-hero-lift)));
-  }
-
-  /* tighten individual element spacings */
-  .rk-title   { margin: .15rem 0 0; }
-  .rk-tagline { margin: 0 0 .25rem; }
-  .rk-introline { margin: 6px 0 0; }
-  .rk-socials { margin-top: 6px; }
-  .rk-cta .btn { margin-top: 8px; }
-}
-
-/* On very large screens we can lift a touch more */
-@media (min-width: 1440px){
-  :root { --rk-hero-lift: 44px; }  /* adjust if you want even less gap */
-}
-
-/* === Floating theme toggle: fixed bottom-right, always on-screen === */
-#rkThemeFab{
-  position: fixed !important;
-  right: calc(20px + env(safe-area-inset-right));
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  z-index: 9999 !important;
-
-  width: 52px; height: 52px; border-radius: 9999px;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 26px; line-height: 1;
-
-  cursor: pointer; user-select: none;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-  box-shadow: 0 10px 24px rgba(0,0,0,.28);
-  backdrop-filter: blur(6px);
-  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
-}
-#rkThemeFab:hover{ transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.32); }
-#rkThemeFab:active{ transform: translateY(0); }
-
-html[data-theme="light"] #rkThemeFab{
-  border-color: rgba(0,0,0,.12);
-  background: rgba(255,255,255,.9);
-  box-shadow: 0 8px 20px rgba(0,0,0,.14);
-}
-
-/* If any footer wrapper still tries to capture the button, force it floating */
-.page__footer #rkThemeFab{ position: fixed !important; }
-
-/* Optional: if an old full-width bar remains, make footer transparent */
-.page__footer{ background: transparent !important; }
-
-/* ===== Sticky header (always visible on scroll) ===== */
-.site-header, .masthead {
-  position: sticky;
-  position: -webkit-sticky;   /* Safari */
-  top: 0;
-  z-index: 3000;              /* above cards & content */
-}
-
-/* Optional: a touch of padding and keep the glassy look you already have */
-.masthead__inner-wrap { padding-top: 8px; padding-bottom: 8px; }
-
-/* Smooth anchor scrolling + offset already handled via .rk-section scroll-margin-top */
-html { scroll-behavior: smooth; }
-
-/* ===== Fixed header pinned to top ===== */
-:root { --rk-header-h: 68px; }  /* tweak if your header is taller/shorter */
-
-.masthead,
-.site-header {
-  position: fixed !important;
-  top: 0; left: 0; right: 0;
-  z-index: 5000;                 /* above everything */
-}
-
-/* give the page breathing room so content isn't hidden */
-body { padding-top: calc(var(--rk-header-h) + 6px); }
-
-/* ===== Theme toggle: pure circular FAB, no native button box ===== */
-#rkThemeFab{
-  all: unset;                       /* strip native button styles */
-  position: fixed !important;
-  right: calc(20px + env(safe-area-inset-right));
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  z-index: 9999 !important;
-
-  width: 52px; height: 52px;
-  display: grid; place-items: center;
-  border-radius: 9999px;
-
-  font-size: 26px; line-height: 1;
-  cursor: pointer; user-select: none;
-
-  background: rgba(255,255,255,.06);       /* subtle glass on dark */
-  border: 1px solid rgba(255,255,255,.18);
-  box-shadow: 0 10px 24px rgba(0,0,0,.28);
-  backdrop-filter: blur(6px);
-  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
-}
-
-#rkThemeFab:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(0,0,0,.32); }
-#rkThemeFab:active{ transform: translateY(0); }
-
-html[data-theme="light"] #rkThemeFab{
-  background: rgba(255,255,255,.92);       /* clean on light */
-  border-color: rgba(0,0,0,.12);
-  box-shadow: 0 8px 20px rgba(0,0,0,.14);
-}
-
-/* If anything in the footer still tries to wrap it, force it floating */
-.page__footer #rkThemeFab{ position: fixed !important; }
-
-/* ===== Center the header nav (desktop), keep mobile as-is ===== */
-@media (min-width: 900px){
-  /* Make the inner wrap a centering flex container */
-  .masthead__inner-wrap{
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-
-  /* Greedy nav spans full width and centers its links */
-  .greedy-nav{
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    margin: 0 auto !important;
-  }
-
-  /* The links row itself is centered with a nice gap */
-  .greedy-nav .visible-links{
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    gap: 28px;                /* spacing between menu items */
-    margin: 0 auto !important;
-  }
-
-  /* Remove anything that pushes links to the right */
-  .greedy-nav .site-logo,
-  .greedy-nav .site-title,
-  .greedy-nav .site-subtitle,
-  .greedy-nav .search__toggle,
-  .greedy-nav .menu-btn{
-    display: none !important;
-  }
-}
-
-/* Optional: ensure header has full width and sits on top (you already fixed header) */
-.masthead, .site-header{
-  left: 0; right: 0; width: 100%;
-}
-
-/* ===== Prevent content from sliding under the fixed header ===== */
-:root { --rk-header-h: 72px; }  /* fallback; JS will update this precisely */
-
-/* Push all content down by header height */
-body,
-.initial-content,
-.page {
-  padding-top: calc(var(--rk-header-h) + 8px) !important;
-}
-
-/* When clicking nav links (#about, #skills...), keep the section title clear of header */
-.rk-section,
-section[id],
-[id].rk-section {
-  scroll-margin-top: calc(var(--rk-header-h) + 12px);
-}
-
-/* === Global top offset so content never sits under the fixed header === */
-:root{
-  /* JS sets --rk-header-h precisely; fallback here */
-  --rk-header-h: 72px;
-  --rk-hero-lift: 36px; /* if you changed earlier, mirror the same value here */
-}
-
-/* Push the whole page down by header height (+ tiny cushion) */
-body,
-.initial-content,
-.page{
-  padding-top: calc(var(--rk-header-h) + var(--rk-hero-lift, 0px) + 8px) !important;
-}
-
-/* === Per-section safe offset: headings won't slide under the header === */
-.rk-section,
-section[id]{
-  /* Anchor jumps (e.g., clicking "About") */
-  scroll-margin-top: calc(var(--rk-header-h) + 12px);
-  position: relative;
-}
-
-.rk-section::before,
-section[id]::before{
-  content: "";
-  display: block;
-  height: calc(var(--rk-header-h) + 12px);  /* safe buffer */
-  margin-top: calc(-1 * (var(--rk-header-h) + 12px));
-  /* Invisible spacer that prevents overlap when the section reaches the top */
-  pointer-events: none;
-  visibility: hidden;
-}
-
-/* ===== Fixed header & overlap-proof layout ===== */
-
-/* Make sure header is fixed and above content */
-.masthead, .site-header {
-  position: fixed !important;
-  top: 0; left: 0; right: 0;
-  z-index: 5000;
-}
-
-/* We now use a real spacer node; remove any earlier padding offsets */
-body, .initial-content, .page { padding-top: 0 !important; }
-
-/* Spacer (injected by JS) occupies the header height */
-#rk-header-spacer { height: var(--rk-header-h, 72px); }
-
-/* Anchor jumps and manual scroll stop below the header */
-.rk-section, section[id] {
-  position: relative;
-  scroll-margin-top: calc(var(--rk-header-h, 72px) + 12px);
-}
-
-/* (optional) keep nav centered, already set earlier */
-.masthead, .site-header { width: 100%; }
-
-/* ===== Fixed header with highest stacking; content never overlaps ===== */
-:root { --rk-header-h: 72px; } /* fallback; JS updates this precisely */
-
-header.masthead, .masthead, header.site-header, .site-header{
-  position: fixed !important;
-  top: 0; left: 0; right: 0;
-  z-index: 99999 !important;      /* above everything else */
-}
-
-/* Keep the header readable (you can tune opacity) */
-html:not([data-theme="light"]) header.masthead,
-html:not([data-theme="light"]) .masthead,
-html:not([data-theme="light"]) header.site-header,
-html:not([data-theme="light"]) .site-header{
-  background: rgba(16,23,34,.72);
-  backdrop-filter: saturate(140%) blur(8px);
-}
-html[data-theme="light"] header.masthead,
-html[data-theme="light"] .masthead,
-html[data-theme="light"] header.site-header,
-html[data-theme="light"] .site-header{
-  background: rgba(255,255,255,.78);
-  backdrop-filter: saturate(140%) blur(8px);
-}
-
-/* Spacer injected by JS — ensures content starts after the header */
-#rk-header-spacer{ height: var(--rk-header-h,72px); }
-
-/* Remove any earlier attempts that pushed content down */
-body, .initial-content, .page{ padding-top: 0 !important; }
-
-/* Anchor jumps and manual scroll should never tuck under the header */
-.rk-section, section[id]{
-  position: relative;
-  scroll-margin-top: calc(var(--rk-header-h,72px) + 12px);
-}
-
-/* Ensure page content never stacks above the header */
-.page, .initial-content, .rk-hero{ position: relative; z-index: 0; }
-
-/* Floating theme toggle: if CSS missed, keep it round and clean */
+/* =========================================================
+   THEME TOGGLE (FAB bottom-right)
+   ========================================================= */
 #rkThemeFab{
   all: unset;
   position: fixed !important;
   right: calc(20px + env(safe-area-inset-right));
   bottom: calc(20px + env(safe-area-inset-bottom));
   z-index: 99999 !important;
+
   width: 52px; height: 52px; border-radius: 9999px;
   display: grid; place-items: center;
   font-size: 26px; line-height: 1;
   cursor: pointer; user-select: none;
+
   background: rgba(255,255,255,.06);
   border: 1px solid rgba(255,255,255,.18);
   box-shadow: 0 10px 24px rgba(0,0,0,.28);
@@ -747,548 +393,8 @@ html[data-theme="light"] #rkThemeFab{
   box-shadow: 0 8px 20px rgba(0,0,0,.14);
 }
 
-/* ===== Solid header (no blur), on top of everything ===== */
-
-/* Common */
-header.masthead, .masthead, header.site-header, .site-header{
-  position: fixed !important;
-  top: 0; left: 0; right: 0;
-  z-index: 99999 !important;
-
-  /* remove any glass/blur effects */
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none; /* we'll add a subtle divider below */
-}
-
-/* Dark theme solid header */
-html:not([data-theme="light"]) header.masthead,
-html:not([data-theme="light"]) .masthead,
-html:not([data-theme="light"]) header.site-header,
-html:not([data-theme="light"]) .site-header{
-  background: #0f1a26 !important;         /* pick any solid dark */
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-
-/* Light theme solid header */
-html[data-theme="light"] header.masthead,
-html[data-theme="light"] .masthead,
-html[data-theme="light"] header.site-header,
-html[data-theme="light"] .site-header{
-  background: #ffffff !important;          /* pure white */
-  border-bottom: 1px solid rgba(0,0,0,.08);
-}
-
-/* Minimal Mistakes often colors the inner wrap/greedy-nav; neutralize it */
-.masthead__inner-wrap,
-.greedy-nav{
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* (Keep spacer/anchor handling you already have) */
-#rk-header-spacer{ height: var(--rk-header-h,72px); }
-.rk-section, section[id]{ scroll-margin-top: calc(var(--rk-header-h,72px) + 12px); }
-
-/* ============================================================
-   Blended background + shaded header + hero tint (dark & light)
-   Paste at the end of BOTH main.scss and main-light.scss
-   ============================================================ */
-
-/* ---------- Palette: dark (default) ---------- */
-:root{
-  /* Base + accents for the aurora-style blend */
-  --rk-bg: #0e1621;                 /* page base */
-  --rk-bg-2: #0b1522;               /* deeper base */
-  --rk-aurora-1: #1a3542;           /* teal/blue */
-  --rk-aurora-2: #2b2144;           /* purple/navy */
-  --rk-aurora-3: #12353e;           /* cyan/green */
-  --rk-hero-glow: rgba(46, 221, 197, .18); /* hero soft glow */
-}
-
-/* ---------- Palette: light ---------- */
-html[data-theme="light"]{
-  --rk-bg: #f6f9fc;                 /* page base */
-  --rk-bg-2: #eef3f9;               /* deeper base */
-  --rk-aurora-1: #dff3ff;           /* soft blue */
-  --rk-aurora-2: #efe5ff;           /* soft purple */
-  --rk-aurora-3: #e6fff6;           /* soft mint */
-  --rk-hero-glow: rgba(40, 170, 150, .16);
-}
-
-/* ---------- Base blended background ---------- */
-
-/* Solid base */
-html, body { background: var(--rk-bg); }
-
-/* Aurora-style overlay (smooth blend, fixed to viewport) */
-body::before{
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;                 /* always behind content */
-  pointer-events: none;
-
-  /* stack a few large radial grads plus a very soft vertical fade */
-  background:
-    radial-gradient(1200px 800px at 6% -10%,  var(--rk-aurora-1) 0%, transparent 58%),
-    radial-gradient(1000px 700px at 100% 0%, var(--rk-aurora-2) 0%, transparent 60%),
-    radial-gradient(900px 650px at 0% 100%,  var(--rk-aurora-3) 0%, transparent 60%),
-    linear-gradient(to bottom, rgba(255,255,255,.03), rgba(0,0,0,.05));
-  background-attachment: fixed, fixed, fixed, fixed;
-  opacity: .85;                /* dial this down/up to taste */
-}
-
-/* ---------- Header shade (SOLID, different than page) ---------- */
-header.masthead, .masthead, header.site-header, .site-header{
-  /* solid base is already set elsewhere; here we tint slightly different */
-  background-image: linear-gradient(
-    180deg,
-    rgba(0,0,0,.00) 0%,
-    rgba(0,0,0,.00) 35%,
-    rgba(255,255,255,.00) 100%
-  ) !important; /* keep solid; just ensure no blur/extra shading added */
-  border-bottom-width: 1px;
-}
-
-/* Dark: slightly deeper solid header than page */
-html:not([data-theme="light"]) header.masthead,
-html:not([data-theme="light"]) .masthead,
-html:not([data-theme="light"]) header.site-header,
-html:not([data-theme="light"]) .site-header{
-  background-color: #0b1420 !important;
-  border-bottom-color: rgba(255,255,255,.06) !important;
-}
-
-/* Light: crisp white header with a subtle divider */
-html[data-theme="light"] header.masthead,
-html[data-theme="light"] .masthead,
-html[data-theme="light"] header.site-header,
-html[data-theme="light"] .site-header{
-  background-color: #ffffff !important;
-  border-bottom-color: rgba(0,0,0,.08) !important;
-}
-
-/* ---------- Home/Hero section tint (soft focus) ---------- */
-/* Assumes your hero wrapper has .rk-hero — if not, add that class to your hero container */
-.rk-hero{ position: relative; z-index: 0; }
-.rk-hero::before{
-  content: "";
-  position: absolute;
-  inset: -60px 0 -40px 0;   /* leaks a bit above/below for smoother blend */
-  z-index: -1;
-  pointer-events: none;
-
-  /* gentle glow & subtle top vignette */
-  background:
-    radial-gradient(600px 260px at 50% 0%, var(--rk-hero-glow), transparent 60%),
-    radial-gradient(420px 260px at 75% 20%, rgba(120,90,255,.12), transparent 60%),
-    radial-gradient(360px 220px at 20% 30%, rgba(0,180,220,.10), transparent 60%);
-  filter: saturate(120%);
-  opacity: .9;
-}
-
-/* ============================================================
-   Rahul — Blended background + hero glow (works in dark & light)
-   Paste at the END of BOTH main.scss and main-light.scss
-   ============================================================ */
-
-/* --------- Colour system (use rgb tuples so we can vary alpha) --------- */
-:root{
-  /* Dark theme base + accents */
-  --rk-bg:    #0a1220;   /* page base */
-  --rk-bg-2:  #0e1730;   /* deeper top */
-  --rk-a1: 26,127,208;   /* blue    */
-  --rk-a2: 107, 43,217;  /* purple  */
-  --rk-a3:  0,194,169;   /* teal    */
-  --rk-a4: 255,138,  0;  /* amber   */
-
-  /* Hero glow intensity (dark) */
-  --rk-hero-alpha: .22;
-}
-
-/* Light palette */
-html[data-theme="light"]{
-  --rk-bg:    #f7faff;
-  --rk-bg-2:  #eef4ff;
-  --rk-a1: 191,227,255;  /* soft blue  */
-  --rk-a2: 227,210,255;  /* soft purple*/
-  --rk-a3: 199,255,243;  /* soft mint  */
-  --rk-a4: 255,225,179;  /* soft amber */
-  --rk-hero-alpha: .16;
-}
-
-/* --------- Make all theme wrappers transparent so the blend is visible --------- */
-html, body { background: var(--rk-bg) !important; }
-.page, .page__content, .page__inner-wrap, .initial-content, .archive, .layout--single, .layout--home {
-  background: transparent !important;
-}
-
-/* --------- Blended page background (fixed under everything) --------- */
-body::before{
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;                 /* always at the very back */
-  pointer-events: none;
-
-  /* big, soft shapes + a gentle vertical fade */
-  background:
-    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-a1), .25) 0%, transparent 58%),
-    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-a2), .20) 0%, transparent 60%),
-    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-a3), .22) 0%, transparent 60%),
-    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-a4), .10) 0 25%, transparent 25% 100%),
-    linear-gradient(180deg, var(--rk-bg-2) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
-  background-attachment: fixed, fixed, fixed, fixed, fixed;
-  filter: saturate(110%);
-  opacity: .95;
-}
-
-/* Optional second layer for extra richness (blurred blobs) */
-body::after{
-  content: "";
-  position: fixed;
-  inset: -15% -10% -30% -10%;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(55% 35% at 82% 10%, rgba(var(--rk-a2), .20), transparent 65%),
-    radial-gradient(50% 30% at 18% 90%, rgba(var(--rk-a3), .18), transparent 70%);
-  filter: blur(40px) saturate(115%);
-  opacity: .55;
-}
-
-/* --------- Solid header is already set; we just ensure no extra overlay here --------- */
-header.masthead, .masthead, header.site-header, .site-header{
-  background-image: none !important;
-}
-
-/* --------- Home/Hero soft glow (attach .rk-hero to your hero container) --------- */
-.rk-hero{ position: relative; z-index: 0; }
-.rk-hero::before{
-  content: "";
-  position: absolute;
-  inset: -60px 0 -40px 0;     /* extend slightly for smoother blending */
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(620px 280px at 50% 0%,  rgba(var(--rk-a3), var(--rk-hero-alpha)), transparent 60%),
-    radial-gradient(520px 260px at 20% 12%, rgba(var(--rk-a2), calc(var(--rk-hero-alpha) - .05)), transparent 65%),
-    radial-gradient(420px 220px at 80% 18%, rgba(var(--rk-a1), calc(var(--rk-hero-alpha) - .08)), transparent 65%);
-  filter: saturate(120%);
-  opacity: .92;
-}
-
-/* --------- Minor polish so content looks great on the blend --------- */
-.section, .rk-section { background: transparent !important; }
-
-/* If any card components exist, keep them subtly lifted */
-.card, .archive__item, .feature__wrapper .feature__item{
-  background: rgba(0,0,0,.08);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 14px;
-}
-html[data-theme="light"] .card,
-html[data-theme="light"] .archive__item,
-html[data-theme="light"] .feature__wrapper .feature__item{
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(0,0,0,.06);
-}
-
-/* Keep hero content readable regardless of the glow */
-.rk-hero h1, .rk-hero h2, .rk-hero p{ position: relative; z-index: 1; }
-
-/* ============================================================
-   Keep blended background ONLY on Home (.rk-hero)
-   All other sections = solid background
-   Paste at the END of BOTH main.scss and main-light.scss
-   ============================================================ */
-
-/* 1) Make sure the page background is solid everywhere */
-html, body { background: var(--rk-bg) !important; }
-
-/* 2) Turn OFF the global aurora layers we added earlier */
-body::before,
-body::after {
-  content: none !important;   /* fully disable the pseudo layers */
-}
-
-/* 3) Default sections = solid (matches page bg) */
-.rk-section { background: var(--rk-bg) !important; }
-
-/* 4) Recreate the blend INSIDE the Home/Hero only */
-.rk-hero{
-  position: relative;
-  z-index: 0;
-  background: var(--rk-bg) !important;
-  overflow: hidden; /* so the glow doesn't scroll outside on small screens */
-}
-
-/* Colourful blend (moved from body::before) */
-.rk-hero::before{
-  content: "";
-  position: absolute;
-  /* extend slightly beyond to avoid hard edges */
-  inset: -60px -12vw -40px -12vw;
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-a1), .25) 0%, transparent 58%),
-    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-a2), .20) 0%, transparent 60%),
-    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-a3), .22) 0%, transparent 60%),
-    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-a4), .10) 0 25%, transparent 25% 100%),
-    linear-gradient(180deg, var(--rk-bg-2) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
-  filter: saturate(110%);
-  opacity: .95;
-}
-
-/* Soft fade into solid at the bottom of Home */
-.rk-hero::after{
-  content: "";
-  position: absolute;
-  left: -12vw; right: -12vw;
-  bottom: -1px; height: 140px;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(52% 28% at 82% 10%, rgba(var(--rk-a2), .18), transparent 65%),
-    radial-gradient(48% 26% at 18% 90%, rgba(var(--rk-a3), .16), transparent 70%),
-    linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--rk-bg) 85%);
-  filter: blur(34px) saturate(112%);
-  opacity: .60;
-}
-
-/* Keep hero content readable atop the glow */
-.rk-hero h1, .rk-hero h2, .rk-hero p, .rk-hero .btn, .rk-hero .icon-row{
-  position: relative; z-index: 1;
-}
-
-/* ============================================================
-   HOME-ONLY BLEND (robust): .rk-hero = blended, others = solid
-   Put this at the END of BOTH main.scss and main-light.scss
-   ============================================================ */
-
-/* --- solid page background everywhere by default --- */
-html, body { background: var(--rk-bg) !important; }
-.page, .page__content, .page__inner-wrap, .initial-content,
-.archive, .layout--single, .layout--home {
-  background: transparent !important;
-}
-
-/* --- turn OFF any global/background pseudo layers --- */
-body::before, body::after { content: none !important; }
-
-/* --- all sections solid by default --- */
-.rk-section { background: var(--rk-bg) !important; }
-
-/* ===================== HERO ONLY ===================== */
-/* The blend lives inside .rk-hero.
-   isolation:isolate ensures ::before/::after can sit behind content
-   without disappearing behind the page background. */
-.rk-hero{
-  position: relative;
-  background: var(--rk-bg) !important;
-  overflow: hidden;          /* keeps glow edges tidy on small screens */
-  isolation: isolate;        /* important for safe z-index stacking */
-  z-index: 0;                /* new stacking context root */
-}
-
-/* Main blended overlay */
-.rk-hero::before{
-  content: "";
-  position: absolute;
-  /* extend a bit to avoid any hard edge on wide screens */
-  inset: -60px -12vw -40px -12vw;
-  pointer-events: none;
-  z-index: -1;               /* sits behind hero content, above page */
-
-  /* Aurora-style blend */
-  background:
-    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-a1), .25) 0%, transparent 58%),
-    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-a2), .20) 0%, transparent 60%),
-    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-a3), .22) 0%, transparent 60%),
-    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-a4), .10) 0 25%, transparent 25% 100%),
-    linear-gradient(180deg, var(--rk-bg-2) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
-  filter: saturate(110%);
-  opacity: .95;
-}
-
-/* Soft blend-to-solid at bottom of Home */
-.rk-hero::after{
-  content: "";
-  position: absolute;
-  left: -12vw; right: -12vw;
-  bottom: -1px; height: 140px;
-  pointer-events: none;
-  z-index: -1;               /* keep it with the blend layer */
-
-  background:
-    radial-gradient(52% 28% at 82% 10%, rgba(var(--rk-a2), .18), transparent 65%),
-    radial-gradient(48% 26% at 18% 90%, rgba(var(--rk-a3), .16), transparent 70%),
-    linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--rk-bg) 85%);
-  filter: blur(34px) saturate(112%);
-  opacity: .60;
-}
-
-/* Ensure hero text/buttons stay on top of the glow */
-.rk-hero h1, .rk-hero h2, .rk-hero p,
-.rk-hero .btn, .rk-hero .icon-row {
-  position: relative;
-  z-index: 1;
-}
-
-/* ============================================================
-   HOME-ONLY AURORA BLEND (solid elsewhere)
-   ============================================================ */
-
-/* Color tuples for safe rgba(var(--x), a) usage */
-:root{
-  /* dark theme aurora palette (RGB tuples) */
-  --rk-aur1: 26,127,208;   /* blue */
-  --rk-aur2: 107,43,217;   /* purple */
-  --rk-aur3: 0,194,169;    /* teal/mint */
-  --rk-aur4: 255,138,0;    /* amber */
-  --rk-hero-alpha: .22;    /* overall glow strength */
-}
-
-/* softer tints for light theme */
-html[data-theme="light"]{
-  --rk-aur1: 191,227,255;
-  --rk-aur2: 227,210,255;
-  --rk-aur3: 199,255,243;
-  --rk-aur4: 255,225,179;
-  --rk-hero-alpha: .18;
-}
-
-/* keep every section solid by default (you already do this, harmless to repeat) */
-.rk-section{ background: var(--rk-bg) !important; }
-
-/* blend lives only inside the hero */
-.rk-hero{
-  position: relative;
-  isolation: isolate;   /* new stacking context so ::before stays behind */
-  overflow: hidden;     /* tidy edges on mobile */
-  background: var(--rk-bg) !important;
-  z-index: 0;
-}
-
-/* Main aurora layer */
-.rk-hero::before{
-  content: "";
-  position: absolute;
-  inset: -60px -12vw -40px -12vw;   /* extend for smooth edges */
-  z-index: -1;
-  pointer-events: none;
-
-  background:
-    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-aur1), calc(var(--rk-hero-alpha)*1.05)) 0%, transparent 58%),
-    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-aur2), calc(var(--rk-hero-alpha)*0.95)) 0%, transparent 60%),
-    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-aur3), calc(var(--rk-hero-alpha)*1.00)) 0%, transparent 60%),
-    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-aur4), .10) 0 25%, transparent 25% 100%),
-    linear-gradient(180deg, var(--rk-bg-2, #0e1730) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
-  filter: saturate(110%);
-  opacity: .95;
-}
-
-/* Soft fade into the solid page background at the bottom of hero */
-.rk-hero::after{
-  content: "";
-  position: absolute;
-  left: -12vw; right: -12vw; bottom: -1px;
-  height: 140px; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(52% 28% at 82% 10%, rgba(var(--rk-aur2), .18), transparent 65%),
-    radial-gradient(48% 26% at 18% 90%, rgba(var(--rk-aur3), .16), transparent 70%),
-    linear-gradient(to bottom, rgba(0,0,0,0) 0%, var(--rk-bg) 85%);
-  filter: blur(34px) saturate(112%);
-  opacity: .60;
-}
-
-/* Gentle drift (disabled for reduced-motion users) */
-@media (prefers-reduced-motion: no-preference){
-  .rk-hero::before{
-    animation: rkAuroraDrift 26s ease-in-out infinite alternate;
-    background-size: 100% 100%;
-  }
-  @keyframes rkAuroraDrift{
-    0%   { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
-    100% { background-position: 1.8% -0.6%, -1.2% 0.4%, 1.2% 1.0%, 0 0, 0 0; }
-  }
-}
-
-/* Make sure hero text & buttons sit above the glow */
-.rk-hero h1, .rk-hero h2, .rk-hero p, .rk-hero .btn, .rk-hero .icon-row{
-  position: relative;
-  z-index: 1;
-}
-
-/* ============================================================
-   PATCH: make the hero blend visible
-   - keep the aurora overlay above the section background
-   - keep hero content above the overlay
-   ============================================================ */
-
-.rk-hero{
-  position: relative !important;
-  isolation: isolate;       /* creates a stacking context for safety */
-  overflow: hidden;
-  background: var(--rk-bg) !important;
-}
-
-/* The blend lives on ::before / ::after – put them above the bg */
-.rk-hero::before,
-.rk-hero::after{
-  z-index: 0 !important;    /* <-- was -1; this is the key change */
-}
-
-/* Make sure the content sits above the overlay */
-.rk-hero > *,
-.rk-hero .rk-hero__inner,
-.rk-hero h1,
-.rk-hero h2,
-.rk-hero p,
-.rk-hero .btn,
-.rk-hero .rk-socials {
-  position: relative;
-  z-index: 1 !important;
-}
-
-/* --- Disable any older pseudo layers to avoid conflicts --- */
-.rk-hero::before,
-.rk-hero::after {
-  content: none !important;
-}
-
-/* --- Home section: blended background ONLY in the hero --- */
-.rk-hero{
-  position: relative !important;
-  background: var(--rk-bg) !important;  /* solid everywhere else */
-  isolation: isolate;                   /* safe stacking */
-  overflow: hidden;
-}
-
-/* The actual aurora layer (real element) */
-.rk-hero .rk-aurora{
-  position: absolute;
-  inset: -80px -12vw -50px -12vw;   /* bleed a bit around edges */
-  z-index: 0;
-  pointer-events: none;
-
-  /* Aurora-style blend (dark/light adapt via your CSS vars) */
-  background:
-    radial-gradient(1200px 800px at 6% -12%,    rgba(var(--rk-a1), .28) 0%, transparent 58%),
-    radial-gradient(1100px 760px at 100% 0%,   rgba(var(--rk-a2), .22) 0%, transparent 60%),
-    radial-gradient(950px  680px at 0% 105%,   rgba(var(--rk-a3), .26) 0%, transparent 60%),
-    conic-gradient(from 210deg at 55% -20%,    rgba(var(--rk-a4), .16) 0 25%, transparent 25% 100%),
-    linear-gradient(180deg, var(--rk-bg-2) 0%, var(--rk-bg) 55%, var(--rk-bg) 100%);
-  filter: saturate(112%);
-  opacity: .95;
-}
-
-/* Keep the hero content above the blend */
-.rk-hero .rk-hero__inner,
-.rk-hero > *:not(.rk-aurora){
-  position: relative;
-  z-index: 1;
-}
+/* =========================================================
+   MISC
+   ========================================================= */
+#about .rk-narrow + .rk-narrow { margin-top: 10px; }
+html { scroll-behavior: smooth; }
