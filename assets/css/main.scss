@@ -512,3 +512,45 @@ html { scroll-behavior: smooth; }
 }
 
 /* keep the blend layer – no change needed if you already added it */
+
+/* === HERO should fill the viewport on every screen === */
+/* Put this at the END of main.scss */
+
+:root { --rk-header-h: 72px; } /* keep your value; harmless if already set */
+
+.rk-hero{
+  /* fill the *entire* viewport height; we don't subtract the header here
+     because your fixed-header spacer already accounts for it */
+  min-height: 100dvh !important;            /* modern mobile friendly */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;       /* centers the stack */
+  padding-top:  clamp(10px, 4vh, 36px) !important;
+  padding-bottom: clamp(12px, 5vh, 40px) !important;
+  overflow: hidden;
+}
+
+/* fallback for browsers without dvh */
+@supports not (height: 100dvh) {
+  .rk-hero{ min-height: 100vh !important; }
+}
+
+/* keep the stack compact so the CTA fits on short screens */
+.rk-hero__inner{ gap: clamp(8px, 1.6vh, 14px) !important; }
+
+.rk-title      { margin: .2rem 0 .1rem !important; }
+.rk-tagline    { margin: 0 0 .3rem !important; }
+.rk-introline  { margin: 6px 0 0 !important; font-size: clamp(1.02rem, 2.1vw, 1.4rem) !important; }
+.rk-socials    { margin-top: clamp(4px, 1.2vh, 10px) !important; }
+.rk-cta .btn   { margin-top: clamp(6px, 1.4vh, 12px) !important; }
+
+/* slight responsive scaling so everything fits comfortably */
+.rk-avatar{
+  width:  clamp(128px, 17vw, 186px) !important;
+  height: clamp(128px, 17vw, 186px) !important;
+}
+
+/* make sure any earlier “lift” is disabled */
+:root{ --rk-hero-lift: 0px; }
+.rk-hero__inner{ transform: none !important; }
+
