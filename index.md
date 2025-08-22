@@ -6,6 +6,9 @@ author_profile: false
 
 <!-- ======================= HERO ======================= -->
 <section id="home" class="rk-section rk-hero">
+  <!-- ✨ blended background layer -->
+  <div class="rk-aurora" aria-hidden="true"></div>
+
   <div class="rk-container">
     <div class="rk-hero__inner">
       <img class="rk-avatar" src="{{ '/assets/images/avatar.jpeg' | relative_url }}" alt="Rahul Kalliadan">
@@ -13,7 +16,6 @@ author_profile: false
       <h1 class="rk-title">Rahul Kalliadan</h1>
       <p class="rk-tagline">Engineer – Mechanical and Robotics</p>
 
-      <!-- Short, bold intro -->
       <p class="rk-introline"><strong>Hello, I’m Rahul — a mechanical engineer designing the future of automation. I love building things end-to-end and will do what it takes to ship robust systems.</strong></p>
 
       <div class="rk-socials">
