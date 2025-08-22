@@ -705,3 +705,29 @@ html { scroll-behavior: smooth; }
     }
   }
 }
+/* === Publications: compact cards === */
+#publications .rk-card{
+  /* smaller vertical padding; keep a little horizontal breathing room */
+  padding: 10px 16px !important;  /* was 18px all around */
+  margin: 10px 0 !important;      /* tighter gap between cards */
+}
+
+/* title + meta spacing and size */
+#publications .rk-card .archive__item-title,
+#publications .rk-card h3{
+  font-size: 1.1rem;               /* optional: slightly smaller title */
+  margin: 0 0 .35rem !important;   /* less space below the title */
+}
+
+#publications .rk-card .page__meta,
+#publications .rk-card p{
+  margin: 2px 0 0 !important;      /* tighten text below the title */
+}
+
+/* (optional) keep the list itself from stretching too wide on huge screens */
+#publications .rk-wide,
+#publications .rk-exp-list{
+  max-width: 900px;                 /* adjust to taste (820–960px works well) */
+  margin-left: auto;
+  margin-right: auto;
+}
