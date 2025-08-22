@@ -29,3 +29,14 @@
   window.__rkSetTheme = function (t) { localStorage.setItem(KEY, t); apply(t); };
 })();
 </script>
+
+<!-- Set theme ASAP to avoid flash -->
+<script>
+(function () {
+  var t = localStorage.getItem('rk-theme');
+  if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  if (t === 'light') document.documentElement.setAttribute('data-theme','light');
+  else document.documentElement.removeAttribute('data-theme'); // dark = default
+})();
+</script>
+
