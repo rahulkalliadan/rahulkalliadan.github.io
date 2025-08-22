@@ -777,3 +777,23 @@ html { scroll-behavior: smooth; }
     content: ""; /* drop the dot if it wraps */
   }
 }
+
+/* === Intro copy: +25% size, keeping your clamp behavior === */
+.rk-introline,
+.rk-introline strong{
+  font-size: calc(1.25 * clamp(1.10rem, 2.6vw, 1.65rem)) !important;
+}
+
+/* Keep the same +25% scale on shorter viewports too */
+@media (max-height: 820px){
+  .rk-introline,
+  .rk-introline strong{
+    font-size: calc(1.25 * clamp(1.02rem, 2.1vw, 1.40rem)) !important;
+  }
+}
+@media (max-height: 700px){
+  .rk-introline,
+  .rk-introline strong{
+    font-size: calc(1.25 * clamp(.98rem, 1.9vw, 1.25rem)) !important;
+  }
+}
