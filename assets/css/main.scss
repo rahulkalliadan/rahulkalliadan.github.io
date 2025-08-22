@@ -731,3 +731,49 @@ html { scroll-behavior: smooth; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* === Publications: title + venue on one line === */
+#publications .rk-card{
+  display: flex;                 /* lay out children in a row */
+  align-items: baseline;         /* align text nicely */
+  gap: .6rem;                    /* small space between title and venue */
+}
+
+/* title */
+#publications .rk-card > h3,
+#publications .rk-card > .archive__item-title{
+  display: inline;
+  margin: 0 !important;
+}
+
+/* venue/meta (e.g., “TIAR 2017”) */
+#publications .rk-card > .page__meta,
+#publications .rk-card > .rk-exp__meta,
+#publications .rk-card > p{
+  display: inline;
+  margin: 0 !important;
+  white-space: nowrap;           /* keep it on the same line */
+  color: var(--rk-dim);
+}
+
+/* subtle separator dot before the venue */
+#publications .rk-card > .page__meta::before,
+#publications .rk-card > .rk-exp__meta::before,
+#publications .rk-card > p::before{
+  content: "•";
+  margin-right: .45rem;
+  opacity: .6;
+}
+
+/* On very narrow screens, allow wrapping vertically for readability */
+@media (max-width: 480px){
+  #publications .rk-card{
+    flex-wrap: wrap;
+    gap: .3rem .6rem;
+  }
+  #publications .rk-card > .page__meta::before,
+  #publications .rk-card > .rk-exp__meta::before,
+  #publications .rk-card > p::before{
+    content: ""; /* drop the dot if it wraps */
+  }
+}
