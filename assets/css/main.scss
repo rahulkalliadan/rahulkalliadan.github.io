@@ -1096,3 +1096,68 @@ html[data-theme="light"] .page__footer a{
   .rk-introline{ font-size: clamp(1.02rem, 3.4vw, 1.22rem) !important; }
   .rk-cta .btn{ margin-top: 8px !important; }
 }
+
+/* =========================================================
+   MOBILE LAYOUT FIXES — force compact view on phones
+   ========================================================= */
+@media screen and (max-width: 900px){
+
+  /* Global trim so pages aren’t long */
+  .rk-section{ padding-top: 10px !important; padding-bottom: 14px !important; }
+  .rk-card{ margin: 6px 0 !important; }
+
+  /* HERO stays compact so CTA is visible */
+  .rk-hero{
+    padding-top: 12px !important;
+    padding-bottom: 16px !important;
+    min-height: auto !important;          /* don’t stretch on short screens */
+  }
+  .rk-cta .btn{ margin-top: 8px !important; }
+
+  /* ========= Experience timeline ========= */
+  /* Use a two-column grid: [ logo | content ] */
+  .rk-timeline{ padding-left: 0 !important; }
+  .rk-timeline::before{ left: 27px !important; } /* align the vertical line */
+
+  .rk-item{
+    display: grid !important;
+    grid-template-columns: 54px 1fr !important;   /* logo | content */
+    column-gap: 10px !important;
+    align-items: start !important;
+    margin: 12px 0 18px !important;
+  }
+
+  .rk-item .rk-logo{
+    grid-column: 1 !important;
+    width: 50px !important; height: 50px !important;
+    margin: 0 !important;
+  }
+
+  /* Put every non-logo element in the content column */
+  .rk-item > *:not(.rk-logo){ grid-column: 2 !important; }
+
+  .rk-expcard{
+    margin: 0 !important;
+    padding: 12px 14px !important;        /* tighter content block */
+  }
+  .rk-expcard h3, .rk-exphead h3{ font-size: 1rem !important; }
+  .rk-exp__meta{ font-size: .86rem !important; }
+  .rk-expcard ul{ margin: 6px 0 0 14px !important; }
+  .rk-expcard li{ margin: 5px 0 !important; line-height: 1.42 !important; }
+
+  /* ========= Core Skills grid (no long list) ========= */
+  /* Turn pills into a responsive multi-column grid */
+  #skills .rk-pills, .rk-pills{
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+    gap: 10px !important;
+    justify-items: stretch !important;
+  }
+  .rk-pill{
+    width: 100% !important;
+    text-align: center !important;
+    white-space: normal !important;       /* allow wrapping */
+    padding: 10px 8px !important;
+    font-size: .95rem !important;
+  }
+}
