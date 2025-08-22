@@ -601,3 +601,22 @@ body,
 .page{
   padding-top: calc(var(--rk-header-h) + var(--rk-hero-lift, 0px) + 8px) !important;
 }
+
+/* === Per-section safe offset: headings won't slide under the header === */
+.rk-section,
+section[id]{
+  /* Anchor jumps (e.g., clicking "About") */
+  scroll-margin-top: calc(var(--rk-header-h) + 12px);
+  position: relative;
+}
+
+.rk-section::before,
+section[id]::before{
+  content: "";
+  display: block;
+  height: calc(var(--rk-header-h) + 12px);  /* safe buffer */
+  margin-top: calc(-1 * (var(--rk-header-h) + 12px));
+  /* Invisible spacer that prevents overlap when the section reaches the top */
+  pointer-events: none;
+  visibility: hidden;
+}
