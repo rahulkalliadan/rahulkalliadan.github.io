@@ -696,3 +696,24 @@ html.rk-scrolled .site-header{
   border-bottom: 1px solid var(--rk-header-border) !important;
 }
 
+/* === HERO type tweaks: slightly smaller name, bigger intro === */
+
+/* Name (Rahul Kalliadan): trim ~10–15% on large screens, responsive on smaller */
+.rk-title{
+  /* min 2.0rem, scales with viewport, caps around 2.85rem */
+  font-size: clamp(2.0rem, 2.3rem + 1.1vw, 2.85rem);
+  line-height: 1.1;
+  margin-bottom: .25rem;
+}
+
+/* Intro paragraph (“Hello, I’m Rahul — …”): make it larger, still readable */
+.rk-introline{
+  /* min 1.25rem, scales with viewport, caps around 1.85rem */
+  font-size: clamp(1.25rem, 1.05rem + 1.1vw, 1.85rem);
+  line-height: 1.38;
+}
+
+/* (Tiny spacing touch so the CTA remains in view comfortably) */
+.rk-socials{ margin-top: 8px; }
+.rk-cta .btn{ margin-top: 10px; }
+
