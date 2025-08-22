@@ -206,28 +206,27 @@ body, .initial-content, .page{ padding-top: 0 !important; }
 /* ======= THE BLEND (dusk style) – lives on .rk-aurora ======= */
 .rk-hero .rk-aurora{
   position: absolute;
-  inset: -90px -14vw -60px -14vw;   /* bleed beyond edges to avoid lines */
+  inset: -90px -14vw -60px -14vw;
   z-index: 0;
   pointer-events: none;
 
-  /* Dusk-like mix: plum middle, indigo left, blue right, soft navy vignette + base */
   background:
     radial-gradient(1200px 700px at 50% -12%,
-      rgba(var(--rk-aur1), .42) 0%,
-      rgba(var(--rk-aur1), .28) 32%,
-      rgba(0,0,0,0) 62%
+      rgb(var(--rk-aur1) / .42) 0%,
+      rgb(var(--rk-aur1) / .28) 32%,
+      rgb(0 0 0 / 0) 62%
     ),
     radial-gradient(1000px 800px at -10% 15%,
-      rgba(var(--rk-aur2), .22) 0%,
-      rgba(0,0,0,0) 60%
+      rgb(var(--rk-aur2) / .22) 0%,
+      rgb(0 0 0 / 0) 60%
     ),
     radial-gradient(1100px 850px at 110% 10%,
-      rgba(var(--rk-aur3), .26) 0%,
-      rgba(0,0,0,0) 68%
+      rgb(var(--rk-aur3) / .26) 0%,
+      rgb(0 0 0 / 0) 68%
     ),
     radial-gradient(150% 120% at 50% 40%,
-      rgba(0,0,0,0) 60%,
-      rgba(0,0,0,.25) 100%
+      rgb(0 0 0 / 0) 60%,
+      rgb(0 0 0 / .25) 100%
     ),
     linear-gradient(180deg,
       var(--rk-bg-2) 0%,
@@ -238,6 +237,7 @@ body, .initial-content, .page{ padding-top: 0 !important; }
   filter: saturate(108%) contrast(102%);
   opacity: var(--rk-hero-alpha);
 }
+
 
 /* Optional, subtle animated drift (respects reduced motion) */
 @media (prefers-reduced-motion: no-preference){
