@@ -3,5 +3,5 @@ main:
     url: /
   - title: "Blog"
     url: /blog/
-  - title: "Portfolio"          # <— new
-    url: /portfolio/            # trailing slash matters
+  - title: "Portfolio"
+    url: /portfolio/
