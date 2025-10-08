@@ -1,16 +1,6 @@
 main:
   - title: "Home"
     url: /
-  - title: "About"
-    url: /about/
-  - title: "Skills"
-    url: /skills/
-  - title: "Experience"
-    url: /experience/
-  - title: "Education"
-    url: /education/
-  - title: "Publication"
-    url: /publication/
   - title: "Blog"
     url: /blog/
   - title: "Portfolio"          # <— new
